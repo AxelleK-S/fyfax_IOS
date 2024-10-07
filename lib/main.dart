@@ -13,7 +13,7 @@ void main() {
 
       await appInitializer.preAppRun();
 
-      runApp(Application());
+      runApp(const Application());
 
       appInitializer.postAppRun();
     },

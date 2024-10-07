@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fyfax/features/login/login_screen.dart';
 
 import 'package:fyfax/shared/widgets/validated_button.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SecondScreen extends StatelessWidget {
   const SecondScreen({super.key});
@@ -18,13 +19,13 @@ class SecondScreen extends StatelessWidget {
               left: 16,
               right: 16
             ),
-            child: Text('Pour accéder aux épreuves, Contactez l’administrateur pour recevoir votre code d’accès '),
+            child: Text('Pour accéder aux épreuves, Contactez l’administrateur pour recevoir votre code d’accès ', style: GoogleFonts.handlee(),),
           ),
           ValidatedButton(onTap:  () {
 
           }, text: 'Whatsapp'),
 
-          SizedBox(height: 50,),
+          const SizedBox(height: 50,),
 
           ValidatedButton(onTap: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginScreen(),));

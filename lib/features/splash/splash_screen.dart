@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -16,8 +17,8 @@ class SplashScreen extends StatelessWidget {
                 image: DecorationImage(image: AssetImage(''))
             ),
           ),
-          SizedBox(height: 24,),
-          Text('FyFax'),
+          const SizedBox(height: 24,),
+          Text('FyFax', style: GoogleFonts.handlee()),
         ],
       ),
     );

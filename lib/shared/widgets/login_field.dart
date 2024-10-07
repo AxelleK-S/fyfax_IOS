@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'input_field.dart';
 
@@ -12,37 +13,34 @@ class LoginField extends StatelessWidget {
   final TextInputType inputType;
   final StringVoidString validator;
   final bool isObscure;
-  const LoginField({super.key,
-    required this.title,
-    required this.controller,
-    required this.onChanged,
-    required this.validator,
-    required this.isObscure,
-    required this.inputType});
+  const LoginField(
+      {super.key,
+      required this.title,
+      required this.controller,
+      required this.onChanged,
+      required this.validator,
+      required this.isObscure,
+      required this.inputType});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(
-          top: 7,
-          bottom: 7
-      ),
+      margin: const EdgeInsets.only(top: 7, bottom: 7),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(
-                left: 16,
-                right: 16
-            ),
-            child: Text(title, style: TextStyle(
-                color: Theme.of(context).colorScheme.onBackground,
-                fontSize: 15,
-                fontFamily: 'Inter')
-            ),
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Text(title,
+                style: GoogleFonts.handlee(
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontSize: 15,
+                )),
           ),
-          const SizedBox(height: 14,),
+          const SizedBox(
+            height: 14,
+          ),
           InputField(
             align: TextAlign.left,
             controller: controller,
@@ -50,7 +48,8 @@ class LoginField extends StatelessWidget {
             onChanged: onChanged,
             validator: validator,
             obscureText: isObscure,
-            inputType: inputType, borderEnabled: true,
+            inputType: inputType,
+            borderEnabled: true,
           )
         ],
       ),

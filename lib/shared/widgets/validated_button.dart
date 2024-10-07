@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ValidatedButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -12,24 +13,16 @@ class ValidatedButton extends StatelessWidget {
       child: Container(
         height: 54,
         //width: 275,
-        margin : const EdgeInsets.only(
-          top: 24,
-          bottom: 24,
-          left: 50,
-          right: 50
-        ),
+        margin: const EdgeInsets.only(top: 24, bottom: 24, left: 50, right: 50),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
             color: Theme.of(context).colorScheme.primary),
         child: Center(
-          child: Text(
-            text,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimary,
-              fontSize: 24
-            ),
-          )
-        ),
+            child: Text(
+          text,
+          style: GoogleFonts.handlee(
+              color: Theme.of(context).colorScheme.onPrimary, fontSize: 24),
+        )),
       ),
     );
   }
