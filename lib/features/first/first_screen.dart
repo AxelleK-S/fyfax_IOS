@@ -46,7 +46,7 @@ class FirstScreen extends StatelessWidget {
             child: Text('Consultez toutes les anciennes épreuves de vos grands concours de médécine', style: GoogleFonts.handlee(),),
           ),
           ValidatedButton(onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SecondScreen(),));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => SecondScreen(),));
           }, text:  'Allons-y')
         ],
       ),

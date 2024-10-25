@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "204275652793",
+    "project_id": "fyfax-a19cc",
+    "storage_bucket": "fyfax-a19cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204275652793:android:252e18216825ef39bfa368",
+        "android_client_info": {
+          "package_name": "com.example.fyfax"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqnB6EY0JugVubNmHrGqgfeMjtg0MyjQ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

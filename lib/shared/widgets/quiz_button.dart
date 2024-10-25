@@ -22,7 +22,7 @@ class QuizButton extends StatelessWidget {
         margin: const EdgeInsets.only(left: 16, right: 16, top: 7, bottom: 7),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: clicked ? color : Colors.transparent,
+            color: color,
             border: Border.all(
                 color: clicked
                     ? Colors.transparent

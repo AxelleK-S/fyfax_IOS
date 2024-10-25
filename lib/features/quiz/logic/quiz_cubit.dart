@@ -1,9 +1,79 @@
-import 'package:bloc/bloc.dart';
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:fyfax/features/quiz/model/quiz_details.dart';
+import 'package:fyfax/features/quiz/repository/quiz_repository.dart';
+import 'package:fyfax/shared/hive/model/offline_quiz.dart';
+import 'package:fyfax/shared/services/hive_service.dart';
 
 part 'quiz_state.dart';
 part 'quiz_cubit.freezed.dart';
 
 class QuizCubit extends Cubit<QuizState> {
+  QuizRepository quizRepository = QuizRepository();
+  final HiveService hiveService = HiveService();
+  late StreamSubscription<List<ConnectivityResult>> connectivitySubscription;
   QuizCubit() : super(const QuizState.initial());
+
+  Future<void> getQuizzes()async {
+    connectivitySubscription = Connectivity().onConnectivityChanged.listen(
+          (result) async {
+        if (!result.contains(ConnectivityResult.none)) {
+          emit(const QuizState.loading());
+          try {
+            List<QuizDetails>? quizzes = await quizRepository.getQuizWithDetails();
+            if (quizzes == []) {
+              emit(const QuizState.empty());
+            } else {
+              emit(QuizState.success(quizzes: quizzes));
+            }
+          } catch (e) {
+            if (kDebugMode) {
+              print(e);
+            }
+            emit(const QuizState.error(error: 'Une erreur est survenue'));
+          }
+        } else {
+          emit(const QuizState.notConnected());
+
+          emit(const QuizState.loading());
+          try {
+            List<OfflineQuiz> offlineQuiz = await hiveService.getAllQuiz();
+            if (offlineQuiz == []){
+              emit(const QuizState.empty());
+            }
+            else {
+              List<QuizDetails> quizDetails = [];
+              for (var quiz in offlineQuiz){
+                quizDetails.add(QuizDetails.fromJson(quiz.toJson()));
+              }
+              emit(QuizState.offLineQuiz(quizzes: quizDetails));
+            }
+          } catch (e){
+            emit(const QuizState.error(error: 'Une erreur est survenue'));
+          }
+          // perform local recuperation -- loading -- empty or offlineQuiz -- error
+        }
+      },
+    );
+  }
+
+  Future<void> storeQuiz(QuizDetails quiz) async{
+    emit(const QuizState.loading());
+    try {
+      QuizDetails quizzes = await quizRepository.getQuizWithDetailsById(quiz.id);
+      hiveService.addQuiz(OfflineQuiz.fromJson(quizzes.toJson()));
+      emit(const QuizState.done());
+        }
+        catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      emit(const QuizState.error(error: 'Une erreur est survenue'));
+    }
+
+  }
 }
