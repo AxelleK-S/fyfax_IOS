@@ -12,7 +12,7 @@ List<OfflineQuiz> quizDetailsFromJson(String str) => List<OfflineQuiz>.from(json
 String quizDetailsToJson(List<OfflineQuiz> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 @HiveType(typeId: 1)
-class OfflineQuiz {
+class OfflineQuiz extends HiveObject {
   @HiveField(0)
   int id;
 
