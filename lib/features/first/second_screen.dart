@@ -4,6 +4,7 @@ import 'package:fyfax/features/quiz/repository/quiz_repository.dart';
 
 import 'package:fyfax/shared/widgets/validated_button.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SecondScreen extends StatelessWidget {
   final QuizRepository quizRepository = QuizRepository();
@@ -25,10 +26,14 @@ class SecondScreen extends StatelessWidget {
             )),
           ),
           ValidatedButton(
-              onTap: () {
-                quizRepository.getQuizWithDetails();
-              },
-              text: 'Whatsapp'),
+              onTap: () async {
+                //const url = "https://wa.me/237691983314?text=Your Message here";
+                const url = "237691983314?text=Your Message here";
+                var encoded = Uri(scheme: 'https', host: 'wa.me',path: url);
+                launchUrl(encoded);
+                },
+                //quizRepository.getQuizWithDetails();
+                text: 'Whatsapp'),
           const SizedBox(
             height: 50,
           ),
