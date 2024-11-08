@@ -7,7 +7,7 @@ class QuizState with _$QuizState {
   const factory QuizState.success({required List<QuizDetails> quizzes}) = _Success;
   const factory QuizState.error({required String error}) = _Error;
   const factory QuizState.notConnected() = _NotConnected;
-  const factory QuizState.offLineQuiz({required List<QuizDetails> quizzes}) = _OffLineQuiz;
+  const factory QuizState.offLineQuiz({required List<OfflineQuiz> quizzes}) = _OffLineQuiz;
   const factory QuizState.empty() = _Empty;
   const factory QuizState.done() = _Done;
 }

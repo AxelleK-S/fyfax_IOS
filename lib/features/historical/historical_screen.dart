@@ -15,15 +15,17 @@ class HistoricalScreen extends StatelessWidget {
                 BoxDecoration(color: Theme.of(context).colorScheme.primary),
             child: SafeArea(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Historique', style: GoogleFonts.handlee(),),
+                  Text('Historique', style: GoogleFonts.handlee(fontSize: 16),),
                 ],
               ),
             ),
           )),
-      body: Column(
+      body: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          /*
           Padding(
             padding: const EdgeInsets.only(
               left: 16,
@@ -31,10 +33,11 @@ class HistoricalScreen extends StatelessWidget {
               bottom: 24
             ),
             child: Text('Hier', style: GoogleFonts.handlee(),),
-          ),
-          const HistoricalCard(text: 'Inscription réussi , Bienvenue sur Mederine',),
-          const HistoricalCard(text: 'Inscription réussi , Bienvenue sur Mederine',),
-          const HistoricalCard(text: 'Inscription réussi , Bienvenue sur Mederine',),
+          ),*/
+          SizedBox(height: 20,),
+          HistoricalCard(text: 'Quiz cas court 2016 terminé', time: '20s',),
+          HistoricalCard(text: 'Quiz ECN Généraliste 2014 terminé', time: '44min',),
+          HistoricalCard(text: 'Inscription réussi , Bienvenue sur Mederine', time: '1h',),
         ],
       ),
     );

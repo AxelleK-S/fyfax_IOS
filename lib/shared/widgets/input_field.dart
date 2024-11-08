@@ -79,6 +79,20 @@ class InputField extends StatelessWidget {
                   style: BorderStyle.solid,
                   width: 1),
             ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.primary,
+                  style: BorderStyle.solid,
+                  width: 1),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.primary,
+                  style: BorderStyle.solid,
+                  width: 1),
+            ),
             floatingLabelBehavior: FloatingLabelBehavior.always,
             labelText: label,
             prefixIcon: prefix,

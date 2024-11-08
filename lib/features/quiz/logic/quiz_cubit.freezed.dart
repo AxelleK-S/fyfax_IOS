@@ -23,7 +23,7 @@ mixin _$QuizState {
     required TResult Function(List<QuizDetails> quizzes) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
-    required TResult Function(List<QuizDetails> quizzes) offLineQuiz,
+    required TResult Function(List<OfflineQuiz> quizzes) offLineQuiz,
     required TResult Function() empty,
     required TResult Function() done,
   }) =>
@@ -35,7 +35,7 @@ mixin _$QuizState {
     TResult? Function(List<QuizDetails> quizzes)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
-    TResult? Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult? Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult? Function()? empty,
     TResult? Function()? done,
   }) =>
@@ -47,7 +47,7 @@ mixin _$QuizState {
     TResult Function(List<QuizDetails> quizzes)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
-    TResult Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult Function()? empty,
     TResult Function()? done,
     required TResult orElse(),
@@ -158,7 +158,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     required TResult Function(List<QuizDetails> quizzes) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
-    required TResult Function(List<QuizDetails> quizzes) offLineQuiz,
+    required TResult Function(List<OfflineQuiz> quizzes) offLineQuiz,
     required TResult Function() empty,
     required TResult Function() done,
   }) {
@@ -173,7 +173,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     TResult? Function(List<QuizDetails> quizzes)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
-    TResult? Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult? Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult? Function()? empty,
     TResult? Function()? done,
   }) {
@@ -188,7 +188,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     TResult Function(List<QuizDetails> quizzes)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
-    TResult Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult Function()? empty,
     TResult Function()? done,
     required TResult orElse(),
@@ -302,7 +302,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
     required TResult Function(List<QuizDetails> quizzes) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
-    required TResult Function(List<QuizDetails> quizzes) offLineQuiz,
+    required TResult Function(List<OfflineQuiz> quizzes) offLineQuiz,
     required TResult Function() empty,
     required TResult Function() done,
   }) {
@@ -317,7 +317,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
     TResult? Function(List<QuizDetails> quizzes)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
-    TResult? Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult? Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult? Function()? empty,
     TResult? Function()? done,
   }) {
@@ -332,7 +332,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
     TResult Function(List<QuizDetails> quizzes)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
-    TResult Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult Function()? empty,
     TResult Function()? done,
     required TResult orElse(),
@@ -481,7 +481,7 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
     required TResult Function(List<QuizDetails> quizzes) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
-    required TResult Function(List<QuizDetails> quizzes) offLineQuiz,
+    required TResult Function(List<OfflineQuiz> quizzes) offLineQuiz,
     required TResult Function() empty,
     required TResult Function() done,
   }) {
@@ -496,7 +496,7 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
     TResult? Function(List<QuizDetails> quizzes)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
-    TResult? Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult? Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult? Function()? empty,
     TResult? Function()? done,
   }) {
@@ -511,7 +511,7 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
     TResult Function(List<QuizDetails> quizzes)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
-    TResult Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult Function()? empty,
     TResult Function()? done,
     required TResult orElse(),
@@ -659,7 +659,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     required TResult Function(List<QuizDetails> quizzes) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
-    required TResult Function(List<QuizDetails> quizzes) offLineQuiz,
+    required TResult Function(List<OfflineQuiz> quizzes) offLineQuiz,
     required TResult Function() empty,
     required TResult Function() done,
   }) {
@@ -674,7 +674,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     TResult? Function(List<QuizDetails> quizzes)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
-    TResult? Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult? Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult? Function()? empty,
     TResult? Function()? done,
   }) {
@@ -689,7 +689,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     TResult Function(List<QuizDetails> quizzes)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
-    TResult Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult Function()? empty,
     TResult Function()? done,
     required TResult orElse(),
@@ -808,7 +808,7 @@ class _$NotConnectedImpl with DiagnosticableTreeMixin implements _NotConnected {
     required TResult Function(List<QuizDetails> quizzes) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
-    required TResult Function(List<QuizDetails> quizzes) offLineQuiz,
+    required TResult Function(List<OfflineQuiz> quizzes) offLineQuiz,
     required TResult Function() empty,
     required TResult Function() done,
   }) {
@@ -823,7 +823,7 @@ class _$NotConnectedImpl with DiagnosticableTreeMixin implements _NotConnected {
     TResult? Function(List<QuizDetails> quizzes)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
-    TResult? Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult? Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult? Function()? empty,
     TResult? Function()? done,
   }) {
@@ -838,7 +838,7 @@ class _$NotConnectedImpl with DiagnosticableTreeMixin implements _NotConnected {
     TResult Function(List<QuizDetails> quizzes)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
-    TResult Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult Function()? empty,
     TResult Function()? done,
     required TResult orElse(),
@@ -909,7 +909,7 @@ abstract class _$$OffLineQuizImplCopyWith<$Res> {
           _$OffLineQuizImpl value, $Res Function(_$OffLineQuizImpl) then) =
       __$$OffLineQuizImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<QuizDetails> quizzes});
+  $Res call({List<OfflineQuiz> quizzes});
 }
 
 /// @nodoc
@@ -929,7 +929,7 @@ class __$$OffLineQuizImplCopyWithImpl<$Res>
       quizzes: null == quizzes
           ? _value._quizzes
           : quizzes // ignore: cast_nullable_to_non_nullable
-              as List<QuizDetails>,
+              as List<OfflineQuiz>,
     ));
   }
 }
@@ -937,12 +937,12 @@ class __$$OffLineQuizImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$OffLineQuizImpl with DiagnosticableTreeMixin implements _OffLineQuiz {
-  const _$OffLineQuizImpl({required final List<QuizDetails> quizzes})
+  const _$OffLineQuizImpl({required final List<OfflineQuiz> quizzes})
       : _quizzes = quizzes;
 
-  final List<QuizDetails> _quizzes;
+  final List<OfflineQuiz> _quizzes;
   @override
-  List<QuizDetails> get quizzes {
+  List<OfflineQuiz> get quizzes {
     if (_quizzes is EqualUnmodifiableListView) return _quizzes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_quizzes);
@@ -987,7 +987,7 @@ class _$OffLineQuizImpl with DiagnosticableTreeMixin implements _OffLineQuiz {
     required TResult Function(List<QuizDetails> quizzes) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
-    required TResult Function(List<QuizDetails> quizzes) offLineQuiz,
+    required TResult Function(List<OfflineQuiz> quizzes) offLineQuiz,
     required TResult Function() empty,
     required TResult Function() done,
   }) {
@@ -1002,7 +1002,7 @@ class _$OffLineQuizImpl with DiagnosticableTreeMixin implements _OffLineQuiz {
     TResult? Function(List<QuizDetails> quizzes)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
-    TResult? Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult? Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult? Function()? empty,
     TResult? Function()? done,
   }) {
@@ -1017,7 +1017,7 @@ class _$OffLineQuizImpl with DiagnosticableTreeMixin implements _OffLineQuiz {
     TResult Function(List<QuizDetails> quizzes)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
-    TResult Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult Function()? empty,
     TResult Function()? done,
     required TResult orElse(),
@@ -1079,10 +1079,10 @@ class _$OffLineQuizImpl with DiagnosticableTreeMixin implements _OffLineQuiz {
 }
 
 abstract class _OffLineQuiz implements QuizState {
-  const factory _OffLineQuiz({required final List<QuizDetails> quizzes}) =
+  const factory _OffLineQuiz({required final List<OfflineQuiz> quizzes}) =
       _$OffLineQuizImpl;
 
-  List<QuizDetails> get quizzes;
+  List<OfflineQuiz> get quizzes;
   @JsonKey(ignore: true)
   _$$OffLineQuizImplCopyWith<_$OffLineQuizImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1137,7 +1137,7 @@ class _$EmptyImpl with DiagnosticableTreeMixin implements _Empty {
     required TResult Function(List<QuizDetails> quizzes) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
-    required TResult Function(List<QuizDetails> quizzes) offLineQuiz,
+    required TResult Function(List<OfflineQuiz> quizzes) offLineQuiz,
     required TResult Function() empty,
     required TResult Function() done,
   }) {
@@ -1152,7 +1152,7 @@ class _$EmptyImpl with DiagnosticableTreeMixin implements _Empty {
     TResult? Function(List<QuizDetails> quizzes)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
-    TResult? Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult? Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult? Function()? empty,
     TResult? Function()? done,
   }) {
@@ -1167,7 +1167,7 @@ class _$EmptyImpl with DiagnosticableTreeMixin implements _Empty {
     TResult Function(List<QuizDetails> quizzes)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
-    TResult Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult Function()? empty,
     TResult Function()? done,
     required TResult orElse(),
@@ -1280,7 +1280,7 @@ class _$DoneImpl with DiagnosticableTreeMixin implements _Done {
     required TResult Function(List<QuizDetails> quizzes) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
-    required TResult Function(List<QuizDetails> quizzes) offLineQuiz,
+    required TResult Function(List<OfflineQuiz> quizzes) offLineQuiz,
     required TResult Function() empty,
     required TResult Function() done,
   }) {
@@ -1295,7 +1295,7 @@ class _$DoneImpl with DiagnosticableTreeMixin implements _Done {
     TResult? Function(List<QuizDetails> quizzes)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
-    TResult? Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult? Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult? Function()? empty,
     TResult? Function()? done,
   }) {
@@ -1310,7 +1310,7 @@ class _$DoneImpl with DiagnosticableTreeMixin implements _Done {
     TResult Function(List<QuizDetails> quizzes)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
-    TResult Function(List<QuizDetails> quizzes)? offLineQuiz,
+    TResult Function(List<OfflineQuiz> quizzes)? offLineQuiz,
     TResult Function()? empty,
     TResult Function()? done,
     required TResult orElse(),

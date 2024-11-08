@@ -21,21 +21,23 @@ class ProfileScreen extends StatelessWidget {
                       fit: BoxFit.fill)),
             ),
             const SizedBox(
-              height: 24,
+              height: 44,
             ),
-            Text('Mes informations personnelles', style: GoogleFonts.handlee(),),
+            Text('Mes informations personnelles', style: GoogleFonts.handlee(fontSize: 18),),
+            const SizedBox(height: 14,),
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16, top: 7, bottom: 7),
               child: Row(
-                children: [Text('Nom', style: GoogleFonts.handlee())],
+                children: [Text('Nom', style: GoogleFonts.handlee(fontSize: 16))],
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16, top: 7, bottom: 7),
               child: Row(
-                children: [Text('Tel', style: GoogleFonts.handlee())],
+                children: [Text('Tel', style: GoogleFonts.handlee(fontSize: 16))],
               ),
             ),
+            const SizedBox(height: 14,),
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16, top: 7, bottom: 7),
               child: Row(

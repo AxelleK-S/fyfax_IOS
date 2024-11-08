@@ -4,9 +4,15 @@ import 'package:fyfax/shared/widgets/validated_button.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class FirstScreen extends StatelessWidget {
+class FirstScreen extends StatefulWidget {
   const FirstScreen({super.key});
 
+  @override
+  State<FirstScreen> createState() => _FirstScreenState();
+}
+
+class _FirstScreenState extends State<FirstScreen> {
+  int activeIndex = 0;
   @override
   Widget build(BuildContext context) {
     List<String> images = [
@@ -21,29 +27,49 @@ class FirstScreen extends StatelessWidget {
               items: List.generate(3, (index) => Image.asset(images[index], fit: BoxFit.fitHeight,),),
               options: CarouselOptions(
                 height: 600,
-                //aspectRatio: 16/9,
-                viewportFraction: 1,
+                viewportFraction: 0.98,
                 initialPage: 0,
                 enableInfiniteScroll: true,
                 reverse: false,
-                autoPlay: true,
-                autoPlayInterval: const Duration(seconds: 3),
-                autoPlayAnimationDuration: const Duration(milliseconds: 10),
-                autoPlayCurve: Curves.ease,
-                enlargeCenterPage: true,
-                enlargeFactor: 0.3,
                 scrollDirection: Axis.horizontal,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    activeIndex = index;
+                  });
+                },
               )
           ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+                3, (index) => Container(
+              width: 10,
+              height: 10,
+              margin: const EdgeInsets.only(
+                  top: 14,
+                  left: 6,
+                  right: 6,
+                  bottom: 14
+              ),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: activeIndex==index ?
+                  Theme.of(context).colorScheme.primary :
+                  Theme.of(context).colorScheme.onSurface
+              ),
+            )
+            ),
+          ),
           const SizedBox(height: 24,),
-          Text('Bienvenu sur FyFax', style: GoogleFonts.handlee(),),
+          Text('Bienvenu sur FyFax', style: GoogleFonts.handlee(fontSize: 18),),
           const SizedBox(height: 10,),
           Padding(
             padding: const EdgeInsets.only(
-              left: 16,
-              right: 16
+                left: 16,
+                right: 16
             ),
-            child: Text('Consultez toutes les anciennes épreuves de vos grands concours de médécine', style: GoogleFonts.handlee(),),
+            child: Text('Consultez toutes les anciennes épreuves de vos grands concours de médécine', style: GoogleFonts.handlee(fontSize: 16),),
           ),
           ValidatedButton(onTap: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => SecondScreen(),));
@@ -53,3 +79,4 @@ class FirstScreen extends StatelessWidget {
     );
   }
 }
+

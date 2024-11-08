@@ -14,24 +14,31 @@ class SecondScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-
         children: [
           Padding(
-            padding: const EdgeInsets.only(
-              left: 16,
-              right: 16
-            ),
-            child: Text('Pour accéder aux épreuves, Contactez l’administrateur pour recevoir votre code d’accès ', style: GoogleFonts.handlee(),),
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Center(
+                child: Text(
+              'Pour accéder aux épreuves, Contactez l’administrateur pour recevoir votre code d’accès ',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.handlee(fontSize: 16),
+            )),
           ),
-          ValidatedButton(onTap:  () {
-            quizRepository.getQuizWithDetails();
-          }, text: 'Whatsapp'),
-
-          const SizedBox(height: 50,),
-
-          ValidatedButton(onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginScreen(),));
-          }, text: 'Fait')
+          ValidatedButton(
+              onTap: () {
+                quizRepository.getQuizWithDetails();
+              },
+              text: 'Whatsapp'),
+          const SizedBox(
+            height: 50,
+          ),
+          ValidatedButton(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const LoginScreen(),
+                ));
+              },
+              text: 'Fait')
         ],
       ),
     );

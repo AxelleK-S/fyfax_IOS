@@ -46,11 +46,14 @@ class QuizCubit extends Cubit<QuizState> {
               emit(const QuizState.empty());
             }
             else {
+              /*
               List<QuizDetails> quizDetails = [];
               for (var quiz in offlineQuiz){
                 quizDetails.add(QuizDetails.fromJson(quiz.toJson()));
               }
-              emit(QuizState.offLineQuiz(quizzes: quizDetails));
+               */
+              print(offlineQuiz);
+              emit(QuizState.offLineQuiz(quizzes: offlineQuiz));
             }
           } catch (e){
             emit(const QuizState.error(error: 'Une erreur est survenue'));
@@ -61,12 +64,42 @@ class QuizCubit extends Cubit<QuizState> {
     );
   }
 
-  Future<void> storeQuiz(QuizDetails quiz) async{
+  Future<void> getOffLineQuizzes()async {
+
     emit(const QuizState.loading());
+    print('start');
+    try {
+      List<OfflineQuiz> offlineQuiz = await hiveService.getAllQuiz();
+      if (offlineQuiz==[]){
+        emit(const QuizState.empty());
+        print('empty');
+      }
+      else {
+        /*
+        List<QuizDetails> quizDetails = [];
+        for (var quiz in offlineQuiz){
+          quizDetails.add(QuizDetails.fromJson(quiz.toJson()));
+          print(quiz.toJson());
+        }
+
+         */
+        print(offlineQuiz);
+        emit(QuizState.offLineQuiz(quizzes: offlineQuiz));
+        print('done');
+      }
+    } catch (e){
+      emit(const QuizState.error(error: 'Une erreur est survenue'));
+      print('error');
+    }
+  }
+
+  Future<void> storeQuiz(QuizDetails quiz) async{
+    //emit(const QuizState.loading());
     try {
       QuizDetails quizzes = await quizRepository.getQuizWithDetailsById(quiz.id);
       hiveService.addQuiz(OfflineQuiz.fromJson(quizzes.toJson()));
       emit(const QuizState.done());
+      getQuizzes();
         }
         catch (e) {
       if (kDebugMode) {

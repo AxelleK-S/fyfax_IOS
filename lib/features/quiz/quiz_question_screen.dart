@@ -178,7 +178,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
               }
             } else {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const QuizDoneScreen(),
+                builder: (context) => QuizDoneScreen(score: 0, quiz: widget.quiz,),
               ));
             }
           },
