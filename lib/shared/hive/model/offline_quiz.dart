@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:fyfax/features/quiz/model/domain.dart';
-import 'package:fyfax/features/quiz/model/question.dart';
-import 'package:fyfax/features/quiz/model/section_title.dart';
+
+import 'package:fyfax/shared/hive/model/domain.dart';
+import 'package:fyfax/shared/hive/model/section.dart';
 import 'package:hive/hive.dart';
 
 part 'offline_quiz.g.dart';
@@ -67,30 +67,3 @@ class OfflineQuiz extends HiveObject {
 
 
 
-class Section {
-  int id;
-  int quiz;
-  SectionTitle title;
-  List<Question> question;
-
-  Section({
-    required this.id,
-    required this.quiz,
-    required this.title,
-    required this.question,
-  });
-
-  factory Section.fromJson(Map<String, dynamic> json) => Section(
-    id: json["id"],
-    quiz: json["quiz"],
-    title: SectionTitle.fromJson(json["title"]),
-    question: List<Question>.from(json["question"].map((x) => Question.fromJson(x))),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "quiz": quiz,
-    "title": title.toJson(),
-    "question": List<dynamic>.from(question.map((x) => x.toJson())),
-  };
-}

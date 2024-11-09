@@ -68,7 +68,9 @@ class QuizCubit extends Cubit<QuizState> {
 
     emit(const QuizState.loading());
     print('start');
+
     try {
+      //hiveService.deleteAllQuiz();
       List<OfflineQuiz> offlineQuiz = await hiveService.getAllQuiz();
       if (offlineQuiz==[]){
         emit(const QuizState.empty());
@@ -89,7 +91,7 @@ class QuizCubit extends Cubit<QuizState> {
       }
     } catch (e){
       emit(const QuizState.error(error: 'Une erreur est survenue'));
-      print('error');
+      print(e);
     }
   }
 
@@ -98,8 +100,8 @@ class QuizCubit extends Cubit<QuizState> {
     try {
       QuizDetails quizzes = await quizRepository.getQuizWithDetailsById(quiz.id);
       hiveService.addQuiz(OfflineQuiz.fromJson(quizzes.toJson()));
-      emit(const QuizState.done());
-      getQuizzes();
+      //emit(const QuizState.done());
+      //getQuizzes();
         }
         catch (e) {
       if (kDebugMode) {

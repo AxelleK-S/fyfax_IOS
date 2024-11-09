@@ -1,6 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fyfax/shared/hive/model/domain.dart';
 import 'package:fyfax/shared/hive/model/offline_quiz.dart';
+import 'package:fyfax/shared/hive/model/question.dart';
+import 'package:fyfax/shared/hive/model/section.dart';
+import 'package:fyfax/shared/hive/model/section_title.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -18,6 +22,10 @@ class AppInitializer {
     );
     await Hive.initFlutter();
     Hive.registerAdapter(OfflineQuizAdapter());
+    Hive.registerAdapter(DomainAdapter());
+    Hive.registerAdapter(QuestionAdapter());
+    Hive.registerAdapter(SectionAdapter());
+    Hive.registerAdapter(SectionTitleAdapter());
   }
 
   /// Initialize services, plugins, etc. after the app runs.

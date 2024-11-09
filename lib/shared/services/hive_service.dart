@@ -26,9 +26,15 @@ class HiveService {
   }
 
   //delete
-  Future<void> deletePerson(int index) async {
+  Future<void> deleteQuiz(int index) async {
     var box = await _box;
     await box.deleteAt(index);
+  }
+
+  //delete all
+  Future<void> deleteAllQuiz() async {
+    var box = await _box;
+    await box.deleteFromDisk();
   }
 
 }
