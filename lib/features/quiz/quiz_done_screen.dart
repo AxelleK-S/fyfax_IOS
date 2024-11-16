@@ -13,39 +13,44 @@ class QuizDoneScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            height: 150,
-            width: 150,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(image: AssetImage('assets/images/result.png'),)
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height: 150,
+              width: 150,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(image: AssetImage('assets/images/result.png'),)
+              ),
             ),
-          ),
-          const SizedBox(height: 44,),
-          Text('Félicitation tu as terminé', style: GoogleFonts.handlee(fontSize: 18),),
-          const SizedBox(height: 24,),
-          Text('Score', style: GoogleFonts.handlee(fontSize: 18),),
-          const SizedBox(height: 14,),
-          Text('${score.toString()}/200', style: GoogleFonts.handlee(fontSize: 18),),
-        ],
+            const SizedBox(height: 44,),
+            Text('Félicitation tu as terminé', style: GoogleFonts.handlee(fontSize: 18),),
+            const SizedBox(height: 24,),
+            Text('Score', style: GoogleFonts.handlee(fontSize: 18),),
+            const SizedBox(height: 14,),
+            Text('${score.toString()}/200', style: GoogleFonts.handlee(fontSize: 18),),
+          ],
+        ),
       ),
-      bottomNavigationBar: Column(
-        children: [
-          ValidatedButton(onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return QuizWelcomeScreen(quiz: quiz);
-            },));
-          }, text: 'Rejouer'),
-          ValidatedButton(onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return const HomeScreen();
-            },));
-          }, text: 'Retour à l\'accueil'),
-        ],
+      bottomNavigationBar: SizedBox(
+        height: 210,
+        child: Column(
+          children: [
+            ValidatedButton(onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return QuizWelcomeScreen(quiz: quiz);
+              },));
+            }, text: 'Rejouer'),
+            ValidatedButton(onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const HomeScreen();
+              },));
+            }, text: 'Retour à l\'accueil'),
+          ],
+        ),
       ),
     );
   }

@@ -215,14 +215,10 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                                   print(widget.quiz.section.length<(activeSectionIndex+1));
                                 }
 
-                                /*
-                                setState(() {
-                                  activeSectionIndex = 17;
-                                });
+                                List<String> answers = ['A','B', 'C', 'D', 'E'];
 
-                                 */
-
-                                if(isClickedOption.contains(true)){
+                                if(widget.quiz.section[activeSectionIndex]
+                                    .question[activeQuestionIndex].greatAnswer == answers[isClickedOption.indexOf(true)]){
                                   score ++;
                                 }
 
@@ -241,6 +237,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                                     });
                                   }
                                 } else {
+                                  print('finish');
                                   context.read<QuizCubit>().finishQuiz(widget.quiz, score);
                                 }
                               },

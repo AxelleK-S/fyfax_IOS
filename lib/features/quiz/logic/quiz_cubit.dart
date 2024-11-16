@@ -114,9 +114,11 @@ class QuizCubit extends Cubit<QuizState> {
   }
 
   Future<void> finishQuiz(QuizDetails quiz, int score) async {
+    print('start');
     connectivitySubscription =
         Connectivity().onConnectivityChanged.listen((result) async {
       if (!result.contains(ConnectivityResult.none)) {
+        print('load');
         emit(const QuizState.loading());
         try {
           // take user id
@@ -155,4 +157,5 @@ class QuizCubit extends Cubit<QuizState> {
       }
     });
   }
+
 }

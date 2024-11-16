@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fyfax/features/historical/logic/historical_cubit.dart';
@@ -24,6 +25,9 @@ class HistoricalArea extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<HistoricalCubit, HistoricalState>(
       listener: (context, state) {
+        if (kDebugMode) {
+          print(state);
+        }
         state.maybeWhen(
           error: (message) {
             var snackBar = SnackBar(
@@ -43,7 +47,9 @@ class HistoricalArea extends StatelessWidget {
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           },
-          orElse: () {},
+          orElse: () {if (kDebugMode) {
+            print('else');
+          }},
         );
       },
       child: Scaffold(
@@ -125,10 +131,35 @@ class HistoricalArea extends StatelessWidget {
                 ),
               ),
               orElse: () {
-                return Center(
-                  child: Text(
-                    'Aucun historique',
-                    style: GoogleFonts.handlee(),
+                return const Skeletonizer(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      /*
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 16,
+                                top: 24,
+                                bottom: 24
+                              ),
+                              child: Text('Hier', style: GoogleFonts.handlee(),),
+                            ),*/
+                      SizedBox(
+                        height: 20,
+                      ),
+                      HistoricalCard(
+                        text: 'Quiz cas court 2016 terminé',
+                        time: '20s',
+                      ),
+                      HistoricalCard(
+                        text: 'Quiz ECN Généraliste 2014 terminé',
+                        time: '44min',
+                      ),
+                      HistoricalCard(
+                        text: 'Inscription réussi , Bienvenue sur Mederine',
+                        time: '1h',
+                      ),
+                    ],
                   ),
                 );
               },

@@ -20,7 +20,7 @@ mixin _$LoginState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(User user) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) =>
@@ -29,7 +29,7 @@ mixin _$LoginState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(User user)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) =>
@@ -38,7 +38,7 @@ mixin _$LoginState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(User user)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),
@@ -138,7 +138,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(User user) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) {
@@ -150,7 +150,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(User user)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) {
@@ -162,7 +162,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(User user)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),
@@ -264,7 +264,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(User user) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) {
@@ -276,7 +276,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(User user)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) {
@@ -288,7 +288,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(User user)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),
@@ -349,6 +349,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({User user});
 }
 
 /// @nodoc
@@ -358,43 +360,69 @@ class __$$SuccessImplCopyWithImpl<$Res>
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+  }) {
+    return _then(_$SuccessImpl(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
-  const _$SuccessImpl();
+  const _$SuccessImpl({required this.user});
+
+  @override
+  final User user;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'LoginState.success()';
+    return 'LoginState.success(user: $user)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'LoginState.success'));
+    properties
+      ..add(DiagnosticsProperty('type', 'LoginState.success'))
+      ..add(DiagnosticsProperty('user', user));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SuccessImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessImpl &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, user);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(User user) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) {
-    return success();
+    return success(user);
   }
 
   @override
@@ -402,11 +430,11 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(User user)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) {
-    return success?.call();
+    return success?.call(user);
   }
 
   @override
@@ -414,13 +442,13 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(User user)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(user);
     }
     return orElse();
   }
@@ -467,7 +495,12 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
 }
 
 abstract class _Success implements LoginState {
-  const factory _Success() = _$SuccessImpl;
+  const factory _Success({required final User user}) = _$SuccessImpl;
+
+  User get user;
+  @JsonKey(ignore: true)
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -544,7 +577,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(User user) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) {
@@ -556,7 +589,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(User user)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) {
@@ -568,7 +601,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(User user)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),
@@ -675,7 +708,7 @@ class _$NotConnectedImpl with DiagnosticableTreeMixin implements _NotConnected {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(User user) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) {
@@ -687,7 +720,7 @@ class _$NotConnectedImpl with DiagnosticableTreeMixin implements _NotConnected {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(User user)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) {
@@ -699,7 +732,7 @@ class _$NotConnectedImpl with DiagnosticableTreeMixin implements _NotConnected {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(User user)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),

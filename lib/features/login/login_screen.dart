@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
       child: const LoginArea(),
     );
   }
-} 
+}
 
 class LoginArea extends StatelessWidget {
   const LoginArea({super.key});
@@ -62,7 +62,7 @@ class LoginArea extends StatelessWidget {
               }
               showMyDialog();
             },
-            success: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeScreen(),)),
+            success: (user) => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeScreen(),)),
             orElse: () {
 
           },);

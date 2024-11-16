@@ -75,6 +75,13 @@ class MiniQuizArea extends StatelessWidget {
                             print(researchController.text);
                           }
                         },
+
+                        onChanged: (value) {
+                          researchController.text = value;
+                          researchController.selection =
+                              TextSelection.fromPosition(
+                                  TextPosition(offset: value.length));
+                        },
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Search Quiz',

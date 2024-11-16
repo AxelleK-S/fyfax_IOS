@@ -8,6 +8,7 @@ import 'package:fyfax/features/historical/model/historical.dart';
 import 'package:fyfax/features/historical/repository/historical_repository.dart';
 import 'package:fyfax/shared/services/hive_service.dart';
 import 'package:fyfax/shared/hive/model/historical.dart' as hs;
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'historical_state.dart';
 part 'historical_cubit.freezed.dart';
@@ -19,16 +20,42 @@ class HistoricalCubit extends Cubit<HistoricalState> {
   HistoricalCubit() : super(const HistoricalState.initial());
 
   Future<void> getHistorical()async {
+    print('debut');
+    /*
+    try {
+      print('recup');
+      List<Historical> historical = await historicalRepository.getHistorical(1);
+      if (historical == []){
+        emit(const HistoricalState.empty());
+      } else {
+        emit(HistoricalState.success(historical: historical));
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      emit(const HistoricalState.error(error: 'Une erreur est survenue'));
+    }
+
+     */
     connectivitySubscription = Connectivity().onConnectivityChanged.listen(
             (result) async {
           if (!result.contains(ConnectivityResult.none)) {
+            print('load');
             emit(const HistoricalState.loading());
             try {
-              List<Historical> historical = await historicalRepository.getHistorical(1);
-              if (historical == []){
-                emit(const HistoricalState.empty());
+              print('recup');
+              final prefs = await SharedPreferences.getInstance();
+              final id = prefs.getInt('id');
+              if (id != null ){
+                List<Historical> historical = await historicalRepository.getHistorical(id);
+                if (historical == []){
+                  emit(const HistoricalState.empty());
+                } else {
+                  emit(HistoricalState.success(historical: historical));
+                }
               } else {
-                emit(HistoricalState.success(historical: historical));
+                emit(const HistoricalState.error(error: 'Une erreur est survenue'));
               }
             } catch (e) {
               if (kDebugMode) {

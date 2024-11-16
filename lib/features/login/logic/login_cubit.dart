@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:fyfax/features/login/model/user.dart';
 import 'package:fyfax/features/login/repository/user_repository.dart';
 import 'package:fyfax/shared/services/local_storage_service.dart';
 
@@ -26,9 +27,16 @@ class LoginCubit extends Cubit<LoginState> {
             try {
               String? pass = await userRepository.login(username, phoneNumber);
               if (pass!= null){
-                await localStorageService.saveUser(username, phoneNumber);
-                await localStorageService.saveToken(pass);
-                const LoginState.success();
+                int userId = await userRepository.getUserId(username);
+                print(userId);
+                if (userId !=0){
+                  await localStorageService.saveUser(username, phoneNumber, userId);
+                  await localStorageService.saveToken(pass);
+                  LoginState.success(user : User(id: userId, username:  username, phoneNumber: phoneNumber));
+                }
+                else {
+                  emit(const LoginState.error(error: 'Une erreur est survenue'));
+                }
               } else {
                 emit(const LoginState.error(error: 'Une erreur est survenue'));
               }
@@ -54,7 +62,7 @@ class LoginCubit extends Cubit<LoginState> {
             try {
               await userRepository.logout();
               await localStorageService.deleteAll();
-              const LoginState.success();
+              LoginState.success(user: User(phoneNumber: '', username: '',id: 0));
             } catch (e) {
               if (kDebugMode) {
                 print(e);
