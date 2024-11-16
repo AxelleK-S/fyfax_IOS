@@ -10,4 +10,5 @@ class QuizState with _$QuizState {
   const factory QuizState.offLineQuiz({required List<OfflineQuiz> quizzes}) = _OffLineQuiz;
   const factory QuizState.empty() = _Empty;
   const factory QuizState.done() = _Done;
+  const factory QuizState.finished({required int score}) = _Finished;
 }

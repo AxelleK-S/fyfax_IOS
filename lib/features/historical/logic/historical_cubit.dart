@@ -1,9 +1,61 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:fyfax/features/historical/model/historical.dart';
+import 'package:fyfax/features/historical/repository/historical_repository.dart';
+import 'package:fyfax/shared/services/hive_service.dart';
+import 'package:fyfax/shared/hive/model/historical.dart' as hs;
 
 part 'historical_state.dart';
 part 'historical_cubit.freezed.dart';
 
 class HistoricalCubit extends Cubit<HistoricalState> {
+  final HistoricalRepository historicalRepository = HistoricalRepository();
+  final HiveService hiveService = HiveService();
+  late StreamSubscription<List<ConnectivityResult>> connectivitySubscription;
   HistoricalCubit() : super(const HistoricalState.initial());
+
+  Future<void> getHistorical()async {
+    connectivitySubscription = Connectivity().onConnectivityChanged.listen(
+            (result) async {
+          if (!result.contains(ConnectivityResult.none)) {
+            emit(const HistoricalState.loading());
+            try {
+              List<Historical> historical = await historicalRepository.getHistorical(1);
+              if (historical == []){
+                emit(const HistoricalState.empty());
+              } else {
+                emit(HistoricalState.success(historical: historical));
+              }
+            } catch (e) {
+              if (kDebugMode) {
+                print(e);
+              }
+              emit(const HistoricalState.error(error: 'Une erreur est survenue'));
+            }
+          } else {
+            try{
+              emit(const HistoricalState.notConnected());
+              emit(const HistoricalState.loading());
+              List<hs.Historical> historical = await hiveService.getAllHistorical();
+
+              List<Historical> historicalList = [];
+
+              for (var hist in historical){
+                historicalList.add(Historical.fromJson(hist.toJson()));
+                if (kDebugMode) {
+                  print(hist.toJson());
+                }
+              }
+              emit(HistoricalState.success(historical: historicalList));
+            } catch (e){
+              emit(const HistoricalState.error(error: 'Une erreur est survenue'));
+            }
+          }
+        }
+    );
+  }
 }

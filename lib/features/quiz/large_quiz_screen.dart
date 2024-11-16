@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fyfax/features/quiz/logic/quiz_cubit.dart';
 import 'package:fyfax/features/quiz/model/quiz_details.dart';
-import 'package:fyfax/shared/widgets/offline_quiz_large_card.dart';
 import 'package:fyfax/shared/widgets/quiz_large_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -85,13 +84,13 @@ class LargeQuizArea extends StatelessWidget {
                       ),
                     ),
                   )),
-              /*success: (quizzes) => SingleChildScrollView(
+              success: (quizzes) => SingleChildScrollView(
                 child: Column(
                     children: List.generate(
                   quizzes.length,
                   (index) => QuizLargeCard(quiz : quizzes[index]),
                 )),
-              ),*/
+              ),
               offLineQuiz: (quizzes) => SingleChildScrollView(
                 child: Column(
                     children: List.generate(

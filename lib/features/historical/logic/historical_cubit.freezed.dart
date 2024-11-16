@@ -20,7 +20,8 @@ mixin _$HistoricalState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(List<Historical> historical) success,
+    required TResult Function() empty,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) =>
@@ -29,7 +30,8 @@ mixin _$HistoricalState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(List<Historical> historical)? success,
+    TResult? Function()? empty,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) =>
@@ -38,7 +40,8 @@ mixin _$HistoricalState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(List<Historical> historical)? success,
+    TResult Function()? empty,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),
@@ -49,6 +52,7 @@ mixin _$HistoricalState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
   }) =>
@@ -58,6 +62,7 @@ mixin _$HistoricalState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
   }) =>
@@ -67,6 +72,7 @@ mixin _$HistoricalState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
     required TResult orElse(),
@@ -110,12 +116,18 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
+class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   const _$InitialImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HistoricalState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'HistoricalState.initial'));
   }
 
   @override
@@ -132,7 +144,8 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(List<Historical> historical) success,
+    required TResult Function() empty,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) {
@@ -144,7 +157,8 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(List<Historical> historical)? success,
+    TResult? Function()? empty,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) {
@@ -156,7 +170,8 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(List<Historical> historical)? success,
+    TResult Function()? empty,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),
@@ -173,6 +188,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
   }) {
@@ -185,6 +201,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
   }) {
@@ -197,6 +214,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
     required TResult orElse(),
@@ -230,12 +248,18 @@ class __$$LoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadingImpl implements _Loading {
+class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   const _$LoadingImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HistoricalState.loading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'HistoricalState.loading'));
   }
 
   @override
@@ -252,7 +276,8 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(List<Historical> historical) success,
+    required TResult Function() empty,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) {
@@ -264,7 +289,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(List<Historical> historical)? success,
+    TResult? Function()? empty,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) {
@@ -276,7 +302,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(List<Historical> historical)? success,
+    TResult Function()? empty,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),
@@ -293,6 +320,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
   }) {
@@ -305,6 +333,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
   }) {
@@ -317,6 +346,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
     required TResult orElse(),
@@ -337,6 +367,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Historical> historical});
 }
 
 /// @nodoc
@@ -346,37 +378,78 @@ class __$$SuccessImplCopyWithImpl<$Res>
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? historical = null,
+  }) {
+    return _then(_$SuccessImpl(
+      historical: null == historical
+          ? _value._historical
+          : historical // ignore: cast_nullable_to_non_nullable
+              as List<Historical>,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$SuccessImpl implements _Success {
-  const _$SuccessImpl();
+class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
+  const _$SuccessImpl({required final List<Historical> historical})
+      : _historical = historical;
+
+  final List<Historical> _historical;
+  @override
+  List<Historical> get historical {
+    if (_historical is EqualUnmodifiableListView) return _historical;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_historical);
+  }
 
   @override
-  String toString() {
-    return 'HistoricalState.success()';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HistoricalState.success(historical: $historical)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HistoricalState.success'))
+      ..add(DiagnosticsProperty('historical', historical));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SuccessImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessImpl &&
+            const DeepCollectionEquality()
+                .equals(other._historical, _historical));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_historical));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(List<Historical> historical) success,
+    required TResult Function() empty,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) {
-    return success();
+    return success(historical);
   }
 
   @override
@@ -384,11 +457,12 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(List<Historical> historical)? success,
+    TResult? Function()? empty,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) {
-    return success?.call();
+    return success?.call(historical);
   }
 
   @override
@@ -396,13 +470,14 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(List<Historical> historical)? success,
+    TResult Function()? empty,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(historical);
     }
     return orElse();
   }
@@ -413,6 +488,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
   }) {
@@ -425,6 +501,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
   }) {
@@ -437,6 +514,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
     required TResult orElse(),
@@ -449,7 +527,145 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements HistoricalState {
-  const factory _Success() = _$SuccessImpl;
+  const factory _Success({required final List<Historical> historical}) =
+      _$SuccessImpl;
+
+  List<Historical> get historical;
+  @JsonKey(ignore: true)
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$EmptyImplCopyWith<$Res> {
+  factory _$$EmptyImplCopyWith(
+          _$EmptyImpl value, $Res Function(_$EmptyImpl) then) =
+      __$$EmptyImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$EmptyImplCopyWithImpl<$Res>
+    extends _$HistoricalStateCopyWithImpl<$Res, _$EmptyImpl>
+    implements _$$EmptyImplCopyWith<$Res> {
+  __$$EmptyImplCopyWithImpl(
+      _$EmptyImpl _value, $Res Function(_$EmptyImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$EmptyImpl with DiagnosticableTreeMixin implements _Empty {
+  const _$EmptyImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HistoricalState.empty()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'HistoricalState.empty'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$EmptyImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<Historical> historical) success,
+    required TResult Function() empty,
+    required TResult Function(String error) error,
+    required TResult Function() notConnected,
+  }) {
+    return empty();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<Historical> historical)? success,
+    TResult? Function()? empty,
+    TResult? Function(String error)? error,
+    TResult? Function()? notConnected,
+  }) {
+    return empty?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Historical> historical)? success,
+    TResult Function()? empty,
+    TResult Function(String error)? error,
+    TResult Function()? notConnected,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Empty value) empty,
+    required TResult Function(_Error value) error,
+    required TResult Function(_NotConnected value) notConnected,
+  }) {
+    return empty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Empty value)? empty,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_NotConnected value)? notConnected,
+  }) {
+    return empty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Empty value)? empty,
+    TResult Function(_Error value)? error,
+    TResult Function(_NotConnected value)? notConnected,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Empty implements HistoricalState {
+  const factory _Empty() = _$EmptyImpl;
 }
 
 /// @nodoc
@@ -485,15 +701,23 @@ class __$$ErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorImpl implements _Error {
+class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   const _$ErrorImpl({required this.error});
 
   @override
   final String error;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HistoricalState.error(error: $error)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HistoricalState.error'))
+      ..add(DiagnosticsProperty('error', error));
   }
 
   @override
@@ -518,7 +742,8 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(List<Historical> historical) success,
+    required TResult Function() empty,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) {
@@ -530,7 +755,8 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(List<Historical> historical)? success,
+    TResult? Function()? empty,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) {
@@ -542,7 +768,8 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(List<Historical> historical)? success,
+    TResult Function()? empty,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),
@@ -559,6 +786,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
   }) {
@@ -571,6 +799,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
   }) {
@@ -583,6 +812,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
     required TResult orElse(),
@@ -621,12 +851,18 @@ class __$$NotConnectedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NotConnectedImpl implements _NotConnected {
+class _$NotConnectedImpl with DiagnosticableTreeMixin implements _NotConnected {
   const _$NotConnectedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HistoricalState.notConnected()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'HistoricalState.notConnected'));
   }
 
   @override
@@ -643,7 +879,8 @@ class _$NotConnectedImpl implements _NotConnected {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(List<Historical> historical) success,
+    required TResult Function() empty,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) {
@@ -655,7 +892,8 @@ class _$NotConnectedImpl implements _NotConnected {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(List<Historical> historical)? success,
+    TResult? Function()? empty,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) {
@@ -667,7 +905,8 @@ class _$NotConnectedImpl implements _NotConnected {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(List<Historical> historical)? success,
+    TResult Function()? empty,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),
@@ -684,6 +923,7 @@ class _$NotConnectedImpl implements _NotConnected {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
   }) {
@@ -696,6 +936,7 @@ class _$NotConnectedImpl implements _NotConnected {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
   }) {
@@ -708,6 +949,7 @@ class _$NotConnectedImpl implements _NotConnected {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
     required TResult orElse(),

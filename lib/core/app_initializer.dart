@@ -4,6 +4,7 @@ import 'package:fyfax/shared/hive/model/domain.dart';
 import 'package:fyfax/shared/hive/model/offline_quiz.dart';
 import 'package:fyfax/shared/hive/model/question.dart';
 import 'package:fyfax/shared/hive/model/section.dart';
+import 'package:fyfax/shared/hive/model/historical.dart';
 import 'package:fyfax/shared/hive/model/section_title.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -26,6 +27,7 @@ class AppInitializer {
     Hive.registerAdapter(QuestionAdapter());
     Hive.registerAdapter(SectionAdapter());
     Hive.registerAdapter(SectionTitleAdapter());
+    Hive.registerAdapter(HistoricalAdapter());
   }
 
   /// Initialize services, plugins, etc. after the app runs.

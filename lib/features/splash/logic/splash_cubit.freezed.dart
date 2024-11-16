@@ -19,6 +19,7 @@ mixin _$SplashState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function(bool isLoggedIn) initialized,
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String error) error,
@@ -28,6 +29,7 @@ mixin _$SplashState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function(bool isLoggedIn)? initialized,
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String error)? error,
@@ -37,6 +39,7 @@ mixin _$SplashState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(bool isLoggedIn)? initialized,
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String error)? error,
@@ -47,6 +50,7 @@ mixin _$SplashState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
@@ -56,6 +60,7 @@ mixin _$SplashState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
@@ -65,6 +70,7 @@ mixin _$SplashState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
@@ -131,6 +137,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function(bool isLoggedIn) initialized,
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String error) error,
@@ -143,6 +150,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function(bool isLoggedIn)? initialized,
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String error)? error,
@@ -155,6 +163,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(bool isLoggedIn)? initialized,
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String error)? error,
@@ -171,6 +180,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
@@ -183,6 +193,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
@@ -195,6 +206,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
@@ -210,6 +222,165 @@ class _$InitialImpl implements _Initial {
 
 abstract class _Initial implements SplashState {
   const factory _Initial() = _$InitialImpl;
+}
+
+/// @nodoc
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isLoggedIn});
+}
+
+/// @nodoc
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$SplashStateCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isLoggedIn = null,
+  }) {
+    return _then(_$InitializedImpl(
+      isLoggedIn: null == isLoggedIn
+          ? _value.isLoggedIn
+          : isLoggedIn // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl({required this.isLoggedIn});
+
+  @override
+  final bool isLoggedIn;
+
+  @override
+  String toString() {
+    return 'SplashState.initialized(isLoggedIn: $isLoggedIn)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InitializedImpl &&
+            (identical(other.isLoggedIn, isLoggedIn) ||
+                other.isLoggedIn == isLoggedIn));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isLoggedIn);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(bool isLoggedIn) initialized,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function(String error) error,
+    required TResult Function() notConnected,
+  }) {
+    return initialized(isLoggedIn);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(bool isLoggedIn)? initialized,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function(String error)? error,
+    TResult? Function()? notConnected,
+  }) {
+    return initialized?.call(isLoggedIn);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(bool isLoggedIn)? initialized,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function(String error)? error,
+    TResult Function()? notConnected,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized(isLoggedIn);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_NotConnectesd value) notConnected,
+  }) {
+    return initialized(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_NotConnectesd value)? notConnected,
+  }) {
+    return initialized?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_NotConnectesd value)? notConnected,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Initialized implements SplashState {
+  const factory _Initialized({required final bool isLoggedIn}) =
+      _$InitializedImpl;
+
+  bool get isLoggedIn;
+  @JsonKey(ignore: true)
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -251,6 +422,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function(bool isLoggedIn) initialized,
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String error) error,
@@ -263,6 +435,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function(bool isLoggedIn)? initialized,
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String error)? error,
@@ -275,6 +448,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(bool isLoggedIn)? initialized,
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String error)? error,
@@ -291,6 +465,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
@@ -303,6 +478,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
@@ -315,6 +491,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
@@ -371,6 +548,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function(bool isLoggedIn) initialized,
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String error) error,
@@ -383,6 +561,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function(bool isLoggedIn)? initialized,
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String error)? error,
@@ -395,6 +574,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(bool isLoggedIn)? initialized,
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String error)? error,
@@ -411,6 +591,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
@@ -423,6 +604,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
@@ -435,6 +617,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
@@ -517,6 +700,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function(bool isLoggedIn) initialized,
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String error) error,
@@ -529,6 +713,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function(bool isLoggedIn)? initialized,
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String error)? error,
@@ -541,6 +726,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(bool isLoggedIn)? initialized,
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String error)? error,
@@ -557,6 +743,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
@@ -569,6 +756,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
@@ -581,6 +769,7 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
@@ -642,6 +831,7 @@ class _$NotConnectesdImpl implements _NotConnectesd {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function(bool isLoggedIn) initialized,
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String error) error,
@@ -654,6 +844,7 @@ class _$NotConnectesdImpl implements _NotConnectesd {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function(bool isLoggedIn)? initialized,
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String error)? error,
@@ -666,6 +857,7 @@ class _$NotConnectesdImpl implements _NotConnectesd {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(bool isLoggedIn)? initialized,
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String error)? error,
@@ -682,6 +874,7 @@ class _$NotConnectesdImpl implements _NotConnectesd {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
@@ -694,6 +887,7 @@ class _$NotConnectesdImpl implements _NotConnectesd {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
@@ -706,6 +900,7 @@ class _$NotConnectesdImpl implements _NotConnectesd {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,

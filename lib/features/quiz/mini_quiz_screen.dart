@@ -1,8 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fyfax/features/quiz/logic/quiz_cubit.dart';
 import 'package:fyfax/features/quiz/model/quiz_details.dart';
-import 'package:fyfax/features/quiz/quiz_welcome_screen.dart';
-import 'package:fyfax/shared/widgets/quiz_mini_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -72,6 +71,9 @@ class MiniQuizArea extends StatelessWidget {
                         ),
                         onTapOutside: (event) {
                           FocusScope.of(context).unfocus();
+                          if (kDebugMode) {
+                            print(researchController.text);
+                          }
                         },
                         decoration: InputDecoration(
                             border: InputBorder.none,
@@ -202,7 +204,7 @@ class MiniQuizArea extends StatelessWidget {
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
-                                children: quizzesList.map((quiz) {
+                                children: quizzesList.where((element) => element.name.contains(researchController.text),).toList().map((quiz) {
                                   return Container(
                                     height: 108,
                                     width: 143,
@@ -214,7 +216,7 @@ class MiniQuizArea extends StatelessWidget {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                                       children: [
-                                        Text(quiz.domain.name, textAlign: TextAlign.left, style: GoogleFonts.handlee(color: Colors.black)),
+                                        Text(quiz.name, textAlign: TextAlign.left, style: GoogleFonts.handlee(color: Colors.black)),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [

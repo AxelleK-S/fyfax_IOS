@@ -21,60 +21,62 @@ class _FirstScreenState extends State<FirstScreen> {
       'assets/images/image3.jpg',
     ];
     return Scaffold(
-      body: Column(
-        children: [
-          CarouselSlider(
-              items: List.generate(3, (index) => Image.asset(images[index], fit: BoxFit.fitHeight,),),
-              options: CarouselOptions(
-                height: 600,
-                viewportFraction: 0.98,
-                initialPage: 0,
-                enableInfiniteScroll: true,
-                reverse: false,
-                scrollDirection: Axis.horizontal,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    activeIndex = index;
-                  });
-                },
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            CarouselSlider(
+                items: List.generate(3, (index) => Image.asset(images[index], fit: BoxFit.fitHeight,),),
+                options: CarouselOptions(
+                  height: 600,
+                  viewportFraction: 0.98,
+                  initialPage: 0,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  scrollDirection: Axis.horizontal,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      activeIndex = index;
+                    });
+                  },
+                )
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                  3, (index) => Container(
+                width: 10,
+                height: 10,
+                margin: const EdgeInsets.only(
+                    top: 14,
+                    left: 6,
+                    right: 6,
+                    bottom: 14
+                ),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: activeIndex==index ?
+                    Theme.of(context).colorScheme.primary :
+                    Theme.of(context).colorScheme.onSurface
+                ),
               )
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-                3, (index) => Container(
-              width: 10,
-              height: 10,
-              margin: const EdgeInsets.only(
-                  top: 14,
-                  left: 6,
-                  right: 6,
-                  bottom: 14
               ),
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: activeIndex==index ?
-                  Theme.of(context).colorScheme.primary :
-                  Theme.of(context).colorScheme.onSurface
+            ),
+            const SizedBox(height: 24,),
+            Text('Bienvenu sur FyFax', style: GoogleFonts.handlee(fontSize: 18),),
+            const SizedBox(height: 10,),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 16,
+                  right: 16
               ),
-            )
+              child: Text('Consultez toutes les anciennes épreuves de vos grands concours de médécine', style: GoogleFonts.handlee(fontSize: 16),),
             ),
-          ),
-          const SizedBox(height: 24,),
-          Text('Bienvenu sur FyFax', style: GoogleFonts.handlee(fontSize: 18),),
-          const SizedBox(height: 10,),
-          Padding(
-            padding: const EdgeInsets.only(
-                left: 16,
-                right: 16
-            ),
-            child: Text('Consultez toutes les anciennes épreuves de vos grands concours de médécine', style: GoogleFonts.handlee(fontSize: 16),),
-          ),
-          ValidatedButton(onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => SecondScreen(),));
-          }, text:  'Allons-y')
-        ],
+            ValidatedButton(onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => SecondScreen(),));
+            }, text:  'Allons-y')
+          ],
+        ),
       ),
     );
   }

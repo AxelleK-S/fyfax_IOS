@@ -4,6 +4,7 @@ import 'package:fyfax/core/i18n/l10n.dart';
 import 'package:fyfax/core/theme/app_theme.dart';
 import 'package:fyfax/features/home/home_screen.dart';
 import 'package:fyfax/features/first/first_screen.dart';
+import 'package:fyfax/features/splash/splash_screen.dart';
 
 
 
@@ -16,8 +17,9 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'FyFax',
-      initialRoute: '/',
+      initialRoute: '/home',
       routes: {
+        '/splash': (ctx) => const SplashScreen(),
         '/': (ctx) => const FirstScreen(),
         '/home': (ctx) => const HomeScreen(),
       },
