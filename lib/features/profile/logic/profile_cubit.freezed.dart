@@ -20,7 +20,8 @@ mixin _$ProfileState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String email, String phoneNumber) success,
+    required TResult Function(String email, String phoneNumber, String name)
+        success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) =>
@@ -29,7 +30,7 @@ mixin _$ProfileState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String email, String phoneNumber)? success,
+    TResult? Function(String email, String phoneNumber, String name)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) =>
@@ -38,7 +39,7 @@ mixin _$ProfileState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String email, String phoneNumber)? success,
+    TResult Function(String email, String phoneNumber, String name)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),
@@ -132,7 +133,8 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String email, String phoneNumber) success,
+    required TResult Function(String email, String phoneNumber, String name)
+        success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) {
@@ -144,7 +146,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String email, String phoneNumber)? success,
+    TResult? Function(String email, String phoneNumber, String name)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) {
@@ -156,7 +158,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String email, String phoneNumber)? success,
+    TResult Function(String email, String phoneNumber, String name)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),
@@ -252,7 +254,8 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String email, String phoneNumber) success,
+    required TResult Function(String email, String phoneNumber, String name)
+        success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) {
@@ -264,7 +267,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String email, String phoneNumber)? success,
+    TResult? Function(String email, String phoneNumber, String name)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) {
@@ -276,7 +279,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String email, String phoneNumber)? success,
+    TResult Function(String email, String phoneNumber, String name)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),
@@ -338,7 +341,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String email, String phoneNumber});
+  $Res call({String email, String phoneNumber, String name});
 }
 
 /// @nodoc
@@ -354,6 +357,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
   $Res call({
     Object? email = null,
     Object? phoneNumber = null,
+    Object? name = null,
   }) {
     return _then(_$SuccessImpl(
       email: null == email
@@ -364,6 +368,10 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -371,16 +379,19 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl({required this.email, required this.phoneNumber});
+  const _$SuccessImpl(
+      {required this.email, required this.phoneNumber, required this.name});
 
   @override
   final String email;
   @override
   final String phoneNumber;
+  @override
+  final String name;
 
   @override
   String toString() {
-    return 'ProfileState.success(email: $email, phoneNumber: $phoneNumber)';
+    return 'ProfileState.success(email: $email, phoneNumber: $phoneNumber, name: $name)';
   }
 
   @override
@@ -390,11 +401,12 @@ class _$SuccessImpl implements _Success {
             other is _$SuccessImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber));
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.name, name) || other.name == name));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, phoneNumber);
+  int get hashCode => Object.hash(runtimeType, email, phoneNumber, name);
 
   @JsonKey(ignore: true)
   @override
@@ -407,11 +419,12 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String email, String phoneNumber) success,
+    required TResult Function(String email, String phoneNumber, String name)
+        success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) {
-    return success(email, phoneNumber);
+    return success(email, phoneNumber, name);
   }
 
   @override
@@ -419,11 +432,11 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String email, String phoneNumber)? success,
+    TResult? Function(String email, String phoneNumber, String name)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) {
-    return success?.call(email, phoneNumber);
+    return success?.call(email, phoneNumber, name);
   }
 
   @override
@@ -431,13 +444,13 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String email, String phoneNumber)? success,
+    TResult Function(String email, String phoneNumber, String name)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(email, phoneNumber);
+      return success(email, phoneNumber, name);
     }
     return orElse();
   }
@@ -486,10 +499,12 @@ class _$SuccessImpl implements _Success {
 abstract class _Success implements ProfileState {
   const factory _Success(
       {required final String email,
-      required final String phoneNumber}) = _$SuccessImpl;
+      required final String phoneNumber,
+      required final String name}) = _$SuccessImpl;
 
   String get email;
   String get phoneNumber;
+  String get name;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -561,7 +576,8 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String email, String phoneNumber) success,
+    required TResult Function(String email, String phoneNumber, String name)
+        success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) {
@@ -573,7 +589,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String email, String phoneNumber)? success,
+    TResult? Function(String email, String phoneNumber, String name)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) {
@@ -585,7 +601,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String email, String phoneNumber)? success,
+    TResult Function(String email, String phoneNumber, String name)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),
@@ -686,7 +702,8 @@ class _$NotConnectedImpl implements _NotConnected {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String email, String phoneNumber) success,
+    required TResult Function(String email, String phoneNumber, String name)
+        success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
   }) {
@@ -698,7 +715,7 @@ class _$NotConnectedImpl implements _NotConnected {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String email, String phoneNumber)? success,
+    TResult? Function(String email, String phoneNumber, String name)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
   }) {
@@ -710,7 +727,7 @@ class _$NotConnectedImpl implements _NotConnected {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String email, String phoneNumber)? success,
+    TResult Function(String email, String phoneNumber, String name)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
     required TResult orElse(),

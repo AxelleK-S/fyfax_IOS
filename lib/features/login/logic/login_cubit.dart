@@ -19,20 +19,21 @@ class LoginCubit extends Cubit<LoginState> {
 
 
 
-  Future<void> login(String username, String phoneNumber)async {
+  Future<void> login(String username, String code, String name)async {
     connectivitySubscription = Connectivity().onConnectivityChanged.listen(
             (result) async {
           if (!result.contains(ConnectivityResult.none)) {
             const LoginState.loading();
             try {
-              String? pass = await userRepository.login(username, phoneNumber);
+              String? pass = await userRepository.login(username, code);
               if (pass!= null){
-                int userId = await userRepository.getUserId(username);
+                User user = await userRepository.getUserId(username);
+                int userId = user.id;
                 print(userId);
                 if (userId !=0){
-                  await localStorageService.saveUser(username, phoneNumber, userId);
+                  await localStorageService.saveUser(username, code, userId, name, user.phoneNumber);
                   await localStorageService.saveToken(pass);
-                  LoginState.success(user : User(id: userId, username:  username, phoneNumber: phoneNumber));
+                  LoginState.success(user : User(id: userId, username:  username, phoneNumber: code));
                 }
                 else {
                   emit(const LoginState.error(error: 'Une erreur est survenue'));

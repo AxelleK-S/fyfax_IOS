@@ -14,17 +14,17 @@ class MiniQuizScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => QuizCubit()..getQuizzes(),
-      child: const MiniQuizArea(),
+      child: MiniQuizArea(),
     );
   }
 }
 
 class MiniQuizArea extends StatelessWidget {
-  const MiniQuizArea({super.key});
+  final TextEditingController researchController = TextEditingController();
+  MiniQuizArea({super.key});
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController researchController = TextEditingController();
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(223),

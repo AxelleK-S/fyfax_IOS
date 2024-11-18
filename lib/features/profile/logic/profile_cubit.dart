@@ -11,11 +11,12 @@ class ProfileCubit extends Cubit<ProfileState> {
     final prefs = await SharedPreferences.getInstance();
     final email = prefs.getString('username');
     final phone = prefs.getString('phoneNumber');
-    if (email == null || phone == null) {
+    final name = prefs.getString('name');
+    if (email == null || phone == null || name == null) {
       emit(const ProfileState.error(error: 'Une erreur est survenue'));
     }
     else {
-      emit(ProfileState.success(email: email, phoneNumber: phone));
+      emit(ProfileState.success(email: email, phoneNumber: phone, name: name));
     }
   }
 }

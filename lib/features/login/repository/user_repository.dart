@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:fyfax/features/login/model/user.dart' as u;
 
 class UserRepository {
 
@@ -15,19 +15,21 @@ class UserRepository {
     return session?.accessToken ;
   }
   
-  Future<int> getUserId(String username) async{
+  Future<u.User> getUserId(String username) async{
     try {
       final data = await Supabase.instance.client.from('user').select('*').eq('username', username);
       if (kDebugMode) {
         print(data);
       }
       int userId = data.first['id'];
-      return userId;
+      String phone = data.first['phoneNumber'];
+      String user = data.first['username'];
+      return u.User(id: userId, username: user, phoneNumber: phone);
     } catch (e){
       if (kDebugMode) {
         print(e);
       }
-      return 0;
+      return u.User(id: 0, username: '', phoneNumber: '');
     }
   }
 

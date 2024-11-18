@@ -109,7 +109,7 @@ class ProfileArea extends StatelessWidget {
                   ),
                 ));
               },
-              success: (email, phoneNumber) {
+              success: (email, phoneNumber, name) {
                 return Scaffold(
                   body: SafeArea(
                     child: Column(
@@ -128,6 +128,17 @@ class ProfileArea extends StatelessWidget {
                         ),
                         Text('Mes informations personnelles', style: GoogleFonts.handlee(fontSize: 18),),
                         const SizedBox(height: 14,),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16, right: 16, top: 7, bottom: 7),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text('Nom', style: GoogleFonts.handlee(fontSize: 16)),
+                              const SizedBox(width: 24,),
+                              Text(name, style: GoogleFonts.handlee(fontSize: 16)),
+                            ],
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(left: 16, right: 16, top: 7, bottom: 7),
                           child: Row(
@@ -171,6 +182,7 @@ class ProfileArea extends StatelessWidget {
                             ],
                           ),
                         ),*/
+                        /*
                         Padding(
                           padding: const EdgeInsets.only(left: 16, right: 16, top: 7, bottom: 7),
                           child: Row(
@@ -183,6 +195,8 @@ class ProfileArea extends StatelessWidget {
                             ],
                           ),
                         ),
+
+                         */
                       ],
                     ),
                   ),

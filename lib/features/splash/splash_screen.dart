@@ -39,6 +39,8 @@ class SplashArea extends StatelessWidget {
       },
       child: Scaffold(
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               height: 150,
