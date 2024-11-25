@@ -35,6 +35,7 @@ class FlyerScreen extends StatelessWidget {
           )),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(
             1,
             (index) {
