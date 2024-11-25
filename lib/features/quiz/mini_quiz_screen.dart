@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fyfax/features/flyer/flyer_screen.dart';
 import 'package:fyfax/features/quiz/logic/quiz_cubit.dart';
 import 'package:fyfax/features/quiz/model/quiz_details.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -39,7 +40,16 @@ class MiniQuizArea extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const SizedBox(
-                    height: 24,
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconButton(onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const FlyerScreen(),)), icon: const Icon(Iconsax.paperclip, color: Colors.white,))
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 14,
                   ),
                   Text('Bienvenu sur FyFax', style: GoogleFonts.handlee(fontSize: 18)),
                   const SizedBox(
