@@ -23,6 +23,47 @@ class QuizCubit extends Cubit<QuizState> {
   QuizCubit() : super(const QuizState.initial());
 
   Future<void> getQuizzes() async {
+    final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult.contains(ConnectivityResult.none)) {
+      emit(const QuizState.notConnected());
+
+      emit(const QuizState.loading());
+      try {
+        List<OfflineQuiz> offlineQuiz = await hiveService.getAllQuiz();
+        if (offlineQuiz == []) {
+          emit(const QuizState.empty());
+        } else {
+          /*
+              List<QuizDetails> quizDetails = [];
+              for (var quiz in offlineQuiz){
+                quizDetails.add(QuizDetails.fromJson(quiz.toJson()));
+              }
+               */
+          print(offlineQuiz);
+          emit(QuizState.offLineQuiz(quizzes: offlineQuiz));
+        }
+      } catch (e) {
+        emit(const QuizState.error(error: 'Une erreur est survenue'));
+      }
+    } else {
+      emit(const QuizState.loading());
+      try {
+        List<QuizDetails>? quizzes =
+        await quizRepository.getQuizWithDetails();
+        if (quizzes == []) {
+          emit(const QuizState.empty());
+        } else {
+          emit(QuizState.success(quizzes: quizzes));
+        }
+      } catch (e) {
+        if (kDebugMode) {
+          print(e);
+        }
+        emit(const QuizState.error(error: 'Une erreur est survenue'));
+      }
+    }
+
+    /*
     connectivitySubscription = Connectivity().onConnectivityChanged.listen(
       (result) async {
         if (!result.contains(ConnectivityResult.none)) {
@@ -66,6 +107,8 @@ class QuizCubit extends Cubit<QuizState> {
         }
       },
     );
+
+     */
   }
 
   Future<void> getOffLineQuizzes() async {
@@ -115,6 +158,47 @@ class QuizCubit extends Cubit<QuizState> {
 
   Future<void> finishQuiz(QuizDetails quiz, int score) async {
     print('start');
+    final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult.contains(ConnectivityResult.none)) {
+      try {
+        emit(const QuizState.notConnected());
+        hiveService.addHistorical(hs.Historical(
+            id: 0,
+            createdAt: DateTime.now(),
+            text: 'Vous avez terminé le quiz ${quiz.name} ${quiz.year}',
+            user: 1));
+      } catch (e){
+        if (kDebugMode) {
+          print(e);
+        }
+        emit(const QuizState.error(error: 'Une erreur est survenue'));
+      }
+    } else {
+      print('load');
+      emit(const QuizState.loading());
+      try {
+        // take user id
+        await quizRepository.saveResult(1, quiz.id, 1, score);
+        await historicalRepository.insertHistorical(Historical(
+            id: 0,
+            createdAt: DateTime.now(),
+            text: 'Vous avez terminé le quiz ${quiz.name} ${quiz.year}',
+            user: 1));
+        emit(QuizState.finished(score: score));
+        hiveService.addHistorical(hs.Historical(
+            id: 0,
+            createdAt: DateTime.now(),
+            text: 'Vous avez terminé le quiz ${quiz.name} ${quiz.year}',
+            user: 1));
+      } catch (e) {
+        if (kDebugMode) {
+          print(e);
+        }
+        emit(const QuizState.error(error: 'Une erreur est survenue'));
+      }
+    }
+
+    /*
     connectivitySubscription =
         Connectivity().onConnectivityChanged.listen((result) async {
       if (!result.contains(ConnectivityResult.none)) {
@@ -156,6 +240,8 @@ class QuizCubit extends Cubit<QuizState> {
         }
       }
     });
+
+     */
   }
 
 }

@@ -17,7 +17,7 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'FyFax',
-      initialRoute: '/splash',
+      initialRoute: '/home',
       routes: {
         '/splash': (ctx) => const SplashScreen(),
         '/': (ctx) => const FirstScreen(),

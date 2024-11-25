@@ -53,12 +53,12 @@ class MiniQuizArea extends StatelessWidget {
                   ),
                   Text('Bienvenu sur FyFax', style: GoogleFonts.handlee(fontSize: 18)),
                   const SizedBox(
-                    height: 24,
+                    height: 14,
                   ),
-                  Text('Préparez vou efficacement pour l\' ENSCT',
+                  Text('Préparez vous efficacement pour l\' ENSCT',
                       style: GoogleFonts.handlee(fontSize: 18)),
                   const SizedBox(
-                    height: 24,
+                    height: 14,
                   ),
                   Container(
                     width: 250,

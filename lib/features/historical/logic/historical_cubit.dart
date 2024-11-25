@@ -21,6 +21,49 @@ class HistoricalCubit extends Cubit<HistoricalState> {
 
   Future<void> getHistorical()async {
     print('debut');
+    final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult.contains(ConnectivityResult.none)) {
+      try{
+        emit(const HistoricalState.notConnected());
+        emit(const HistoricalState.loading());
+        List<hs.Historical> historical = await hiveService.getAllHistorical();
+
+        List<Historical> historicalList = [];
+
+        for (var hist in historical){
+          historicalList.add(Historical.fromJson(hist.toJson()));
+          if (kDebugMode) {
+            print(hist.toJson());
+          }
+        }
+        emit(HistoricalState.success(historical: historicalList));
+      } catch (e){
+        emit(const HistoricalState.error(error: 'Une erreur est survenue'));
+      }
+    } else {
+      print('load');
+      emit(const HistoricalState.loading());
+      try {
+        print('recup');
+        final prefs = await SharedPreferences.getInstance();
+        final id = prefs.getInt('id');
+        if (id != null ){
+          List<Historical> historical = await historicalRepository.getHistorical(id);
+          if (historical == []){
+            emit(const HistoricalState.empty());
+          } else {
+            emit(HistoricalState.success(historical: historical));
+          }
+        } else {
+          emit(const HistoricalState.error(error: 'Une erreur est survenue'));
+        }
+      } catch (e) {
+        if (kDebugMode) {
+          print(e);
+        }
+        emit(const HistoricalState.error(error: 'Une erreur est survenue'));
+      }
+    }
     /*
     try {
       print('recup');
@@ -38,6 +81,8 @@ class HistoricalCubit extends Cubit<HistoricalState> {
     }
 
      */
+
+    /*
     connectivitySubscription = Connectivity().onConnectivityChanged.listen(
             (result) async {
           if (!result.contains(ConnectivityResult.none)) {
@@ -84,5 +129,7 @@ class HistoricalCubit extends Cubit<HistoricalState> {
           }
         }
     );
+
+     */
   }
 }
