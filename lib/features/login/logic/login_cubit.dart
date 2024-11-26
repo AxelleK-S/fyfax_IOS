@@ -25,17 +25,18 @@ class LoginCubit extends Cubit<LoginState> {
     if (connectivityResult.contains(ConnectivityResult.none)) {
       emit(const LoginState.notConnected());
     } else {
-      const LoginState.loading();
+      emit(const LoginState.loading());
       try {
         String? pass = await userRepository.login(username, code);
         if (pass!= null){
           User user = await userRepository.getUserId(username);
           int userId = user.id;
-          print(userId);
+          print('userId $userId');
           if (userId !=0){
             await localStorageService.saveUser(username, code, userId, name, user.phoneNumber);
             await localStorageService.saveToken(pass);
-            LoginState.success(user : User(id: userId, username:  username, phoneNumber: code));
+            print('saved');
+            emit(LoginState.success(user : User(id: userId, username:  username, phoneNumber: code)));
           }
           else {
             emit(const LoginState.error(error: 'Une erreur est survenue'));
@@ -94,11 +95,11 @@ class LoginCubit extends Cubit<LoginState> {
     if (connectivityResult.contains(ConnectivityResult.none)) {
       emit(const LoginState.notConnected());
     } else {
-      const LoginState.loading();
+      emit(const LoginState.loading());
       try {
         await userRepository.logout();
         await localStorageService.deleteAll();
-        LoginState.success(user: User(phoneNumber: '', username: '',id: 0));
+        emit(LoginState.success(user: User(phoneNumber: '', username: '',id: 0)));
       } catch (e) {
         if (kDebugMode) {
           print(e);

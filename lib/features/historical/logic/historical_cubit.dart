@@ -28,15 +28,19 @@ class HistoricalCubit extends Cubit<HistoricalState> {
         emit(const HistoricalState.loading());
         List<hs.Historical> historical = await hiveService.getAllHistorical();
 
-        List<Historical> historicalList = [];
+        if (historical == []){
+          emit(const HistoricalState.empty());
+        } else {
+          List<Historical> historicalList = [];
 
-        for (var hist in historical){
-          historicalList.add(Historical.fromJson(hist.toJson()));
-          if (kDebugMode) {
-            print(hist.toJson());
+          for (var hist in historical){
+            historicalList.add(Historical.fromJson(hist.toJson()));
+            if (kDebugMode) {
+              print(hist.toJson());
+            }
           }
+          emit(HistoricalState.success(historical: historicalList));
         }
-        emit(HistoricalState.success(historical: historicalList));
       } catch (e){
         emit(const HistoricalState.error(error: 'Une erreur est survenue'));
       }

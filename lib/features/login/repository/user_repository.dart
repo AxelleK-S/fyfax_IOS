@@ -22,7 +22,7 @@ class UserRepository {
         print(data);
       }
       int userId = data.first['id'];
-      String phone = data.first['phoneNumber'];
+      String phone = data.first['phonenumber'].toString();
       String user = data.first['username'];
       return u.User(id: userId, username: user, phoneNumber: phone);
     } catch (e){
