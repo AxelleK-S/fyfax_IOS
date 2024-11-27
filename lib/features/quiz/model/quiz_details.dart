@@ -6,6 +6,7 @@ import 'dart:convert';
 
 import 'package:fyfax/features/quiz/model/domain.dart';
 import 'package:fyfax/features/quiz/model/question.dart';
+import 'package:fyfax/features/quiz/model/section_group.dart';
 import 'package:fyfax/features/quiz/model/section_title.dart';
 
 List<QuizDetails> quizDetailsFromJson(String str) => List<QuizDetails>.from(json.decode(str).map((x) => QuizDetails.fromJson(x)));
@@ -20,6 +21,7 @@ class QuizDetails {
   Domain domain;
   int questionNumber;
   List<Section> section;
+  List<SectionGroup> sectionGroups;
 
   QuizDetails({
     required this.id,
@@ -29,6 +31,7 @@ class QuizDetails {
     required this.domain,
     required this.questionNumber,
     required this.section,
+    this.sectionGroups = const [],
   });
 
   factory QuizDetails.fromJson(Map<String, dynamic> json) => QuizDetails(
@@ -39,6 +42,7 @@ class QuizDetails {
     domain: Domain.fromJson(json["domain"]),
     questionNumber: json["question_number"],
     section: List<Section>.from(json["section"].map((x) => Section.fromJson(x))),
+    sectionGroups: [],
   );
 
   Map<String, dynamic> toJson() => {
@@ -49,6 +53,7 @@ class QuizDetails {
     "domain": domain.toJson(),
     "question_number": questionNumber,
     "section": List<dynamic>.from(section.map((x) => x.toJson())),
+    "section_groups": List<dynamic>.from(sectionGroups.map((x) => {'title': x.title.toJson(), 'sections': x.sections.map((s) => s.toJson()).toList()})),
   };
 }
 

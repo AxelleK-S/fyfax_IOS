@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +10,7 @@ import 'package:fyfax/features/quiz/repository/quiz_repository.dart';
 import 'package:fyfax/shared/hive/model/offline_quiz.dart';
 import 'package:fyfax/shared/services/hive_service.dart';
 import 'package:fyfax/shared/hive/model/historical.dart' as hs;
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'quiz_state.dart';
 part 'quiz_cubit.freezed.dart';
@@ -143,11 +143,18 @@ class QuizCubit extends Cubit<QuizState> {
   Future<void> storeQuiz(QuizDetails quiz) async {
     //emit(const QuizState.loading());
     try {
-      QuizDetails quizzes =
-          await quizRepository.getQuizWithDetailsById(quiz.id);
-      hiveService.addQuiz(OfflineQuiz.fromJson(quizzes.toJson()));
-      //emit(const QuizState.done());
-      //getQuizzes();
+      List<OfflineQuiz> offlineQuiz = await hiveService.getAllQuiz();
+      List<OfflineQuiz> off = offlineQuiz.where((element) => element.year == quiz.year,).where((element) => element.name == quiz.name,).toList();
+      print(offlineQuiz.where((element) => element.year == quiz.year,));
+      if (off.isNotEmpty){
+        print('don\'t dowload');
+      } else {
+        QuizDetails quizzes =
+        await quizRepository.getQuizWithDetailsById(quiz.id);
+        hiveService.addQuiz(OfflineQuiz.fromJson(quizzes.toJson()));
+        //emit(const QuizState.done());
+        //getQuizzes();
+      }
     } catch (e) {
       if (kDebugMode) {
         print(e);
@@ -177,22 +184,24 @@ class QuizCubit extends Cubit<QuizState> {
       print('load');
       emit(const QuizState.loading());
       try {
+        final prefs = await SharedPreferences.getInstance();
+        final int  id = prefs.getInt('id')!;
         // take user id
-        await quizRepository.saveResult(1, quiz.id, 1, score);
+        await quizRepository.saveResult(id, quiz.id, 1, score);
         await historicalRepository.insertHistorical(Historical(
             id: 0,
             createdAt: DateTime.now(),
             text: 'Vous avez terminé le quiz ${quiz.name} ${quiz.year}',
-            user: 1));
+            user: id));
         emit(QuizState.finished(score: score));
         hiveService.addHistorical(hs.Historical(
             id: 0,
             createdAt: DateTime.now(),
             text: 'Vous avez terminé le quiz ${quiz.name} ${quiz.year}',
-            user: 1));
+            user: id));
       } catch (e) {
         if (kDebugMode) {
-          print(e);
+          print('error $e');
         }
         emit(const QuizState.error(error: 'Une erreur est survenue'));
       }

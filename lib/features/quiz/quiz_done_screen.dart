@@ -7,8 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class QuizDoneScreen extends StatelessWidget {
   final int score;
+  final int totalPoint;
   final QuizDetails quiz;
-  const QuizDoneScreen({super.key, required this.score, required this.quiz});
+  const QuizDoneScreen({super.key, required this.score, required this.quiz, required this.totalPoint});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class QuizDoneScreen extends StatelessWidget {
             const SizedBox(height: 24,),
             Text('Score', style: GoogleFonts.handlee(fontSize: 18),),
             const SizedBox(height: 14,),
-            Text('${score.toString()}/200', style: GoogleFonts.handlee(fontSize: 18),),
+            Text('${score.toString()}/${totalPoint.toString()}', style: GoogleFonts.handlee(fontSize: 18),),
           ],
         ),
       ),

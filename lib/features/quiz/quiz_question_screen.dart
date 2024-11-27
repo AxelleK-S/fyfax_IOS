@@ -42,7 +42,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
             },
             finished: (score) {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => QuizDoneScreen(score: score, quiz: widget.quiz,),
+                builder: (context) => QuizDoneScreen(score: score, quiz: widget.quiz, totalPoint: widget.quiz.questionNumber,),
               ));
             },
             loading: () {
@@ -78,7 +78,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
             builder: (context, state) {
               return Scaffold(
                           appBar: PreferredSize(
-                              preferredSize: const Size.fromHeight(200),
+                              preferredSize: const Size.fromHeight(250),
                               child: Container(
                                 margin: const EdgeInsets.only(left: 16, right: 16),
                                 child: SafeArea(
@@ -114,6 +114,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                                   statement: widget.quiz.section[activeSectionIndex]
                                       .question[activeQuestionIndex].option1,
                                   onTap: () {
+                                    showGreat(activeSectionIndex, activeQuestionIndex, widget.quiz);
                                     setState(() {
                                       isClickedOption[0] = true;
                                       questionClicked = 0;
@@ -133,6 +134,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                                   statement: widget.quiz.section[activeSectionIndex]
                                       .question[activeQuestionIndex].option2,
                                   onTap: () {
+                                    showGreat(activeSectionIndex, activeQuestionIndex, widget.quiz);
                                     setState(() {
                                       isClickedOption[1] = true;
                                       questionClicked = 1;
@@ -152,6 +154,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                                   statement: widget.quiz.section[activeSectionIndex]
                                       .question[activeQuestionIndex].option3,
                                   onTap: () {
+                                    showGreat(activeSectionIndex, activeQuestionIndex, widget.quiz);
                                     setState(() {
                                       isClickedOption[2] = true;
                                       questionClicked = 2;
@@ -171,6 +174,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                                   statement: widget.quiz.section[activeSectionIndex]
                                       .question[activeQuestionIndex].option4,
                                   onTap: () {
+                                    showGreat(activeSectionIndex, activeQuestionIndex, widget.quiz);
                                     setState(() {
                                       isClickedOption[3] = true;
                                       questionClicked = 3;
@@ -190,6 +194,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                                   statement: widget.quiz.section[activeSectionIndex]
                                       .question[activeQuestionIndex].option5,
                                   onTap: () {
+                                    showGreat(activeSectionIndex, activeQuestionIndex, widget.quiz);
                                     setState(() {
                                       isClickedOption[4] = true;
                                       questionClicked = 4;
@@ -204,6 +209,33 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                                               ? Colors.red
                                               : Colors.transparent
                                       : Colors.transparent),
+
+                              const SizedBox(height: 20,),
+
+                              GestureDetector(
+                                onTap: () => Navigator.of(context).pushNamed('/home'),
+                                child: Container(
+                                  height: 54,
+                                  //width: 275,
+                                  margin : const EdgeInsets.only(
+                                      top: 24,
+                                      bottom: 24,
+                                      left: 16,
+                                      right: 16
+                                  ),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      color: Theme.of(context).colorScheme.error,),
+                                  child: Center(
+                                      child: Text(
+                                        'Annuler',
+                                        style: GoogleFonts.handlee(
+                                            color: Theme.of(context).colorScheme.onError,
+                                            fontSize: 24),
+                                      )
+                                  ),
+                                ),
+                              )
                             ]),
                           ),
                           bottomNavigationBar: QuizValidatedButton(
@@ -249,5 +281,22 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
 ),
 ),
 );
+  }
+
+  void showGreat(int sectionIndex, int questionIndex, QuizDetails quiz){
+    if (quiz.section[sectionIndex].question[questionIndex].justification!=null){
+      var snackBar = SnackBar(
+        duration: const Duration(seconds: 3),
+        content: Text('Justification ${quiz.section[sectionIndex].question[questionIndex].justification}',
+            style: GoogleFonts.handlee(
+                color: Theme.of(context).colorScheme.primary)),
+        backgroundColor: Theme.of(context).colorScheme.surface,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+
+  void countPoint(){
+
   }
 }

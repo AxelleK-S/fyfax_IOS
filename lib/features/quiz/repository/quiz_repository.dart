@@ -53,6 +53,20 @@ class QuizRepository {
     return quizDetails;
   }
 
+  Future<List<QuizDetails>> getQuizGroupBySectionTitle () async {
+    final data = await  Supabase.instance.client.from('quiz').select(
+        '*, domain(*) ,section(*, title(*),question(*))');
+    if (kDebugMode) {
+      print(data);
+    }
+    List<QuizDetails> quizDetails = [];
+    for (var element in data) {
+      quizDetails.add(QuizDetails.fromJson(element));
+    }
+
+    return quizDetails;
+  }
+
   Future<QuizDetails> getQuizWithDetailsById(int quizId) async {
     final data = await  Supabase.instance.client.from('quiz').select(
         '*, domain(*) ,section(*, title(*),question(*))').eq('id', quizId);

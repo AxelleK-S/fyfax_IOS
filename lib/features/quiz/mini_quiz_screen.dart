@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fyfax/features/flyer/flyer_screen.dart';
 import 'package:fyfax/features/quiz/logic/quiz_cubit.dart';
 import 'package:fyfax/features/quiz/model/quiz_details.dart';
+import 'package:fyfax/features/quiz/model/section_group.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -22,6 +23,7 @@ class MiniQuizScreen extends StatelessWidget {
 
 class MiniQuizArea extends StatelessWidget {
   final TextEditingController researchController = TextEditingController();
+  final List<String> titles = ['Médecine Générale', 'Odontologie', 'Pharmacie'];
   MiniQuizArea({super.key});
 
   @override
@@ -193,6 +195,83 @@ class MiniQuizArea extends StatelessWidget {
                 ),
               )),
               success: (quizzes) {
+                // Populate section groups for each quiz
+                populateSectionGroups(quizzes);
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          //DomainTab(),
+                          //Put dropdown
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: List.generate(quizzes.length, (quizIndex) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 16, top: 24),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('${quizzes[quizIndex].name} ${quizzes[quizIndex].year}',
+                                      style: GoogleFonts.handlee(fontSize: 16)),
+                                  IconButton(
+                                    icon: const Icon(Iconsax.document_download, color: Colors.black,),
+                                    onPressed: () {
+                                      context.read<QuizCubit>().storeQuiz(quizzes[quizIndex]);
+                                    },
+                                  )
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                              ),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: List.generate(quizzes[quizIndex].sectionGroups.where((element) => element.title.title.contains(researchController.text),).toList().length, (sectionIndex) => Container(
+                                    height: 108,
+                                    width: 143,
+                                    padding: const EdgeInsets.all(10),
+                                    margin: const EdgeInsets.only(left: 7, right: 7),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20), color: Colors.greenAccent),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(quizzes[quizIndex].sectionGroups[sectionIndex].title.title, textAlign: TextAlign.left, style: GoogleFonts.handlee(color: Colors.black)),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text('${quizzes[quizIndex].sectionGroups[sectionIndex].numberOfQuestions.toString()} Qst',
+                                                textAlign: TextAlign.right, style: GoogleFonts.handlee(color: Colors.black)),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),)
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 16), // Space between each year group
+                          ],
+                        ),)
+                      ),
+                    ],
+                  ),
+                );
+                /*
                 Map<int, List<QuizDetails>> groupedQuizzes =
                     groupQuizzesByYear(quizzes);
                 return SingleChildScrollView(
@@ -260,6 +339,8 @@ class MiniQuizArea extends StatelessWidget {
                     }).toList(),
                   ),
                 );
+
+                 */
               },
              /* offLineQuiz: (quizzes) {
                 Map<int, List<QuizDetails>> groupedQuizzes =
@@ -371,5 +452,31 @@ class MiniQuizArea extends StatelessWidget {
     }
 
     return groupedQuizzes;
+  }
+
+  void populateSectionGroups(List<QuizDetails> quizzes) {
+    for (var quiz in quizzes) {
+      final Map<String, SectionGroup> groupedSections = {};
+
+      for (var section in quiz.section) {
+        final titleKey = section.title.title; // Assuming title has a 'name' property
+
+        if (!groupedSections.containsKey(titleKey)) {
+          groupedSections[titleKey] = SectionGroup(
+            title: section.title,
+            sections: [],
+          );
+        }
+        groupedSections[titleKey]!.sections.add(section);
+      }
+
+      // Assign grouped sections to the quiz
+      quiz.sectionGroups = groupedSections.values.toList();
+
+      // Optionally recalculate number of questions for each group (already calculated in constructor)
+      for (var group in quiz.sectionGroups) {
+        group.calculateNumberOfQuestions();
+      }
+    }
   }
 }

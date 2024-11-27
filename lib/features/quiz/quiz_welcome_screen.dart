@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fyfax/features/quiz/model/quiz_details.dart';
 import 'package:fyfax/features/quiz/quiz_question_screen.dart';
@@ -19,18 +20,21 @@ class QuizWelcomeScreen extends StatelessWidget {
               left: 16,
               right: 16
             ),
-            child: const SafeArea(
+            child: SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(Iconsax.arrow_left)
+                  GestureDetector(
+                    onTap : () => Navigator.of(context).pop(),
+                      child: const Icon(Iconsax.arrow_left)
+                  )
                 ],
               ),
             ),
           )),
       body: Column(
         children: [
-          Text(quiz.domain.name, style: GoogleFonts.handlee(),),
+          Text(quiz.name, style: GoogleFonts.handlee(),),
           const SizedBox(height: 10,),
           Text('Session ${quiz.year.toString()}', style: GoogleFonts.handlee(),),
           const SizedBox(height: 24,),

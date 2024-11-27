@@ -27,13 +27,13 @@ class QuizLargeCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(quiz.domain.name,
-                textAlign: TextAlign.left, style: GoogleFonts.handlee()),
+            Text('${quiz.name} ${quiz.year}',
+                textAlign: TextAlign.left, style: GoogleFonts.handlee(color: Colors.black)),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text('${quiz.questionNumber.toString()} Questions',
-                    textAlign: TextAlign.right, style: GoogleFonts.handlee()),
+                    textAlign: TextAlign.right, style: GoogleFonts.handlee(color: Colors.black)),
               ],
             )
           ],
