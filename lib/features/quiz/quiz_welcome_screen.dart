@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fyfax/features/quiz/model/quiz_details.dart';
+import 'package:fyfax/features/quiz/model/section_group.dart';
 import 'package:fyfax/features/quiz/quiz_question_screen.dart';
 import 'package:fyfax/shared/widgets/quiz_validated_button.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,7 +9,8 @@ import 'package:iconsax/iconsax.dart';
 
 class QuizWelcomeScreen extends StatelessWidget {
   final QuizDetails quiz;
-  const QuizWelcomeScreen({super.key, required this.quiz});
+  final SectionGroup sectionGroup;
+  const QuizWelcomeScreen({super.key, required this.quiz, required this.sectionGroup});
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +38,14 @@ class QuizWelcomeScreen extends StatelessWidget {
         children: [
           Text(quiz.name, style: GoogleFonts.handlee(),),
           const SizedBox(height: 10,),
+          Text('Partie ${sectionGroup.title.title}', style: GoogleFonts.handlee(),),
+          const SizedBox(height: 10,),
           Text('Session ${quiz.year.toString()}', style: GoogleFonts.handlee(),),
           const SizedBox(height: 24,),
-          Text('Nombre de questions : ${quiz.questionNumber}', style: GoogleFonts.handlee(),),
+          Text('Nombre de questions : ${sectionGroup.numberOfQuestions.toString()}', style: GoogleFonts.handlee(),),
           const SizedBox(height: 34,),
           QuizValidatedButton(onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => QuizQuestionScreen(quiz: quiz,),));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => QuizQuestionScreen(quiz: quiz, sectionGroup: sectionGroup,),));
           }, text: 'Commencer')
         ],
       ),

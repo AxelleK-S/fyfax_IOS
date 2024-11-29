@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:fyfax/features/historical/model/historical.dart';
 import 'package:fyfax/features/historical/repository/historical_repository.dart';
 import 'package:fyfax/features/quiz/model/quiz_details.dart';
+import 'package:fyfax/features/quiz/model/section_group.dart';
 import 'package:fyfax/features/quiz/repository/quiz_repository.dart';
 import 'package:fyfax/shared/hive/model/offline_quiz.dart';
 import 'package:fyfax/shared/services/hive_service.dart';
@@ -163,7 +164,7 @@ class QuizCubit extends Cubit<QuizState> {
     }
   }
 
-  Future<void> finishQuiz(QuizDetails quiz, int score) async {
+  Future<void> finishQuiz(QuizDetails quiz,SectionGroup sectionGroup, int score) async {
     print('start');
     final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult.contains(ConnectivityResult.none)) {
@@ -172,7 +173,7 @@ class QuizCubit extends Cubit<QuizState> {
         hiveService.addHistorical(hs.Historical(
             id: 0,
             createdAt: DateTime.now(),
-            text: 'Vous avez terminé le quiz ${quiz.name} ${quiz.year}',
+            text: 'Vous avez terminé le quiz ${quiz.name} ${sectionGroup.title.title} ${quiz.year}',
             user: 1));
       } catch (e){
         if (kDebugMode) {
@@ -187,17 +188,17 @@ class QuizCubit extends Cubit<QuizState> {
         final prefs = await SharedPreferences.getInstance();
         final int  id = prefs.getInt('id')!;
         // take user id
-        await quizRepository.saveResult(id, quiz.id, 1, score);
+        await quizRepository.saveResult(id, quiz.id,sectionGroup.title.title, 1, score);
         await historicalRepository.insertHistorical(Historical(
             id: 0,
             createdAt: DateTime.now(),
-            text: 'Vous avez terminé le quiz ${quiz.name} ${quiz.year}',
+            text: 'Vous avez terminé le quiz ${quiz.name} ${sectionGroup.title.title} ${quiz.year}',
             user: id));
         emit(QuizState.finished(score: score));
         hiveService.addHistorical(hs.Historical(
             id: 0,
             createdAt: DateTime.now(),
-            text: 'Vous avez terminé le quiz ${quiz.name} ${quiz.year}',
+            text: 'Vous avez terminé le quiz ${quiz.name} ${sectionGroup.title.title} ${quiz.year}',
             user: id));
       } catch (e) {
         if (kDebugMode) {

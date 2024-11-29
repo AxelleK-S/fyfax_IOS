@@ -23,6 +23,7 @@ class MiniQuizScreen extends StatelessWidget {
 
 class MiniQuizArea extends StatelessWidget {
   final TextEditingController researchController = TextEditingController();
+  final TextEditingController dropdownController = TextEditingController();
   final List<String> titles = ['Médecine Générale', 'Odontologie', 'Pharmacie'];
   MiniQuizArea({super.key});
 
@@ -47,13 +48,22 @@ class MiniQuizArea extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      IconButton(onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const FlyerScreen(),)), icon: const Icon(Iconsax.paperclip, color: Colors.white,))
+                      IconButton(
+                          onPressed: () =>
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const FlyerScreen(),
+                              )),
+                          icon: const Icon(
+                            Iconsax.paperclip,
+                            color: Colors.white,
+                          ))
                     ],
                   ),
                   const SizedBox(
                     height: 14,
                   ),
-                  Text('Bienvenu sur FyFax', style: GoogleFonts.handlee(fontSize: 18)),
+                  Text('Bienvenu sur FyFax',
+                      style: GoogleFonts.handlee(fontSize: 18)),
                   const SizedBox(
                     height: 14,
                   ),
@@ -64,17 +74,19 @@ class MiniQuizArea extends StatelessWidget {
                   ),
                   Container(
                     width: 250,
-                    margin:
-                    const EdgeInsets.only(left: 25, right: 25, top: 7, bottom: 7),
+                    margin: const EdgeInsets.only(
+                        left: 25, right: 25, top: 7, bottom: 7),
                     padding: const EdgeInsets.only(
                       left: 5,
                       right: 5,
                     ),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(40),
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onPrimary.withOpacity(0.5),),
+                      borderRadius: BorderRadius.circular(40),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onPrimary
+                          .withOpacity(0.5),
+                    ),
                     child: Center(
                       child: TextFormField(
                         controller: researchController,
@@ -87,7 +99,6 @@ class MiniQuizArea extends StatelessWidget {
                             print(researchController.text);
                           }
                         },
-
                         onChanged: (value) {
                           researchController.text = value;
                           researchController.selection =
@@ -97,10 +108,12 @@ class MiniQuizArea extends StatelessWidget {
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Search Quiz',
-                            hintStyle: GoogleFonts.handlee(fontSize: 14, color: Theme.of(context)
-                                .colorScheme
-                                .surface
-                                .withOpacity(0.7)),
+                            hintStyle: GoogleFonts.handlee(
+                                fontSize: 14,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .surface
+                                    .withOpacity(0.7)),
                             icon: Icon(
                               Iconsax.search_normal,
                               color: Theme.of(context)
@@ -200,74 +213,129 @@ class MiniQuizArea extends StatelessWidget {
                 return SingleChildScrollView(
                   child: Column(
                     children: [
+                      const SizedBox(height: 8,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          DropdownMenu(
+                            onSelected: (value) {
+                              print(dropdownController.text);
+                              print(titles.indexOf(dropdownController.text));
+                              print(quizzes[0].domain.id);
+                              print(quizzes[0].domain.name);
+                            },
+                            initialSelection: 0,
+                              controller: dropdownController,
+                              dropdownMenuEntries: List.generate(
+                            3,
+                            (index) => DropdownMenuEntry(
+                                value: index, label: titles[index]),
+                          ))
                           //DomainTab(),
                           //Put dropdown
                         ],
                       ),
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: List.generate(quizzes.length, (quizIndex) => Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16, top: 24),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('${quizzes[quizIndex].name} ${quizzes[quizIndex].year}',
-                                      style: GoogleFonts.handlee(fontSize: 16)),
-                                  IconButton(
-                                    icon: const Icon(Iconsax.document_download, color: Colors.black,),
-                                    onPressed: () {
-                                      context.read<QuizCubit>().storeQuiz(quizzes[quizIndex]);
-                                    },
-                                  )
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(
-                                left: 16,
-                                right: 16,
-                              ),
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: List.generate(quizzes[quizIndex].sectionGroups.where((element) => element.title.title.contains(researchController.text),).toList().length, (sectionIndex) => Container(
-                                    height: 108,
-                                    width: 143,
-                                    padding: const EdgeInsets.all(10),
-                                    margin: const EdgeInsets.only(left: 7, right: 7),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20), color: Colors.greenAccent),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Text(quizzes[quizIndex].sectionGroups[sectionIndex].title.title, textAlign: TextAlign.left, style: GoogleFonts.handlee(color: Colors.black)),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text('${quizzes[quizIndex].sectionGroups[sectionIndex].numberOfQuestions.toString()} Qst',
-                                                textAlign: TextAlign.right, style: GoogleFonts.handlee(color: Colors.black)),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),)
+                          children: List.generate(
+                            quizzes.where((element) => element.domain.id==1,).toList().length,
+                            (quizIndex) => Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 16, top: 24),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                          '${quizzes.where((element) => element.domain.id==1,).toList()[quizIndex].name} ${quizzes[quizIndex].year}',
+                                          style: GoogleFonts.handlee(
+                                              fontSize: 16)),
+                                      IconButton(
+                                        icon: const Icon(
+                                          Iconsax.document_download,
+                                          color: Colors.black,
+                                        ),
+                                        onPressed: () {
+                                          context
+                                              .read<QuizCubit>()
+                                              .storeQuiz(quizzes.where((element) => element.domain.id==1,).toList()[quizIndex]);
+                                        },
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
+                                const SizedBox(
+                                  height: 24,
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(
+                                    left: 16,
+                                    right: 16,
+                                  ),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                        children: List.generate(
+                                      quizzes.where((element) => element.domain.id==1,).toList()[quizIndex]
+                                          .sectionGroups
+                                          .where(
+                                            (element) => element.title.title
+                                                .contains(
+                                                    researchController.text),
+                                          )
+                                          .toList()
+                                          .length,
+                                      (sectionIndex) => Container(
+                                        height: 108,
+                                        width: 143,
+                                        padding: const EdgeInsets.all(10),
+                                        margin: const EdgeInsets.only(
+                                            left: 7, right: 7),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            color: Colors.greenAccent),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Text(
+                                                quizzes.where((element) => element.domain.id==1,).toList()[quizIndex]
+                                                    .sectionGroups[sectionIndex]
+                                                    .title
+                                                    .title,
+                                                textAlign: TextAlign.left,
+                                                style: GoogleFonts.handlee(
+                                                    color: Colors.black)),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                    '${quizzes.where((element) => element.domain.id==1,).toList()[quizIndex].sectionGroups[sectionIndex].numberOfQuestions.toString()} Qst',
+                                                    textAlign: TextAlign.right,
+                                                    style: GoogleFonts.handlee(
+                                                        color: Colors.black)),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )),
+                                  ),
+                                ),
+                                const SizedBox(
+                                    height:
+                                        16), // Space between each year group
+                              ],
                             ),
-                            SizedBox(height: 16), // Space between each year group
-                          ],
-                        ),)
-                      ),
+                          )),
                     ],
                   ),
                 );
@@ -342,7 +410,7 @@ class MiniQuizArea extends StatelessWidget {
 
                  */
               },
-             /* offLineQuiz: (quizzes) {
+              /* offLineQuiz: (quizzes) {
                 Map<int, List<QuizDetails>> groupedQuizzes =
                     groupQuizzesByYear(quizzes);
                 return SingleChildScrollView(
@@ -393,47 +461,47 @@ class MiniQuizArea extends StatelessWidget {
               },*/
               orElse: () => Skeletonizer(
                   child: SingleChildScrollView(
-                    child: Column(
-                      children: List.generate(
-                        3,
-                            (index) => Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16, top: 24),
-                              child: Text('Session 2024',
-                                  style: GoogleFonts.handlee(fontSize: 16)),
-                            ),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                            Container(
-                                margin: const EdgeInsets.only(
-                                  left: 16,
-                                  right: 16,
-                                ),
-                                child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: List.generate(
-                                        4,
-                                            (index) => Container(
-                                          height: 108,
-                                          width: 143,
-                                          padding: const EdgeInsets.all(10),
-                                          margin: const EdgeInsets.only(
-                                              left: 7, right: 7),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                              BorderRadius.circular(20)),
-                                        ),
-                                      ),
-                                    )))
-                          ],
+                child: Column(
+                  children: List.generate(
+                    3,
+                    (index) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16, top: 24),
+                          child: Text('Session 2024',
+                              style: GoogleFonts.handlee(fontSize: 16)),
                         ),
-                      ),
+                        const SizedBox(
+                          height: 24,
+                        ),
+                        Container(
+                            margin: const EdgeInsets.only(
+                              left: 16,
+                              right: 16,
+                            ),
+                            child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: List.generate(
+                                    4,
+                                    (index) => Container(
+                                      height: 108,
+                                      width: 143,
+                                      padding: const EdgeInsets.all(10),
+                                      margin: const EdgeInsets.only(
+                                          left: 7, right: 7),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                    ),
+                                  ),
+                                )))
+                      ],
                     ),
-                  )),
+                  ),
+                ),
+              )),
             );
           },
         ),
@@ -459,7 +527,8 @@ class MiniQuizArea extends StatelessWidget {
       final Map<String, SectionGroup> groupedSections = {};
 
       for (var section in quiz.section) {
-        final titleKey = section.title.title; // Assuming title has a 'name' property
+        final titleKey =
+            section.title.title; // Assuming title has a 'name' property
 
         if (!groupedSections.containsKey(titleKey)) {
           groupedSections[titleKey] = SectionGroup(

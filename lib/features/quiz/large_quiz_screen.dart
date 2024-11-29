@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fyfax/features/quiz/logic/quiz_cubit.dart';
 import 'package:fyfax/features/quiz/model/quiz_details.dart';
+import 'package:fyfax/features/quiz/model/section_group.dart';
 import 'package:fyfax/shared/widgets/quiz_large_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -84,22 +85,62 @@ class LargeQuizArea extends StatelessWidget {
                       ),
                     ),
                   )),
-              success: (quizzes) => SingleChildScrollView(
-                child: Column(
-                    children: List.generate(
-                  quizzes.length,
-                  (index) => QuizLargeCard(quiz : quizzes[index]),
-                )),
-              ),
-              offLineQuiz: (quizzes) => SingleChildScrollView(
-                child: Column(
-                    children: List.generate(
-                  quizzes.length,
-                  (index) => QuizLargeCard(
-                    quiz: QuizDetails.fromJson(quizzes[index].toJson()),
-                  ),
-                )),
-              ),
+              success: (quizzes) {
+                populateSectionGroups(quizzes);
+                return SingleChildScrollView(
+                  child: Column(
+                      children: List.generate(
+                    quizzes.length,
+                    (quizIndex) => Column(
+                      children: [
+                        Text(
+                            '${quizzes[quizIndex].name} ${quizzes[quizIndex].year}',
+                            style: GoogleFonts.handlee(fontSize: 16)),
+                        Column(
+                          children: List.generate(
+                            quizzes[quizIndex].sectionGroups.length,
+                            (sectionIndex) => QuizLargeCard(
+                              quiz: quizzes[quizIndex],
+                              sectionGroup: quizzes[quizIndex]
+                                  .sectionGroups[sectionIndex],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )),
+                );
+              },
+              offLineQuiz: (quizzes) {
+                List<QuizDetails> quizzesD = [];
+                for (var quiz in quizzes) {
+                  quizzesD.add(QuizDetails.fromJson(quiz.toJson()));
+                }
+                populateSectionGroups(quizzesD);
+                return SingleChildScrollView(
+                  child: Column(
+                      children: List.generate(
+                    quizzes.length,
+                    (quizIndex) => Column(
+                      children: [
+                        Text(
+                            '${quizzesD[quizIndex].name} ${quizzesD[quizIndex].year}',
+                            style: GoogleFonts.handlee(fontSize: 16)),
+                        Column(
+                          children: List.generate(
+                            quizzesD[quizIndex].sectionGroups.length,
+                            (sectionIndex) => QuizLargeCard(
+                              quiz: quizzesD[quizIndex],
+                              sectionGroup: quizzesD[quizIndex]
+                                  .sectionGroups[sectionIndex],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  )),
+                );
+              },
               empty: () => Center(
                 child: Text('Aucun Quiz téléchargé',
                     style: TextStyle(
@@ -117,5 +158,32 @@ class LargeQuizArea extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void populateSectionGroups(List<QuizDetails> quizzes) {
+    for (var quiz in quizzes) {
+      final Map<String, SectionGroup> groupedSections = {};
+
+      for (var section in quiz.section) {
+        final titleKey =
+            section.title.title; // Assuming title has a 'name' property
+
+        if (!groupedSections.containsKey(titleKey)) {
+          groupedSections[titleKey] = SectionGroup(
+            title: section.title,
+            sections: [],
+          );
+        }
+        groupedSections[titleKey]!.sections.add(section);
+      }
+
+      // Assign grouped sections to the quiz
+      quiz.sectionGroups = groupedSections.values.toList();
+
+      // Optionally recalculate number of questions for each group (already calculated in constructor)
+      for (var group in quiz.sectionGroups) {
+        group.calculateNumberOfQuestions();
+      }
+    }
   }
 }

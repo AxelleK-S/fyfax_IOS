@@ -76,13 +76,14 @@ class QuizRepository {
     return QuizDetails.fromJson(data.first);
   }
 
-  Future<void> saveResult (int user, int quiz, int part, int score) async {
+  Future<void> saveResult (int user, int quiz,String section, int part, int score) async {
     final data = await  Supabase.instance.client.from('result').insert(
         {
           "user" : user,
           "quiz" : quiz,
           "part" : part,
           "score" : score,
+          "section" : section,
         }
     );
     if (kDebugMode) {
