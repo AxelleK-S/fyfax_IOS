@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fyfax/features/flyer/flyer_screen.dart';
@@ -21,6 +22,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
   final TextEditingController dropdownController = TextEditingController();
   int activeDomainIndex = 1;
   final List<String> titles = ['Médecine Générale', 'Odontologie', 'Pharmacie'];
+  String searchQuery = '';
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +99,9 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                             }
                           },
                           onChanged: (value) {
+                            setState(() {
+                              searchQuery = value;
+                            });
                             researchController.text = value;
                             researchController.selection =
                                 TextSelection.fromPosition(
@@ -211,6 +216,25 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                     child: Column(
                       children: [
                         const SizedBox(height: 8,),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                              return const FlyerScreen();
+                            },));
+                          },
+                          child: CarouselSlider(
+                              items: List.generate(1, (index) => Image.asset('assets/images/flyer.jpg', fit: BoxFit.fitHeight,),),
+                              options: CarouselOptions(
+                                height: 150,
+                                viewportFraction: 0.98,
+                                initialPage: 0,
+                                enableInfiniteScroll: true,
+                                reverse: false,
+                                scrollDirection: Axis.horizontal,
+                              )
+                          ),
+                        ),
+                        const SizedBox(height: 8,),
                         Container(
                           height: 40,
                           padding: const EdgeInsets.only(
@@ -274,16 +298,19 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                             '${quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].name} ${quizzes[quizIndex].year}',
                                             style: GoogleFonts.handlee(
                                                 fontSize: 16)),
-                                        IconButton(
-                                          icon: const Icon(
-                                            Iconsax.document_download,
-                                            color: Colors.black,
+                                        Visibility(
+                                          visible: quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].sectionGroups.isEmpty ? false : true,
+                                          child: IconButton(
+                                            icon: const Icon(
+                                              Iconsax.document_download,
+                                              color: Colors.black,
+                                            ),
+                                            onPressed: () {
+                                              context
+                                                  .read<QuizCubit>()
+                                                  .storeQuiz(quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex]);
+                                            },
                                           ),
-                                          onPressed: () {
-                                            context
-                                                .read<QuizCubit>()
-                                                .storeQuiz(quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex]);
-                                          },
                                         )
                                       ],
                                     ),
@@ -303,9 +330,9 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                             quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex]
                                                 .sectionGroups
                                                 .where(
-                                                  (element) => element.title.title
+                                                  (element) => element.title.title.toLowerCase()
                                                   .contains(
-                                                  researchController.text),
+                                                  searchQuery.toLowerCase()),
                                             )
                                                 .toList()
                                                 .length,
@@ -327,7 +354,12 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                                 children: [
                                                   Text(
                                                       quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex]
-                                                          .sectionGroups[sectionIndex]
+                                                          .sectionGroups.where(
+                                                            (element) => element.title.title.toLowerCase()
+                                                            .contains(
+                                                            searchQuery.toLowerCase()),
+                                                      )
+                                                          .toList()[sectionIndex]
                                                           .title
                                                           .title,
                                                       textAlign: TextAlign.left,
@@ -339,7 +371,12 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                                         .spaceBetween,
                                                     children: [
                                                       Text(
-                                                          '${quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].sectionGroups[sectionIndex].numberOfQuestions.toString()} Qst',
+                                                          '${quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].sectionGroups.where(
+                                                                (element) => element.title.title.toLowerCase()
+                                                                .contains(
+                                                                searchQuery.toLowerCase()),
+                                                          )
+                                                              .toList()[sectionIndex].numberOfQuestions.toString()} Qst',
                                                           textAlign: TextAlign.right,
                                                           style: GoogleFonts.handlee(
                                                               color: Colors.black)),

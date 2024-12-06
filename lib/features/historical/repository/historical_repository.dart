@@ -4,7 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HistoricalRepository {
   Future<List<Historical>> getHistorical (int userId) async {
-    final data = await  Supabase.instance.client.from('notifications').select('*').eq('user', userId);
+    final data = await  Supabase.instance.client.from('notifications').select('*').eq('user', userId).order('created_at', ascending: false);
     if (kDebugMode) {
       print(data);
     }

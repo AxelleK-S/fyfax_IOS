@@ -28,13 +28,14 @@ class QuestionAdapter extends TypeAdapter<Question> {
       option5: fields[8] as String,
       section: fields[9] as int,
       justification: fields[10] as String?,
+      image: fields[11] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Question obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -56,7 +57,9 @@ class QuestionAdapter extends TypeAdapter<Question> {
       ..writeByte(9)
       ..write(obj.section)
       ..writeByte(10)
-      ..write(obj.justification);
+      ..write(obj.justification)
+      ..writeByte(11)
+      ..write(obj.image);
   }
 
   @override

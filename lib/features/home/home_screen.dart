@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        extendBody: true,
+        extendBody: false,
         body: pages[activeIndex],
         bottomNavigationBar: Container(
           height: 66,

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -95,8 +97,8 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                             height: 10,
                           ),
                           Text(
-                            widget.sectionGroup.sections[activeSectionIndex]
-                                .statement,
+                            _decodeIfNeeded(widget.sectionGroup
+                                .sections[activeSectionIndex].statement),
                             style: GoogleFonts.handlee(),
                             maxLines: 5,
                           ),
@@ -104,11 +106,36 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                             height: 10,
                           ),
                           Text(
-                            widget.sectionGroup.sections[activeSectionIndex]
-                                .question[activeQuestionIndex].statement,
+                            _decodeIfNeeded(widget
+                                .sectionGroup
+                                .sections[activeSectionIndex]
+                                .question[activeQuestionIndex]
+                                .statement),
                             style: GoogleFonts.handlee(),
                             maxLines: 5,
                           ),
+                          Visibility(
+                              visible: widget
+                                  .sectionGroup
+                                  .sections[activeSectionIndex]
+                                  .question[activeQuestionIndex]
+                                  .image==null? false : true,
+                              child: Container(
+                                height: 200,
+                                margin: const EdgeInsets.only(
+                                    left: 16, right: 16, top: 14, bottom: 14),
+                                decoration: BoxDecoration(
+                                    image:
+                                        DecorationImage(
+                                            image: NetworkImage('https://xtcqhaotzsxfzfygefrt.supabase.co/storage/v1/object/public/fyfax/${widget
+                                                .sectionGroup
+                                                .sections[activeSectionIndex]
+                                                .question[activeQuestionIndex]
+                                                .image}'),
+                                            fit: BoxFit.fill
+                                        )
+                                ),
+                              ))
                         ],
                       ),
                     ),
@@ -320,9 +347,8 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                         });
                       } else {
                         print('finish');
-                        context
-                            .read<QuizCubit>()
-                            .finishQuiz(widget.quiz, widget.sectionGroup, score);
+                        context.read<QuizCubit>().finishQuiz(
+                            widget.quiz, widget.sectionGroup, score);
                       }
                     }
                   },
@@ -330,8 +356,10 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                           widget.sectionGroup.sections.length
                       ? 'Suivant'
                       : (activeQuestionIndex + 1) <
-                      widget.sectionGroup.sections[activeSectionIndex]
-                          .question.length ? 'Suivant' : 'Terminer'),
+                              widget.sectionGroup.sections[activeSectionIndex]
+                                  .question.length
+                          ? 'Suivant'
+                          : 'Terminer'),
             );
           },
         ),
@@ -351,6 +379,18 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
         backgroundColor: Theme.of(context).colorScheme.surface,
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+
+  String _decodeIfNeeded(String text) {
+    // Vérifiez si le texte est en UTF-8
+    try {
+      // Tentative de décodage
+      var decodedText = utf8.decode(text.codeUnits, allowMalformed: false);
+      return decodedText;
+    } catch (e) {
+      // Si une exception se produit, retourner le texte original
+      return text;
     }
   }
 

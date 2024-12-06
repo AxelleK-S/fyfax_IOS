@@ -38,22 +38,24 @@ class SplashArea extends StatelessWidget {
         );
       },
       child: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              height: 150,
-              width: 150,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage('assets/images/splash.png'))
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 150,
+                width: 150,
+                decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/splash.png'))
+                ),
               ),
-            ),
-            const SizedBox(height: 24,),
-            Text('FyFax', style: GoogleFonts.handlee()),
-          ],
+              const SizedBox(height: 24,),
+              Text('FyFax', style: GoogleFonts.handlee()),
+            ],
+          ),
         ),
       ),
     );

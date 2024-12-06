@@ -54,7 +54,7 @@ class QuizCubit extends Cubit<QuizState> {
         if (quizzes == []) {
           emit(const QuizState.empty());
         } else {
-          emit(QuizState.success(quizzes: quizzes.where((element) => element.section.isNotEmpty,).toList()));
+          emit(QuizState.success(quizzes: quizzes));
         }
       } catch (e) {
         if (kDebugMode) {

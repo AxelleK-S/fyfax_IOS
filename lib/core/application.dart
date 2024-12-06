@@ -24,7 +24,7 @@ class Application extends StatelessWidget {
         '/home': (ctx) => const HomeScreen(),
       },
       theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
+      //darkTheme: AppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         I18n.delegate,

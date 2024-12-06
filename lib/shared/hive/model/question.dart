@@ -47,6 +47,9 @@ class Question {
   @HiveField(10)
   String? justification;
 
+  @HiveField(11)
+  String? image;
+
   Question({
     required this.id,
     required this.createdAt,
@@ -59,6 +62,7 @@ class Question {
     required this.option5,
     required this.section,
     required this.justification,
+    required this.image,
   });
 
   factory Question.fromJson(Map<String, dynamic> json) => Question(
@@ -73,6 +77,7 @@ class Question {
     option5: json["option_5"],
     section: json["section"],
     justification: json["justification"],
+    image: json["image"]
   );
 
   Map<String, dynamic> toJson() => {
@@ -87,5 +92,6 @@ class Question {
     "option_5": option5,
     "section": section,
     "justification": justification,
+    "image": image,
   };
 }

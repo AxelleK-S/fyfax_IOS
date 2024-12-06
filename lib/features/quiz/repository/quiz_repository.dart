@@ -41,7 +41,7 @@ class QuizRepository {
 
   Future<List<QuizDetails>> getQuizWithDetails () async {
     final data = await  Supabase.instance.client.from('quiz').select(
-        '*, domain(*) ,section(*, title(*),question(*))');
+        '*, domain(*) ,section(*, title(*),question(*))').order('id', ascending: true);
     if (kDebugMode) {
       print(data);
     }
