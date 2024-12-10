@@ -29,6 +29,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
   int activeQuestionIndex = 0;
   int activeSectionIndex = 0;
   int score = 0;
+  String baseUrl = 'https://xtcqhaotzsxfzfygefrt.supabase.co/storage/v1/object/public/fyfax';
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -85,7 +86,12 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
           builder: (context, state) {
             return Scaffold(
               appBar: PreferredSize(
-                  preferredSize: const Size.fromHeight(250),
+                  preferredSize:  Size.fromHeight(widget
+                      .sectionGroup
+                      .sections[activeSectionIndex]
+                      .question[activeQuestionIndex]
+                      .image ==
+                      ' '? 250 : 420),
                   child: Container(
                     margin: const EdgeInsets.only(left: 16, right: 16),
                     child: SafeArea(
@@ -116,25 +122,66 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                           ),
                           Visibility(
                               visible: widget
-                                  .sectionGroup
-                                  .sections[activeSectionIndex]
-                                  .question[activeQuestionIndex]
-                                  .image==null? false : true,
+                                          .sectionGroup
+                                          .sections[activeSectionIndex]
+                                          .question[activeQuestionIndex]
+                                          .image ==
+                                      ' '
+                                  ? false
+                                  : true,
                               child: Container(
                                 height: 200,
                                 margin: const EdgeInsets.only(
-                                    left: 16, right: 16, top: 14, bottom: 14),
-                                decoration: BoxDecoration(
-                                    image:
-                                        DecorationImage(
-                                            image: NetworkImage('https://xtcqhaotzsxfzfygefrt.supabase.co/storage/v1/object/public/fyfax/${widget
+                                    //left: 16, right: 16,
+                                    top: 14,
+                                    bottom: 14),
+                                /*decoration: BoxDecoration(
+                                    image: widget
                                                 .sectionGroup
                                                 .sections[activeSectionIndex]
                                                 .question[activeQuestionIndex]
-                                                .image}'),
-                                            fit: BoxFit.fill
-                                        )
-                                ),
+                                                .image
+                                                .split(',')
+                                                .length >
+                                            1
+                                        ? null
+                                        : DecorationImage(
+                                            image: NetworkImage(
+                                                '$baseUrl/${widget.sectionGroup.sections[activeSectionIndex].question[activeQuestionIndex].image.trimLeft()}'),
+                                            fit: BoxFit.fill)),
+
+                                 */
+                                child: widget
+                                    .sectionGroup
+                                    .sections[activeSectionIndex]
+                                    .question[activeQuestionIndex]
+                                    .image
+                                    .split(',')
+                                    .length >
+                                    1
+                                    ? Row(
+                                    children: List.generate(
+                                  widget
+                                      .sectionGroup
+                                      .sections[activeSectionIndex]
+                                      .question[activeQuestionIndex]
+                                      .image
+                                      .split(',')
+                                      .length,
+                                  (index) => SizedBox(
+                                    height: 200,
+                                    /*
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                                '$baseUrl/${widget.sectionGroup.sections[activeSectionIndex].question[activeQuestionIndex].image.split(',')[index].trimLeft()}'),
+                                            fit: BoxFit.fill)),
+
+                                     */
+                                    child: Image.network('$baseUrl/${widget.sectionGroup.sections[activeSectionIndex].question[activeQuestionIndex].image.split(',')[index].trimLeft()}', fit: BoxFit.fill,),
+                                  ),
+                                )
+                                ) : Center(child: Image.network('$baseUrl/${widget.sectionGroup.sections[activeSectionIndex].question[activeQuestionIndex].image.trimLeft()}')),
                               ))
                         ],
                       ),
