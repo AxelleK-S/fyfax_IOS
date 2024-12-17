@@ -1,4 +1,4 @@
-package com.example.fyfax
+package com.fyfax.fyfax
 
 import io.flutter.embedding.android.FlutterActivity
 

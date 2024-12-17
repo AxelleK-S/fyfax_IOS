@@ -20,7 +20,7 @@ class SecondScreen extends StatelessWidget {
             padding: const EdgeInsets.only(left: 16, right: 16),
             child: Center(
                 child: Text(
-              'Pour accéder aux épreuves, Contactez l’administrateur pour recevoir votre code d’accès ',
+              'Pour accéder aux épreuves, Contactez l’administrateur pour recevoir votre code d’accès.',
               textAlign: TextAlign.center,
               style: GoogleFonts.handlee(fontSize: 16),
             )),
