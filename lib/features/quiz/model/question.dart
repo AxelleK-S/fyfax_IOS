@@ -20,7 +20,7 @@ class Question {
   String option5;
   int section;
   String? justification;
-  String image;
+  String? image;
 
   Question({
     required this.id,

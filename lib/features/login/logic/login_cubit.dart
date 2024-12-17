@@ -42,7 +42,7 @@ class LoginCubit extends Cubit<LoginState> {
             emit(const LoginState.error(error: 'Une erreur est survenue'));
           }
         } else {
-          emit(const LoginState.error(error: 'Une erreur est survenue'));
+          emit(const LoginState.error(error: 'Identifiants incorrects'));
         }
       } catch (e) {
         if (kDebugMode) {

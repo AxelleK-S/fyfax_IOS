@@ -14,8 +14,8 @@ class QuizValidatedButton extends StatelessWidget {
         height: 54,
         //width: 275,
         margin : const EdgeInsets.only(
-            top: 24,
-            bottom: 24,
+            top: 12,
+            bottom: 20,
             left: 16,
             right: 16
         ),

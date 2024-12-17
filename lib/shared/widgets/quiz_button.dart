@@ -45,6 +45,8 @@ class QuizButton extends StatelessWidget {
     try {
       // Tentative de décodage
       var decodedText = utf8.decode(text.codeUnits, allowMalformed: false);
+      var decode = latin1.decode(text.codeUnits);
+      print(decode);
       return decodedText;
     } catch (e) {
       // Si une exception se produit, retourner le texte original

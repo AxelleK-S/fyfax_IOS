@@ -28,7 +28,7 @@ class SecondScreen extends StatelessWidget {
           ValidatedButton(
               onTap: () async {
                 //const url = "https://wa.me/237691983314?text=Your Message here";
-                const url = "237691983314?text=Bonjour je viens de fyfax j'aimerai obtenir mon code d'accès";
+                const url = "237655487767?text=Bonjour je viens de fyfax j'aimerai obtenir mon code d'accès";
                 var encoded = Uri(scheme: 'https', host: 'wa.me',path: url);
                 launchUrl(encoded);
                 },
