@@ -30,6 +30,7 @@ class LoginArea extends StatelessWidget {
       listener: (context, state) {
         state.maybeWhen(
           error: (error) {
+            Navigator.of(context).pop();
             var snackBar = SnackBar(
               content: Text(error,
                   style: GoogleFonts.handlee(
@@ -49,16 +50,15 @@ class LoginArea extends StatelessWidget {
                     content: SingleChildScrollView(
                       child: Center(
                           child: SizedBox(
-                        height: 50,
-                        width: 50,
-                        child: (CircularProgressIndicator()),
+                            height: 50,
+                            width: 50,
+                          child: (CircularProgressIndicator()),
                       )),
                     ),
                   );
                 },
               );
             }
-
             showMyDialog();
           },
           success: (user) => Navigator.of(context).push(MaterialPageRoute(
