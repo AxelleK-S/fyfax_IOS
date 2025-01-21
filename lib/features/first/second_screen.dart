@@ -22,7 +22,7 @@ class SecondScreen extends StatelessWidget {
                 child: Text(
               'Pour accéder aux épreuves, Contactez l’administrateur pour recevoir votre code d’accès.',
               textAlign: TextAlign.center,
-              style: GoogleFonts.handlee(fontSize: 16),
+              style: GoogleFonts.inter(fontSize: 16),
             )),
           ),
           ValidatedButton(

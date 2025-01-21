@@ -33,7 +33,7 @@ class LoginField extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
             child: Text(title,
-                style: GoogleFonts.handlee(
+                style: GoogleFonts.inter(
                   color: Theme.of(context).colorScheme.onSurface,
                   fontSize: 15,
                 )),

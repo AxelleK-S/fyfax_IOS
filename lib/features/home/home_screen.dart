@@ -26,6 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
     Iconsax.clock,
     Iconsax.user
   ];
+  List<String> texts = [
+    'Accueil',
+    'Mes Epreuves',
+    'Historique',
+    'Mon Compte'
+  ];
   int activeIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -42,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             bottom: 24
           ),
           decoration: BoxDecoration(
-            color: Colors.grey,
+            color: Theme.of(context).colorScheme.primary,
             borderRadius: BorderRadius.circular(30)
           ),
           padding: const EdgeInsets.all(10),
@@ -58,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     activeIndex = index;
                   });
                 },
-                active: activeIndex == index ? true : false),
+                active: activeIndex == index ? true : false, text: texts[index],),
           )),
         ),
       ),

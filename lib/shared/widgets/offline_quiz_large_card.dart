@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fyfax/features/quiz/quiz_welcome_screen.dart';
 import 'package:fyfax/shared/hive/model/offline_quiz.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,12 +28,12 @@ class OfflineQuizLargeCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(quiz.domain.name,
-                textAlign: TextAlign.left, style: GoogleFonts.handlee()),
+                textAlign: TextAlign.left, style: GoogleFonts.inter()),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text('${quiz.questionNumber.toString()} Questions',
-                    textAlign: TextAlign.right, style: GoogleFonts.handlee()),
+                    textAlign: TextAlign.right, style: GoogleFonts.inter()),
               ],
             )
           ],

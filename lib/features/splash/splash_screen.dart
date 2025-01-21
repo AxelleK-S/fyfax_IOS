@@ -53,7 +53,7 @@ class SplashArea extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24,),
-              Text('FyFax', style: GoogleFonts.handlee()),
+              Text('FyFax', style: GoogleFonts.inter()),
             ],
           ),
         ),

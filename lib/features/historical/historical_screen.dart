@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fyfax/features/historical/logic/historical_cubit.dart';
 import 'package:fyfax/shared/widgets/historical_card.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class HistoricalScreen extends StatelessWidget {
@@ -32,7 +33,7 @@ class HistoricalArea extends StatelessWidget {
           error: (message) {
             var snackBar = SnackBar(
               content: Text(message,
-                  style: GoogleFonts.handlee(
+                  style: GoogleFonts.inter(
                       color: Theme.of(context).colorScheme.onError)),
               backgroundColor: Theme.of(context).colorScheme.error,
             );
@@ -41,7 +42,7 @@ class HistoricalArea extends StatelessWidget {
           notConnected: () {
             var snackBar = SnackBar(
               content: Text('Vous n\'êtes pas connecté à Internet',
-                  style: GoogleFonts.handlee(
+                  style: GoogleFonts.inter(
                       color: Theme.of(context).colorScheme.onPrimary)),
               backgroundColor: Theme.of(context).colorScheme.primary,
             );
@@ -64,7 +65,7 @@ class HistoricalArea extends StatelessWidget {
                   children: [
                     Text(
                       'Historique',
-                      style: GoogleFonts.handlee(fontSize: 16),
+                      style: GoogleFonts.inter(fontSize: 16),
                     ),
                   ],
                 ),
@@ -84,7 +85,7 @@ class HistoricalArea extends StatelessWidget {
                                 top: 24,
                                 bottom: 24
                               ),
-                              child: Text('Hier', style: GoogleFonts.handlee(),),
+                              child: Text('Hier', style: GoogleFonts.inter(),),
                             ),*/
                     SizedBox(
                       height: 20,
@@ -112,8 +113,7 @@ class HistoricalArea extends StatelessWidget {
                           historical.length,
                           (index) => HistoricalCard(
                             text: historical[index].text,
-                            time:
-                                historical[index].createdAt.toLocal().toString(),
+                            time: DateFormat('dd-MM-yy:HH-mm-ss').format(historical[index].createdAt.toLocal()),
                           ),
                         )),
                   );
@@ -121,13 +121,13 @@ class HistoricalArea extends StatelessWidget {
               empty: () => Center(
                 child: Text(
                   'Aucun historique',
-                  style: GoogleFonts.handlee(),
+                  style: GoogleFonts.inter(),
                 ),
               ),
               notConnected: () => Center(
                 child: Text(
                   'Vous n\'êtes pas connectés',
-                  style: GoogleFonts.handlee(),
+                  style: GoogleFonts.inter(),
                 ),
               ),
               orElse: () {
@@ -142,7 +142,7 @@ class HistoricalArea extends StatelessWidget {
                                 top: 24,
                                 bottom: 24
                               ),
-                              child: Text('Hier', style: GoogleFonts.handlee(),),
+                              child: Text('Hier', style: GoogleFonts.inter(),),
                             ),*/
                       SizedBox(
                         height: 20,

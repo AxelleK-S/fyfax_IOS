@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fyfax/features/profile/logic/profile_cubit.dart';
+import 'package:fyfax/shared/services/local_storage_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -28,7 +29,7 @@ class ProfileArea extends StatelessWidget {
             error: (error) {
               var snackBar = SnackBar(
                 content: Text(error,
-                    style: GoogleFonts.handlee(
+                    style: GoogleFonts.inter(
                         color: Theme.of(context).colorScheme.onError)),
                 backgroundColor: Theme.of(context).colorScheme.error,
               );
@@ -58,18 +59,18 @@ class ProfileArea extends StatelessWidget {
                         const SizedBox(
                           height: 44,
                         ),
-                        Text('Mes informations personnelles', style: GoogleFonts.handlee(fontSize: 18),),
+                        Text('Mes informations personnelles', style: GoogleFonts.inter(fontSize: 18),),
                         const SizedBox(height: 14,),
                         Padding(
                           padding: const EdgeInsets.only(left: 16, right: 16, top: 7, bottom: 7),
                           child: Row(
-                            children: [Text('Nom', style: GoogleFonts.handlee(fontSize: 16))],
+                            children: [Text('Nom', style: GoogleFonts.inter(fontSize: 16))],
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 16, right: 16, top: 7, bottom: 7),
                           child: Row(
-                            children: [Text('Tel', style: GoogleFonts.handlee(fontSize: 16))],
+                            children: [Text('Tel', style: GoogleFonts.inter(fontSize: 16))],
                           ),
                         ),
                         const SizedBox(height: 14,),
@@ -80,7 +81,7 @@ class ProfileArea extends StatelessWidget {
                             children: [
                               Text(
                                   'Modifier',
-                                  style: GoogleFonts.handlee(color: Theme.of(context).colorScheme.primary)
+                                  style: GoogleFonts.inter(color: Theme.of(context).colorScheme.primary)
                               ),
                               const SizedBox(
                                 height: 12,
@@ -99,7 +100,7 @@ class ProfileArea extends StatelessWidget {
                             children: [
                               Text(
                                 'Deconnexion',
-                                style: GoogleFonts.handlee(color: Theme.of(context).colorScheme.error),
+                                style: GoogleFonts.inter(color: Theme.of(context).colorScheme.error),
                               )
                             ],
                           ),
@@ -126,16 +127,16 @@ class ProfileArea extends StatelessWidget {
                         const SizedBox(
                           height: 44,
                         ),
-                        Text('Mes informations personnelles', style: GoogleFonts.handlee(fontSize: 18),),
+                        Text('Mes informations personnelles', style: GoogleFonts.inter(fontSize: 18),),
                         const SizedBox(height: 14,),
                         Padding(
                           padding: const EdgeInsets.only(left: 16, right: 16, top: 7, bottom: 7),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text('Nom', style: GoogleFonts.handlee(fontSize: 16)),
+                              Text('Nom', style: GoogleFonts.inter(fontSize: 16)),
                               const SizedBox(width: 24,),
-                              Text(name, style: GoogleFonts.handlee(fontSize: 16)),
+                              Text(name, style: GoogleFonts.inter(fontSize: 16)),
                             ],
                           ),
                         ),
@@ -144,9 +145,9 @@ class ProfileArea extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text('Email', style: GoogleFonts.handlee(fontSize: 16)),
+                              Text('Email', style: GoogleFonts.inter(fontSize: 16)),
                               const SizedBox(width: 24,),
-                              Text(email, style: GoogleFonts.handlee(fontSize: 16)),
+                              Text(email, style: GoogleFonts.inter(fontSize: 16)),
                             ],
                           ),
                         ),
@@ -155,9 +156,9 @@ class ProfileArea extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text('Tel', style: GoogleFonts.handlee(fontSize: 16)),
+                              Text('Tel', style: GoogleFonts.inter(fontSize: 16)),
                               const SizedBox(width: 24,),
-                              Text(phoneNumber, style: GoogleFonts.handlee(fontSize: 16)),
+                              Text(phoneNumber, style: GoogleFonts.inter(fontSize: 16)),
                             ],
                           ),
                         ),
@@ -170,7 +171,7 @@ class ProfileArea extends StatelessWidget {
                             children: [
                               Text(
                                   'Modifier',
-                                  style: GoogleFonts.handlee(color: Theme.of(context).colorScheme.primary)
+                                  style: GoogleFonts.inter(color: Theme.of(context).colorScheme.primary)
                               ),
                               const SizedBox(
                                 height: 12,
@@ -182,21 +183,62 @@ class ProfileArea extends StatelessWidget {
                             ],
                           ),
                         ),*/
-                        /*
+
                         Padding(
                           padding: const EdgeInsets.only(left: 16, right: 16, top: 7, bottom: 7),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text(
-                                'Deconnexion',
-                                style: GoogleFonts.handlee(color: Theme.of(context).colorScheme.error),
+                              GestureDetector(
+                                child: Text(
+                                  'Deconnexion',
+                                  style: GoogleFonts.inter(color: Theme.of(context).colorScheme.error),
+                                ),
+                                onTap: () {
+                                  final LocalStorageService localStorageService = LocalStorageService();
+                                  Future<void> showMyDialog() async {
+                                    return showDialog<void>(
+                                      context: context,
+                                      barrierDismissible: false, // user must tap button!
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: const Text('Se déconnecter'),
+                                          content: const SingleChildScrollView(
+                                            child: Center(
+                                                child: SizedBox(
+                                                  height: 50,
+                                                  child: Text(
+                                                      'Etes-vous sur de vouloir vous déconnecter ?'),
+                                                )),
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              child: Text('Oui',style: GoogleFonts.inter(color: Theme.of(context).colorScheme.error),),
+                                              onPressed: () async {
+                                                await localStorageService.deleteAll();
+                                                Navigator.of(context).pushNamed('/splash');
+                                              },
+                                            ),
+                                            // final UserRepository userRepository = UserRepository();
+                                            // await userRepository.logout() ;
+                                            TextButton(
+                                              child: Text('Non', style: GoogleFonts.inter(),),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
+
+                                  showMyDialog();
+                                },
                               )
                             ],
                           ),
                         ),
-
-                         */
                       ],
                     ),
                   ),
@@ -219,18 +261,18 @@ class ProfileArea extends StatelessWidget {
                         const SizedBox(
                           height: 44,
                         ),
-                        Text('Mes informations personnelles', style: GoogleFonts.handlee(fontSize: 18),),
+                        Text('Mes informations personnelles', style: GoogleFonts.inter(fontSize: 18),),
                         const SizedBox(height: 14,),
                         Padding(
                           padding: const EdgeInsets.only(left: 16, right: 16, top: 7, bottom: 7),
                           child: Row(
-                            children: [Text('Nom', style: GoogleFonts.handlee(fontSize: 16))],
+                            children: [Text('Nom', style: GoogleFonts.inter(fontSize: 16))],
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 16, right: 16, top: 7, bottom: 7),
                           child: Row(
-                            children: [Text('Tel', style: GoogleFonts.handlee(fontSize: 16))],
+                            children: [Text('Tel', style: GoogleFonts.inter(fontSize: 16))],
                           ),
                         ),
                         const SizedBox(height: 14,),
@@ -241,7 +283,7 @@ class ProfileArea extends StatelessWidget {
                             children: [
                               Text(
                                   'Modifier',
-                                  style: GoogleFonts.handlee(color: Theme.of(context).colorScheme.primary)
+                                  style: GoogleFonts.inter(color: Theme.of(context).colorScheme.primary)
                               ),
                               const SizedBox(
                                 height: 12,
@@ -260,7 +302,7 @@ class ProfileArea extends StatelessWidget {
                             children: [
                               Text(
                                 'Deconnexion',
-                                style: GoogleFonts.handlee(color: Theme.of(context).colorScheme.error),
+                                style: GoogleFonts.inter(color: Theme.of(context).colorScheme.error),
                               )
                             ],
                           ),

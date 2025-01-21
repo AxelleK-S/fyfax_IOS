@@ -38,7 +38,7 @@ class InputField extends StatelessWidget {
         keyboardType: inputType,
         enabled: enabled,
         textAlign: align,
-        style: GoogleFonts.handlee(fontWeight: FontWeight.w400, fontSize: 12),
+        style: GoogleFonts.inter(fontWeight: FontWeight.w400, fontSize: 12),
         onEditingComplete: () {
           FocusScope.of(context).nextFocus();
         },
@@ -97,7 +97,7 @@ class InputField extends StatelessWidget {
             labelText: label,
             prefixIcon: prefix,
             suffixIcon: suffix,
-            labelStyle: GoogleFonts.handlee(
+            labelStyle: GoogleFonts.inter(
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w400,
                 fontSize: 12)),

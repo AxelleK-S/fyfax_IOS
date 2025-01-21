@@ -58,7 +58,7 @@ class _DomainTabState extends State<DomainTab> {
                 color: selected[index]? Theme.of(context).colorScheme.primary : Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(10)
             ),
-            child: Center(child: Text(titles[index], style: GoogleFonts.handlee(color: selected[index]? Theme.of(context).colorScheme.onPrimary : Colors.black),)),
+            child: Center(child: Text(titles[index], style: GoogleFonts.inter(color: selected[index]? Theme.of(context).colorScheme.onPrimary : Colors.black),)),
           ),
         ),),
       ),

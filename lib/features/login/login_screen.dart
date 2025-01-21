@@ -33,7 +33,7 @@ class LoginArea extends StatelessWidget {
             Navigator.of(context).pop();
             var snackBar = SnackBar(
               content: Text(error,
-                  style: GoogleFonts.handlee(
+                  style: GoogleFonts.inter(
                       color: Theme.of(context).colorScheme.onError)),
               backgroundColor: Theme.of(context).colorScheme.error,
             );

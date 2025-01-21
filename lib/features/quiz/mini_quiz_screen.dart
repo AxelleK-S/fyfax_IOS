@@ -62,12 +62,12 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                       height: 14,
                     ),
                     Text('Bienvenu sur FyFax',
-                        style: GoogleFonts.handlee(fontSize: 18)),
+                        style: GoogleFonts.inter(fontSize: 18, color: Colors.white)),
                     const SizedBox(
                       height: 14,
                     ),
                     Text('Préparez vous efficacement pour l\' ENSCT',
-                        style: GoogleFonts.handlee(fontSize: 18)),
+                        style: GoogleFonts.inter(fontSize: 18, color: Colors.white)),
                     const SizedBox(
                       height: 14,
                     ),
@@ -89,7 +89,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                       child: Center(
                         child: TextFormField(
                           controller: researchController,
-                          style: GoogleFonts.handlee(
+                          style: GoogleFonts.inter(
                             fontSize: 14,
                           ),
                           onTapOutside: (event) {
@@ -110,18 +110,12 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Search Quiz',
-                              hintStyle: GoogleFonts.handlee(
+                              hintStyle: GoogleFonts.inter(
                                   fontSize: 14,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .surface
-                                      .withOpacity(0.7)),
-                              icon: Icon(
+                                  color: Colors.black54),
+                              icon: const Icon(
                                 Iconsax.search_normal,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .surface
-                                    .withOpacity(0.7),
+                                color: Colors.black54,
                               )),
                         ),
                       ),
@@ -136,7 +130,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
               error: (message) {
                 var snackBar = SnackBar(
                   content: Text(message,
-                      style: GoogleFonts.handlee(
+                      style: GoogleFonts.inter(
                           color: Theme.of(context).colorScheme.onError)),
                   backgroundColor: Theme.of(context).colorScheme.error,
                 );
@@ -145,7 +139,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
               notConnected: () {
                 var snackBar = SnackBar(
                   content: Text('Vous n\'êtes pas connecté à Internet',
-                      style: GoogleFonts.handlee(
+                      style: GoogleFonts.inter(
                           color: Theme.of(context).colorScheme.onError)),
                   backgroundColor: Theme.of(context).colorScheme.error,
                 );
@@ -154,9 +148,9 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
               done: () {
                 var snackBar = SnackBar(
                   content: Text('Téléchargement reussi',
-                      style: GoogleFonts.handlee(
-                          color: Theme.of(context).colorScheme.onError)),
-                  backgroundColor: Theme.of(context).colorScheme.error,
+                      style: GoogleFonts.inter(
+                          color: Theme.of(context).colorScheme.onPrimary)),
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
@@ -177,7 +171,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 16, top: 24),
                                 child: Text('Session 2024',
-                                    style: GoogleFonts.handlee(fontSize: 16)),
+                                    style: GoogleFonts.inter(fontSize: 16)),
                               ),
                               const SizedBox(
                                 height: 24,
@@ -250,7 +244,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                               bottom: 14
                           ),
                           decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
+                              color: Colors.transparent,
                               borderRadius: BorderRadius.circular(10)
                           ),
                           child: Row(
@@ -275,7 +269,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                     color: activeDomainIndex==index+1? Theme.of(context).colorScheme.primary : Colors.grey.shade100,
                                     borderRadius: BorderRadius.circular(10)
                                 ),
-                                child: Center(child: Text(titles[index], style: GoogleFonts.handlee(color: activeDomainIndex==index+1? Theme.of(context).colorScheme.onPrimary : Colors.black),)),
+                                child: Center(child: Text(titles[index], style: GoogleFonts.inter(color: activeDomainIndex==index+1? Theme.of(context).colorScheme.onPrimary : Colors.black),)),
                               ),
                             ),),
                           ),
@@ -296,7 +290,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                       children: [
                                         Text(
                                             '${quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].name} ${quizzes[quizIndex].year}',
-                                            style: GoogleFonts.handlee(
+                                            style: GoogleFonts.inter(
                                                 fontSize: 16)),
                                         Visibility(
                                           visible: quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].sectionGroups.isEmpty ? false : true,
@@ -306,9 +300,29 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                               color: Colors.black,
                                             ),
                                             onPressed: () {
-                                              context
-                                                  .read<QuizCubit>()
-                                                  .storeQuiz(quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex]);
+                                              try {
+                                                context
+                                                    .read<QuizCubit>()
+                                                    .storeQuiz(quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex]);
+                                                var snackBar = SnackBar(
+                                                  content: Text('Téléchargement reussi',
+                                                      style: GoogleFonts.inter(
+                                                          color: Theme.of(context).colorScheme.onPrimary)),
+                                                  backgroundColor: Theme.of(context).colorScheme.primary,
+                                                );
+                                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                              } catch (e) {
+                                                if (kDebugMode) {
+                                                  print(e);
+                                                }
+                                                var snackBar = SnackBar(
+                                                  content: Text('Une erreur est survenue',
+                                                      style: GoogleFonts.inter(
+                                                          color: Theme.of(context).colorScheme.onError)),
+                                                  backgroundColor: Theme.of(context).colorScheme.error,
+                                                );
+                                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                              }
                                             },
                                           ),
                                         )
@@ -345,7 +359,12 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                   BorderRadius.circular(20),
-                                                  color: Colors.greenAccent),
+                                                  color: quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].domain.name == "Odontostomatologie"
+                                                      ? Colors.greenAccent
+                                                      : quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].domain.name == "Médecine"
+                                                      ? Colors.lightBlueAccent
+                                                      : Colors.deepPurpleAccent
+                                              ),
                                               child: Column(
                                                 crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -363,7 +382,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                                           .title
                                                           .title,
                                                       textAlign: TextAlign.left,
-                                                      style: GoogleFonts.handlee(
+                                                      style: GoogleFonts.inter(
                                                           color: Colors.black)),
                                                   Row(
                                                     mainAxisAlignment:
@@ -378,7 +397,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                                           )
                                                               .toList()[sectionIndex].numberOfQuestions.toString()} Qst',
                                                           textAlign: TextAlign.right,
-                                                          style: GoogleFonts.handlee(
+                                                          style: GoogleFonts.inter(
                                                               color: Colors.black)),
                                                     ],
                                                   )
@@ -413,7 +432,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                           Padding(
                             padding: const EdgeInsets.only(left: 16, top: 24),
                             child: Text('Session $year',
-                                style: GoogleFonts.handlee(fontSize: 16)),
+                                style: GoogleFonts.inter(fontSize: 16)),
                           ),
                           const SizedBox(
                             height: 24,
@@ -438,12 +457,12 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                                       children: [
-                                        Text(quiz.name, textAlign: TextAlign.left, style: GoogleFonts.handlee(color: Colors.black)),
+                                        Text(quiz.name, textAlign: TextAlign.left, style: GoogleFonts.inter(color: Colors.black)),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text('${quiz.questionNumber.toString()} Qst',
-                                                textAlign: TextAlign.right, style: GoogleFonts.handlee(color: Colors.black)),
+                                                textAlign: TextAlign.right, style: GoogleFonts.inter(color: Colors.black)),
                                             IconButton(
                                               icon: const Icon(Iconsax.document_download, color: Colors.black,),
                                               onPressed: () {
@@ -484,7 +503,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                           Padding(
                             padding: const EdgeInsets.only(left: 16, top: 24),
                             child: Text('Session $year',
-                                style: GoogleFonts.handlee()),
+                                style: GoogleFonts.inter()),
                           ),
                           const SizedBox(
                             height: 24,
@@ -528,7 +547,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 16, top: 24),
                                 child: Text('Session 2024',
-                                    style: GoogleFonts.handlee(fontSize: 16)),
+                                    style: GoogleFonts.inter(fontSize: 16)),
                               ),
                               const SizedBox(
                                 height: 24,
@@ -664,12 +683,12 @@ class MiniQuizArea extends StatelessWidget {
                     height: 14,
                   ),
                   Text('Bienvenu sur FyFax',
-                      style: GoogleFonts.handlee(fontSize: 18)),
+                      style: GoogleFonts.inter(fontSize: 18)),
                   const SizedBox(
                     height: 14,
                   ),
                   Text('Préparez vous efficacement pour l\' ENSCT',
-                      style: GoogleFonts.handlee(fontSize: 18)),
+                      style: GoogleFonts.inter(fontSize: 18)),
                   const SizedBox(
                     height: 14,
                   ),
@@ -691,7 +710,7 @@ class MiniQuizArea extends StatelessWidget {
                     child: Center(
                       child: TextFormField(
                         controller: researchController,
-                        style: GoogleFonts.handlee(
+                        style: GoogleFonts.inter(
                           fontSize: 14,
                         ),
                         onTapOutside: (event) {
@@ -709,7 +728,7 @@ class MiniQuizArea extends StatelessWidget {
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Search Quiz',
-                            hintStyle: GoogleFonts.handlee(
+                            hintStyle: GoogleFonts.inter(
                                 fontSize: 14,
                                 color: Theme.of(context)
                                     .colorScheme
@@ -735,7 +754,7 @@ class MiniQuizArea extends StatelessWidget {
             error: (message) {
               var snackBar = SnackBar(
                 content: Text(message,
-                    style: GoogleFonts.handlee(
+                    style: GoogleFonts.inter(
                         color: Theme.of(context).colorScheme.onError)),
                 backgroundColor: Theme.of(context).colorScheme.error,
               );
@@ -744,7 +763,7 @@ class MiniQuizArea extends StatelessWidget {
             notConnected: () {
               var snackBar = SnackBar(
                 content: Text('Vous n\'êtes pas connecté à Internet',
-                    style: GoogleFonts.handlee(
+                    style: GoogleFonts.inter(
                         color: Theme.of(context).colorScheme.onError)),
                 backgroundColor: Theme.of(context).colorScheme.error,
               );
@@ -753,7 +772,7 @@ class MiniQuizArea extends StatelessWidget {
             done: () {
               var snackBar = SnackBar(
                 content: Text('Téléchargement reussi',
-                    style: GoogleFonts.handlee(
+                    style: GoogleFonts.inter(
                         color: Theme.of(context).colorScheme.onError)),
                 backgroundColor: Theme.of(context).colorScheme.error,
               );
@@ -776,7 +795,7 @@ class MiniQuizArea extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: 16, top: 24),
                           child: Text('Session 2024',
-                              style: GoogleFonts.handlee(fontSize: 16)),
+                              style: GoogleFonts.inter(fontSize: 16)),
                         ),
                         const SizedBox(
                           height: 24,
@@ -852,7 +871,7 @@ class MiniQuizArea extends StatelessWidget {
                                     children: [
                                       Text(
                                           '${quizzes.where((element) => element.domain.id==1,).toList()[quizIndex].name} ${quizzes[quizIndex].year}',
-                                          style: GoogleFonts.handlee(
+                                          style: GoogleFonts.inter(
                                               fontSize: 16)),
                                       IconButton(
                                         icon: const Icon(
@@ -911,7 +930,7 @@ class MiniQuizArea extends StatelessWidget {
                                                     .title
                                                     .title,
                                                 textAlign: TextAlign.left,
-                                                style: GoogleFonts.handlee(
+                                                style: GoogleFonts.inter(
                                                     color: Colors.black)),
                                             Row(
                                               mainAxisAlignment:
@@ -921,7 +940,7 @@ class MiniQuizArea extends StatelessWidget {
                                                 Text(
                                                     '${quizzes.where((element) => element.domain.id==1,).toList()[quizIndex].sectionGroups[sectionIndex].numberOfQuestions.toString()} Qst',
                                                     textAlign: TextAlign.right,
-                                                    style: GoogleFonts.handlee(
+                                                    style: GoogleFonts.inter(
                                                         color: Colors.black)),
                                               ],
                                             )
@@ -956,7 +975,7 @@ class MiniQuizArea extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 16, top: 24),
                             child: Text('Session $year',
-                                style: GoogleFonts.handlee(fontSize: 16)),
+                                style: GoogleFonts.inter(fontSize: 16)),
                           ),
                           const SizedBox(
                             height: 24,
@@ -981,12 +1000,12 @@ class MiniQuizArea extends StatelessWidget {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                                       children: [
-                                        Text(quiz.name, textAlign: TextAlign.left, style: GoogleFonts.handlee(color: Colors.black)),
+                                        Text(quiz.name, textAlign: TextAlign.left, style: GoogleFonts.inter(color: Colors.black)),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text('${quiz.questionNumber.toString()} Qst',
-                                                textAlign: TextAlign.right, style: GoogleFonts.handlee(color: Colors.black)),
+                                                textAlign: TextAlign.right, style: GoogleFonts.inter(color: Colors.black)),
                                             IconButton(
                                               icon: const Icon(Iconsax.document_download, color: Colors.black,),
                                               onPressed: () {
@@ -1027,7 +1046,7 @@ class MiniQuizArea extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 16, top: 24),
                             child: Text('Session $year',
-                                style: GoogleFonts.handlee()),
+                                style: GoogleFonts.inter()),
                           ),
                           const SizedBox(
                             height: 24,
@@ -1071,7 +1090,7 @@ class MiniQuizArea extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: 16, top: 24),
                           child: Text('Session 2024',
-                              style: GoogleFonts.handlee(fontSize: 16)),
+                              style: GoogleFonts.inter(fontSize: 16)),
                         ),
                         const SizedBox(
                           height: 24,

@@ -26,7 +26,7 @@ class FlyerScreen extends StatelessWidget {
                   Center(
                     child: Text(
                       'Flyers',
-                      style: GoogleFonts.handlee(fontSize: 16),
+                      style: GoogleFonts.inter(fontSize: 16),
                     ),
                   ),
                 ],

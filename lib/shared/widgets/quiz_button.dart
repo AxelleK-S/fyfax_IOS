@@ -32,7 +32,7 @@ class QuizButton extends StatelessWidget {
         child: Center(
           child: Text(
             _decodeIfNeeded(statement),
-            style: GoogleFonts.handlee(),
+            style: GoogleFonts.inter(),
             maxLines: 2,
           ),
         ),

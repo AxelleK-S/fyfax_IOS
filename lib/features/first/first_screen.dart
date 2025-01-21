@@ -63,14 +63,14 @@ class _FirstScreenState extends State<FirstScreen> {
               ),
             ),
             const SizedBox(height: 24,),
-            Text('Bienvenu sur FyFax', style: GoogleFonts.handlee(fontSize: 18),),
+            Text('Bienvenu sur FyFax', style: GoogleFonts.inter(fontSize: 18),),
             const SizedBox(height: 10,),
             Padding(
               padding: const EdgeInsets.only(
                   left: 16,
                   right: 16
               ),
-              child: Text('Consultez toutes les anciennes épreuves de vos grands concours de médécine', style: GoogleFonts.handlee(fontSize: 16),),
+              child: Text('Consultez toutes les anciennes épreuves de vos grands concours de médécine', style: GoogleFonts.inter(fontSize: 16),),
             ),
             ValidatedButton(onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => SecondScreen(),));

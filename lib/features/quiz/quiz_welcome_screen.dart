@@ -36,13 +36,13 @@ class QuizWelcomeScreen extends StatelessWidget {
           )),
       body: Column(
         children: [
-          Text(quiz.name, style: GoogleFonts.handlee(),),
+          Text(quiz.name, style: GoogleFonts.inter(),),
           const SizedBox(height: 10,),
-          Text('Partie ${sectionGroup.title.title}', style: GoogleFonts.handlee(),),
+          Text('Partie ${sectionGroup.title.title}', style: GoogleFonts.inter(),),
           const SizedBox(height: 10,),
-          Text('Session ${quiz.year.toString()}', style: GoogleFonts.handlee(),),
+          Text('Session ${quiz.year.toString()}', style: GoogleFonts.inter(),),
           const SizedBox(height: 24,),
-          Text('Nombre de questions : ${sectionGroup.numberOfQuestions.toString()}', style: GoogleFonts.handlee(),),
+          Text('Nombre de questions : ${sectionGroup.numberOfQuestions.toString()}', style: GoogleFonts.inter(),),
           const SizedBox(height: 34,),
           QuizValidatedButton(onTap: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => QuizQuestionScreen(quiz: quiz, sectionGroup: sectionGroup,),));

@@ -20,7 +20,7 @@ class ValidatedButton extends StatelessWidget {
         child: Center(
             child: Text(
           text,
-          style: GoogleFonts.handlee(
+          style: GoogleFonts.inter(
               color: Theme.of(context).colorScheme.onPrimary, fontSize: 24),
         )),
       ),

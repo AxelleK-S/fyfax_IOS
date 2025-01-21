@@ -10,7 +10,6 @@ import 'package:fyfax/features/quiz/quiz_done_screen.dart';
 import 'package:fyfax/shared/widgets/quiz_button.dart';
 import 'package:fyfax/shared/widgets/quiz_validated_button.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax/iconsax.dart';
 
 class QuizQuestionScreen extends StatefulWidget {
   final QuizDetails quiz;
@@ -29,7 +28,9 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
   int activeQuestionIndex = 0;
   int activeSectionIndex = 0;
   int score = 0;
-  String baseUrl = 'https://xtcqhaotzsxfzfygefrt.supabase.co/storage/v1/object/public/fyfax';
+  int actualQuestion = 1;
+  String baseUrl =
+      'https://xtcqhaotzsxfzfygefrt.supabase.co/storage/v1/object/public/fyfax';
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -40,7 +41,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
             error: (message) {
               var snackBar = SnackBar(
                 content: Text(message,
-                    style: GoogleFonts.handlee(
+                    style: GoogleFonts.inter(
                         color: Theme.of(context).colorScheme.onError)),
                 backgroundColor: Theme.of(context).colorScheme.error,
               );
@@ -86,26 +87,25 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
           builder: (context, state) {
             return Scaffold(
               appBar: PreferredSize(
-                  preferredSize:  Size.fromHeight(widget
-                      .sectionGroup
-                      .sections[activeSectionIndex]
-                      .question[activeQuestionIndex]
-                      .image ==
-                      ' '? 250 : 420),
+                  preferredSize: Size.fromHeight(widget
+                              .sectionGroup
+                              .sections[activeSectionIndex]
+                              .question[activeQuestionIndex]
+                              .image ==
+                          ' '
+                      ? 250
+                      : 420),
                   child: Container(
                     margin: const EdgeInsets.only(left: 16, right: 16),
                     child: SafeArea(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(Iconsax.arrow_left),
-                          const SizedBox(
-                            height: 10,
-                          ),
                           Text(
                             _decodeIfNeeded(widget.sectionGroup
                                 .sections[activeSectionIndex].statement),
-                            style: GoogleFonts.handlee(),
+                            style: GoogleFonts.inter(),
                             maxLines: 5,
                           ),
                           const SizedBox(
@@ -117,7 +117,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                                 .sections[activeSectionIndex]
                                 .question[activeQuestionIndex]
                                 .statement),
-                            style: GoogleFonts.handlee(),
+                            style: GoogleFonts.inter(),
                             maxLines: 5,
                           ),
                           Visibility(
@@ -129,11 +129,13 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                                       ' '
                                   ? false
                                   : widget
-                                  .sectionGroup
-                                  .sections[activeSectionIndex]
-                                  .question[activeQuestionIndex]
-                                  .image ==
-                                  null ? false : true,
+                                              .sectionGroup
+                                              .sections[activeSectionIndex]
+                                              .question[activeQuestionIndex]
+                                              .image ==
+                                          null
+                                      ? false
+                                      : true,
                               child: Container(
                                 height: 200,
                                 margin: const EdgeInsets.only(
@@ -157,25 +159,25 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
 
                                  */
                                 child: widget
-                                    .sectionGroup
-                                    .sections[activeSectionIndex]
-                                    .question[activeQuestionIndex]
-                                    .image
-                                    !.split(',')
-                                    .length >
-                                    1
+                                            .sectionGroup
+                                            .sections[activeSectionIndex]
+                                            .question[activeQuestionIndex]
+                                            .image!
+                                            .split(',')
+                                            .length >
+                                        1
                                     ? Row(
-                                    children: List.generate(
-                                  widget
-                                      .sectionGroup
-                                      .sections[activeSectionIndex]
-                                      .question[activeQuestionIndex]
-                                      .image
-                                      !.split(',')
-                                      .length,
-                                  (index) => SizedBox(
-                                    height: 200,
-                                    /*
+                                        children: List.generate(
+                                        widget
+                                            .sectionGroup
+                                            .sections[activeSectionIndex]
+                                            .question[activeQuestionIndex]
+                                            .image!
+                                            .split(',')
+                                            .length,
+                                        (index) => SizedBox(
+                                          height: 200,
+                                          /*
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
                                             image: NetworkImage(
@@ -183,11 +185,23 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                                             fit: BoxFit.fill)),
 
                                      */
-                                    child: Image.network('$baseUrl/${widget.sectionGroup.sections[activeSectionIndex].question[activeQuestionIndex].image?.split(',')[index].trimLeft()}', fit: BoxFit.fill,),
-                                  ),
-                                )
-                                ) : Center(child: Image.network('$baseUrl/${widget.sectionGroup.sections[activeSectionIndex].question[activeQuestionIndex].image?.trimLeft()}')),
-                              ))
+                                          child: Image.network(
+                                            '$baseUrl/${widget.sectionGroup.sections[activeSectionIndex].question[activeQuestionIndex].image?.split(',')[index].trimLeft()}',
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                      ))
+                                    : Center(
+                                        child: Image.network(
+                                            '$baseUrl/${widget.sectionGroup.sections[activeSectionIndex].question[activeQuestionIndex].image?.trimLeft()}')),
+                              )),
+                          const SizedBox(
+                            height: 6,
+                          ),
+                          Text(
+                            'Question $actualQuestion/${widget.sectionGroup.numberOfQuestions}',
+                            style: GoogleFonts.inter(fontWeight:  FontWeight.w600, color: Theme.of(context).colorScheme.primary),
+                          )
                         ],
                       ),
                     ),
@@ -202,9 +216,8 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                           .question[activeQuestionIndex]
                           .option1,
                       onTap: () {
-                        if(isClickedOption.contains(true)){
-
-                        }else {
+                        if (isClickedOption.contains(true)) {
+                        } else {
                           showGreat(activeSectionIndex, activeQuestionIndex,
                               widget.sectionGroup);
                           setState(() {
@@ -233,9 +246,8 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                           .question[activeQuestionIndex]
                           .option2,
                       onTap: () {
-                        if(isClickedOption.contains(true)){
-
-                        }else {
+                        if (isClickedOption.contains(true)) {
+                        } else {
                           showGreat(activeSectionIndex, activeQuestionIndex,
                               widget.sectionGroup);
                           setState(() {
@@ -264,9 +276,8 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                           .question[activeQuestionIndex]
                           .option3,
                       onTap: () {
-                        if(isClickedOption.contains(true)){
-
-                        }else {
+                        if (isClickedOption.contains(true)) {
+                        } else {
                           showGreat(activeSectionIndex, activeQuestionIndex,
                               widget.sectionGroup);
                           setState(() {
@@ -295,9 +306,8 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                           .question[activeQuestionIndex]
                           .option4,
                       onTap: () {
-                        if(isClickedOption.contains(true)){
-
-                        }else {
+                        if (isClickedOption.contains(true)) {
+                        } else {
                           showGreat(activeSectionIndex, activeQuestionIndex,
                               widget.sectionGroup);
                           setState(() {
@@ -326,9 +336,8 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                           .question[activeQuestionIndex]
                           .option5,
                       onTap: () {
-                        if(isClickedOption.contains(true)){
-
-                        }else {
+                        if (isClickedOption.contains(true)) {
+                        } else {
                           showGreat(activeSectionIndex, activeQuestionIndex,
                               widget.sectionGroup);
                           setState(() {
@@ -368,7 +377,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                       child: Center(
                           child: Text(
                         'Annuler',
-                        style: GoogleFonts.handlee(
+                        style: GoogleFonts.inter(
                             color: Theme.of(context).colorScheme.onError,
                             fontSize: 24),
                       )),
@@ -383,25 +392,62 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                 child: Column(
                   children: [
                     GestureDetector(
-                      onTap: () => Navigator.of(context).pushNamed('/home'),
+                      onTap: () {
+                        Future<void> showMyDialog() async {
+                          return showDialog<void>(
+                            context: context,
+                            barrierDismissible: false, // user must tap button!
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Annuler le quiz'),
+                                content: const SingleChildScrollView(
+                                  child: Center(
+                                      child: SizedBox(
+                                    height: 50,
+                                    child: Text(
+                                        'Etes-vous sur de vouloir annuler le quiz ?'),
+                                  )),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    child: Text('Oui',style: GoogleFonts.inter(color: Theme.of(context).colorScheme.error),),
+                                    onPressed: () {
+                                      Navigator.of(context).pushNamed('/home');
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: Text('Non', style: GoogleFonts.inter(),),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+
+                        showMyDialog();
+                      },
                       child: Container(
                         height: 54,
                         //width: 275,
                         margin: const EdgeInsets.only(
                             top: 20,
                             //bottom: 24,
-                            left: 16, right: 16),
+                            left: 16,
+                            right: 16),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: Theme.of(context).colorScheme.error,
                         ),
                         child: Center(
                             child: Text(
-                              'Annuler',
-                              style: GoogleFonts.handlee(
-                                  color: Theme.of(context).colorScheme.onError,
-                                  fontSize: 24),
-                            )),
+                          'Annuler',
+                          style: GoogleFonts.inter(
+                              color: Theme.of(context).colorScheme.onError,
+                              fontSize: 24),
+                        )),
                       ),
                     ),
                     QuizValidatedButton(
@@ -430,13 +476,25 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                                     .question.length) {
                               activeQuestionIndex++;
                               setState(() {
-                                isClickedOption = [false, false, false, false, false];
+                                isClickedOption = [
+                                  false,
+                                  false,
+                                  false,
+                                  false,
+                                  false
+                                ];
                               });
                             } else {
                               activeSectionIndex++;
                               activeQuestionIndex = 0;
                               setState(() {
-                                isClickedOption = [false, false, false, false, false];
+                                isClickedOption = [
+                                  false,
+                                  false,
+                                  false,
+                                  false,
+                                  false
+                                ];
                               });
                             }
                           } else {
@@ -445,7 +503,13 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                                     .question.length) {
                               activeQuestionIndex++;
                               setState(() {
-                                isClickedOption = [false, false, false, false, false];
+                                isClickedOption = [
+                                  false,
+                                  false,
+                                  false,
+                                  false,
+                                  false
+                                ];
                               });
                             } else {
                               print('finish');
@@ -453,13 +517,19 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                                   widget.quiz, widget.sectionGroup, score);
                             }
                           }
+                          setState(() {
+                            actualQuestion++;
+                          });
                         },
                         text: (activeSectionIndex + 1) <
                                 widget.sectionGroup.sections.length
                             ? 'Suivant'
                             : (activeQuestionIndex + 1) <
-                                    widget.sectionGroup.sections[activeSectionIndex]
-                                        .question.length
+                                    widget
+                                        .sectionGroup
+                                        .sections[activeSectionIndex]
+                                        .question
+                                        .length
                                 ? 'Suivant'
                                 : 'Terminer'),
                   ],
@@ -479,7 +549,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
         duration: const Duration(seconds: 3),
         content: Text(
             'Justification ${quiz.sections[sectionIndex].question[questionIndex].justification}',
-            style: GoogleFonts.handlee(
+            style: GoogleFonts.inter(
                 color: Theme.of(context).colorScheme.primary)),
         backgroundColor: Theme.of(context).colorScheme.surface,
       );

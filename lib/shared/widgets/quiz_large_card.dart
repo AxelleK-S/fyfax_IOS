@@ -15,7 +15,10 @@ class QuizLargeCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => QuizWelcomeScreen(quiz : quiz, sectionGroup: sectionGroup,),
+          builder: (context) => QuizWelcomeScreen(
+            quiz: quiz,
+            sectionGroup: sectionGroup,
+          ),
         ));
       },
       child: Container(
@@ -24,18 +27,25 @@ class QuizLargeCard extends StatelessWidget {
         margin: const EdgeInsets.only(left: 16, right: 16, top: 7, bottom: 7),
         padding: const EdgeInsets.only(left: 16, right: 16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: Colors.greenAccent),
+            borderRadius: BorderRadius.circular(20),
+            color: quiz.domain.name == "Odontostomatologie"
+                ? Colors.greenAccent
+                : quiz.domain.name == "Médecine"
+                    ? Colors.lightBlueAccent
+                    : Colors.deepPurpleAccent),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(sectionGroup.title.title,
-                textAlign: TextAlign.left, style: GoogleFonts.handlee(color: Colors.black)),
+                textAlign: TextAlign.left,
+                style: GoogleFonts.inter(color: Colors.black)),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text('${sectionGroup.numberOfQuestions.toString()} Questions',
-                    textAlign: TextAlign.right, style: GoogleFonts.handlee(color: Colors.black)),
+                    textAlign: TextAlign.right,
+                    style: GoogleFonts.inter(color: Colors.black)),
               ],
             )
           ],

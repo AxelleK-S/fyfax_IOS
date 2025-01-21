@@ -33,7 +33,7 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Mes Epreuves',
-                        style: GoogleFonts.handlee(fontSize: 16)),
+                        style: GoogleFonts.inter(fontSize: 16)),
                   ],
                 ),
               ),
@@ -44,7 +44,7 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
               error: (message) {
                 var snackBar = SnackBar(
                   content: Text(message,
-                      style: GoogleFonts.handlee(
+                      style: GoogleFonts.inter(
                           color: Theme.of(context).colorScheme.onError)),
                   backgroundColor: Theme.of(context).colorScheme.error,
                 );
@@ -53,7 +53,7 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
               notConnected: () {
                 var snackBar = SnackBar(
                   content: Text('Vous n\'êtes pas connecté à Internet',
-                      style: GoogleFonts.handlee(
+                      style: GoogleFonts.inter(
                           color: Theme.of(context).colorScheme.onError)),
                   backgroundColor: Theme.of(context).colorScheme.error,
                 );
@@ -104,7 +104,7 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
                               bottom: 14
                           ),
                           decoration: BoxDecoration(
-                              color: Colors.grey.shade200,
+                              color: Colors.transparent,
                               borderRadius: BorderRadius.circular(10)
                           ),
                           child: Row(
@@ -129,7 +129,7 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
                                     color: activeDomainIndex==index+1? Theme.of(context).colorScheme.primary : Colors.grey.shade100,
                                     borderRadius: BorderRadius.circular(10)
                                 ),
-                                child: Center(child: Text(titles[index], style: GoogleFonts.handlee(color: activeDomainIndex==index+1? Theme.of(context).colorScheme.onPrimary : Colors.black),)),
+                                child: Center(child: Text(titles[index], style: GoogleFonts.inter(color: activeDomainIndex==index+1? Theme.of(context).colorScheme.onPrimary : Colors.black),)),
                               ),
                             ),),
                           ),
@@ -143,7 +143,7 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
                                 children: [
                                   Text(
                                       '${quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].name} ${quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].year}',
-                                      style: GoogleFonts.handlee(fontSize: 16)),
+                                      style: GoogleFonts.inter(fontSize: 16)),
                                   Column(
                                     children: List.generate(
                                       quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].sectionGroups.length,
@@ -211,7 +211,7 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
                                     color: activeDomainIndex==index+1? Theme.of(context).colorScheme.primary : Colors.grey.shade100,
                                     borderRadius: BorderRadius.circular(10)
                                 ),
-                                child: Center(child: Text(titles[index], style: GoogleFonts.handlee(color: activeDomainIndex==index+1? Theme.of(context).colorScheme.onPrimary : Colors.black),)),
+                                child: Center(child: Text(titles[index], style: GoogleFonts.inter(color: activeDomainIndex==index+1? Theme.of(context).colorScheme.onPrimary : Colors.black),)),
                               ),
                             ),),
                           ),
@@ -225,7 +225,7 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
                                 children: [
                                   Text(
                                       '${quizzesD.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].name} ${quizzesD.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].year}',
-                                      style: GoogleFonts.handlee(fontSize: 16)),
+                                      style: GoogleFonts.inter(fontSize: 16)),
                                   Column(
                                     children: List.generate(
                                       quizzesD.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].sectionGroups.length,
@@ -321,7 +321,7 @@ class LargeQuizArea extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('Mes Epreuves',
-                      style: GoogleFonts.handlee(fontSize: 16)),
+                      style: GoogleFonts.inter(fontSize: 16)),
                 ],
               ),
             ),
@@ -332,7 +332,7 @@ class LargeQuizArea extends StatelessWidget {
             error: (message) {
               var snackBar = SnackBar(
                 content: Text(message,
-                    style: GoogleFonts.handlee(
+                    style: GoogleFonts.inter(
                         color: Theme.of(context).colorScheme.onError)),
                 backgroundColor: Theme.of(context).colorScheme.error,
               );
@@ -341,7 +341,7 @@ class LargeQuizArea extends StatelessWidget {
             notConnected: () {
               var snackBar = SnackBar(
                 content: Text('Vous n\'êtes pas connecté à Internet',
-                    style: GoogleFonts.handlee(
+                    style: GoogleFonts.inter(
                         color: Theme.of(context).colorScheme.onError)),
                 backgroundColor: Theme.of(context).colorScheme.error,
               );
@@ -415,7 +415,7 @@ class LargeQuizArea extends StatelessWidget {
                                   color: activeDomainIndex==index+1? Theme.of(context).colorScheme.primary : Colors.grey.shade100,
                                   borderRadius: BorderRadius.circular(10)
                               ),
-                              child: Center(child: Text(titles[index], style: GoogleFonts.handlee(color: activeDomainIndex==index+1? Theme.of(context).colorScheme.onPrimary : Colors.black),)),
+                              child: Center(child: Text(titles[index], style: GoogleFonts.inter(color: activeDomainIndex==index+1? Theme.of(context).colorScheme.onPrimary : Colors.black),)),
                             ),
                           ),),
                         ),
@@ -429,7 +429,7 @@ class LargeQuizArea extends StatelessWidget {
                           children: [
                             Text(
                                 '${quizzes[quizIndex].name} ${quizzes[quizIndex].year}',
-                                style: GoogleFonts.handlee(fontSize: 16)),
+                                style: GoogleFonts.inter(fontSize: 16)),
                             Column(
                               children: List.generate(
                                 quizzes[quizIndex].sectionGroups.length,
@@ -461,7 +461,7 @@ class LargeQuizArea extends StatelessWidget {
                       children: [
                         Text(
                             '${quizzesD[quizIndex].name} ${quizzesD[quizIndex].year}',
-                            style: GoogleFonts.handlee(fontSize: 16)),
+                            style: GoogleFonts.inter(fontSize: 16)),
                         Column(
                           children: List.generate(
                             quizzesD[quizIndex].sectionGroups.length,

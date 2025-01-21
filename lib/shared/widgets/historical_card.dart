@@ -20,14 +20,14 @@ class HistoricalCard extends StatelessWidget {
             text,
             maxLines: 3,
             textAlign: TextAlign.left,
-            style: GoogleFonts.handlee(),
+            style: GoogleFonts.inter(),
           ),
           const SizedBox(height: 10,),
           Text(
             time,
             maxLines: 3,
             textAlign: TextAlign.left,
-            style: GoogleFonts.handlee(fontSize: 12, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),),
+            style: GoogleFonts.inter(fontSize: 12, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),),
           ),
           const SizedBox(height: 20,),
           MySeparator(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),)
