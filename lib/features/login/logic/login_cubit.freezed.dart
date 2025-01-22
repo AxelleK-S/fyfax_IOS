@@ -20,6 +20,7 @@ mixin _$LoginState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() exist,
     required TResult Function(User user) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
@@ -29,6 +30,7 @@ mixin _$LoginState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? exist,
     TResult? Function(User user)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
@@ -38,6 +40,7 @@ mixin _$LoginState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? exist,
     TResult Function(User user)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
@@ -48,6 +51,7 @@ mixin _$LoginState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Exist value) exist,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
@@ -57,6 +61,7 @@ mixin _$LoginState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_Exist value)? exist,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
@@ -66,6 +71,7 @@ mixin _$LoginState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Exist value)? exist,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
@@ -138,6 +144,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() exist,
     required TResult Function(User user) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
@@ -150,6 +157,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? exist,
     TResult? Function(User user)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
@@ -162,6 +170,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? exist,
     TResult Function(User user)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
@@ -178,6 +187,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Exist value) exist,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
@@ -190,6 +200,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_Exist value)? exist,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
@@ -202,6 +213,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Exist value)? exist,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
@@ -264,6 +276,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() exist,
     required TResult Function(User user) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
@@ -276,6 +289,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? exist,
     TResult? Function(User user)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
@@ -288,6 +302,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? exist,
     TResult Function(User user)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
@@ -304,6 +319,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Exist value) exist,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
@@ -316,6 +332,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_Exist value)? exist,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
@@ -328,6 +345,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Exist value)? exist,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
@@ -342,6 +360,138 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
 
 abstract class _Loading implements LoginState {
   const factory _Loading() = _$LoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$ExistImplCopyWith<$Res> {
+  factory _$$ExistImplCopyWith(
+          _$ExistImpl value, $Res Function(_$ExistImpl) then) =
+      __$$ExistImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ExistImplCopyWithImpl<$Res>
+    extends _$LoginStateCopyWithImpl<$Res, _$ExistImpl>
+    implements _$$ExistImplCopyWith<$Res> {
+  __$$ExistImplCopyWithImpl(
+      _$ExistImpl _value, $Res Function(_$ExistImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ExistImpl with DiagnosticableTreeMixin implements _Exist {
+  const _$ExistImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'LoginState.exist()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'LoginState.exist'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ExistImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() exist,
+    required TResult Function(User user) success,
+    required TResult Function(String error) error,
+    required TResult Function() notConnected,
+  }) {
+    return exist();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? exist,
+    TResult? Function(User user)? success,
+    TResult? Function(String error)? error,
+    TResult? Function()? notConnected,
+  }) {
+    return exist?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? exist,
+    TResult Function(User user)? success,
+    TResult Function(String error)? error,
+    TResult Function()? notConnected,
+    required TResult orElse(),
+  }) {
+    if (exist != null) {
+      return exist();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Exist value) exist,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_NotConnected value) notConnected,
+  }) {
+    return exist(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Exist value)? exist,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_NotConnected value)? notConnected,
+  }) {
+    return exist?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Exist value)? exist,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_NotConnected value)? notConnected,
+    required TResult orElse(),
+  }) {
+    if (exist != null) {
+      return exist(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Exist implements LoginState {
+  const factory _Exist() = _$ExistImpl;
 }
 
 /// @nodoc
@@ -418,6 +568,7 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() exist,
     required TResult Function(User user) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
@@ -430,6 +581,7 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? exist,
     TResult? Function(User user)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
@@ -442,6 +594,7 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? exist,
     TResult Function(User user)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
@@ -458,6 +611,7 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Exist value) exist,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
@@ -470,6 +624,7 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_Exist value)? exist,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
@@ -482,6 +637,7 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Exist value)? exist,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
@@ -577,6 +733,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() exist,
     required TResult Function(User user) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
@@ -589,6 +746,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? exist,
     TResult? Function(User user)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
@@ -601,6 +759,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? exist,
     TResult Function(User user)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
@@ -617,6 +776,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Exist value) exist,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
@@ -629,6 +789,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_Exist value)? exist,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
@@ -641,6 +802,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Exist value)? exist,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
@@ -708,6 +870,7 @@ class _$NotConnectedImpl with DiagnosticableTreeMixin implements _NotConnected {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() exist,
     required TResult Function(User user) success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
@@ -720,6 +883,7 @@ class _$NotConnectedImpl with DiagnosticableTreeMixin implements _NotConnected {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? exist,
     TResult? Function(User user)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
@@ -732,6 +896,7 @@ class _$NotConnectedImpl with DiagnosticableTreeMixin implements _NotConnected {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? exist,
     TResult Function(User user)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
@@ -748,6 +913,7 @@ class _$NotConnectedImpl with DiagnosticableTreeMixin implements _NotConnected {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Exist value) exist,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
@@ -760,6 +926,7 @@ class _$NotConnectedImpl with DiagnosticableTreeMixin implements _NotConnected {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_Exist value)? exist,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
@@ -772,6 +939,7 @@ class _$NotConnectedImpl with DiagnosticableTreeMixin implements _NotConnected {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Exist value)? exist,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,

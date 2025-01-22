@@ -113,7 +113,7 @@ class HistoricalArea extends StatelessWidget {
                           historical.length,
                           (index) => HistoricalCard(
                             text: historical[index].text,
-                            time: DateFormat('dd-MM-yy:HH-mm-ss').format(historical[index].createdAt.toLocal()),
+                            time: DateFormat('dd-MM-yy:HH:mm:ss').format(historical[index].createdAt.toLocal()),
                           ),
                         )),
                   );

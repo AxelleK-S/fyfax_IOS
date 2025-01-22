@@ -132,4 +132,74 @@ class LoginCubit extends Cubit<LoginState> {
 
      */
   }
+
+  Future<void> createUser(String email, String phoneNumber, String pass, String username)async {
+    final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
+
+    if (connectivityResult.contains(ConnectivityResult.none)) {
+      emit(const LoginState.notConnected());
+    } else {
+      emit(const LoginState.loading());
+      try {
+        final data = await userRepository.verifyUserExist(email);
+        //|| data != null
+        if (data.isNotEmpty){
+          emit(const LoginState.exist());
+        }else {
+          final userCreate = await userRepository.createUser(email, phoneNumber, pass);
+          if (userCreate!= null){
+            final userInsert = await userRepository.insertUser(email, phoneNumber, pass);
+            User user = await userRepository.getUserId(email);
+            int userId = user.id;
+            print('userId $userId');
+            if (userId !=0){
+              await localStorageService.saveUser(email, pass, userId, username, user.phoneNumber);
+              await localStorageService.saveToken(pass);
+              print('saved');
+              emit(LoginState.success(user : User(id: userId, username:  username, phoneNumber: pass)));
+            }
+            else {
+              emit(const LoginState.error(error: 'Erreur lors de l\'insertion de l\'utilisateur'));
+            }
+          } else {
+            emit(const LoginState.error(error: 'Erreur lors de la création de compte'));
+          }
+        }
+      } catch (e) {
+        if (kDebugMode) {
+          print(e);
+        }
+        emit(const LoginState.error(error: 'Une erreur est survenue'));
+      }
+    }
+
+    /*
+    connectivitySubscription = Connectivity().onConnectivityChanged.listen(
+          (result) async {
+        if (!result.contains(ConnectivityResult.none)) {
+          emit(const UserState.loading());
+          try {
+            final data = await userRepository.verifyUserExist(username);
+            if (data == [] || data == null){
+              emit(const UserState.error(error: 'L\'utilisateur existe déjà'));
+            }else {
+              String pass = await userRepository.createUser(username, phoneNumber);
+              final user = await userRepository.insertUser(username, phoneNumber, pass);
+              emit(UserState.success(password: pass));
+            }
+          } catch (e) {
+            if (kDebugMode) {
+              print(e);
+            }
+            emit(const UserState.error(error: 'Une erreur est survenue'));
+          }
+        } else {
+          emit(const UserState.notConnected());
+
+          }
+          }
+    );
+
+     */
+  }
 }
