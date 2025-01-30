@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -31,7 +29,7 @@ class QuizButton extends StatelessWidget {
                     : Theme.of(context).colorScheme.onSurface)),
         child: Center(
           child: Text(
-            _decodeIfNeeded(statement),
+            statement,
             style: GoogleFonts.inter(),
             maxLines: 2,
           ),
@@ -40,17 +38,4 @@ class QuizButton extends StatelessWidget {
     );
   }
 
-  String _decodeIfNeeded(String text) {
-    // Vérifiez si le texte est en UTF-8
-    try {
-      // Tentative de décodage
-      var decodedText = utf8.decode(text.codeUnits, allowMalformed: false);
-      var decode = latin1.decode(text.codeUnits);
-      print(decode);
-      return decodedText;
-    } catch (e) {
-      // Si une exception se produit, retourner le texte original
-      return text;
-    }
-  }
 }

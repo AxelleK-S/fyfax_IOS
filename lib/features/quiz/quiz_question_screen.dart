@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -103,8 +101,8 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            _decodeIfNeeded(widget.sectionGroup
-                                .sections[activeSectionIndex].statement),
+                            widget.sectionGroup
+                                .sections[activeSectionIndex].statement,
                             style: GoogleFonts.inter(),
                             maxLines: 5,
                           ),
@@ -112,11 +110,11 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                             height: 10,
                           ),
                           Text(
-                            _decodeIfNeeded(widget
+                            widget
                                 .sectionGroup
                                 .sections[activeSectionIndex]
                                 .question[activeQuestionIndex]
-                                .statement),
+                                .statement,
                             style: GoogleFonts.inter(),
                             maxLines: 5,
                           ),
@@ -554,24 +552,6 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
         backgroundColor: Theme.of(context).colorScheme.surface,
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-  }
-
-  String _decodeIfNeeded(String text) {
-    // Vérifiez si le texte est en UTF-8
-    try {
-      print('Befoore text $text');
-      // Tentative de décodage
-      //var decodedText = utf8.decode(text.codeUnits, allowMalformed: false);
-      var decode = latin1.encode(text);
-      print('Coded $decode');
-      var decodeText = utf8.decode(text.codeUnits, allowMalformed: true);
-      print('Decoded $decodeText');
-      return decodeText;
-    } catch (e) {
-      print(e);
-      // Si une exception se produit, retourner le texte original
-      return text;
     }
   }
 
