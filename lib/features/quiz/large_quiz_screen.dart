@@ -417,14 +417,14 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
                         Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: List.generate(
-                              quizzesD
+                              quizzes
                                   .where(
                                     (element) =>
-                                        element.domain.id == activeDomainIndex,
-                                  )
+                                element.domain.id == activeDomainIndex,
+                              )
                                   .toList()
                                   .length,
-                              (quizIndex) => Column(
+                                  (quizIndex) => Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
@@ -432,14 +432,14 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
                                         left: 16, top: 24),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                            '${quizzesD.where(
+                                            '${quizzes.where(
                                                   (element) =>
-                                                      element.domain.id ==
-                                                      activeDomainIndex,
-                                                ).toList()[quizIndex].name} ${quizzes[quizIndex].year}',
+                                              element.domain.id ==
+                                                  activeDomainIndex,
+                                            ).toList()[quizIndex].name} ${quizzes[quizIndex].year}',
                                             style: GoogleFonts.inter(
                                                 fontSize: 16)),
                                         IconButton(
@@ -447,7 +447,29 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
                                             Iconsax.trash,
                                             color: Colors.red,
                                           ),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            try {
+                                              context.read<QuizCubit>().deleteQuiz(quizzesD.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex]);
+                                            } catch (e) {
+                                              if (kDebugMode) {
+                                                print(e);
+                                              }
+                                              var snackBar = SnackBar(
+                                                content: Text(
+                                                    'Une erreur est survenue',
+                                                    style: GoogleFonts.inter(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .onError)),
+                                                backgroundColor:
+                                                Theme.of(context)
+                                                    .colorScheme
+                                                    .error,
+                                              );
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(snackBar);
+                                            }
+                                          },
                                         )
                                       ],
                                     ),
@@ -464,100 +486,130 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
                                       scrollDirection: Axis.horizontal,
                                       child: Row(
                                           children: List.generate(
-                                        quizzesD
-                                            .where(
-                                              (element) =>
-                                                  element.domain.id ==
+                                            quizzesD
+                                                .where(
+                                                  (element) =>
+                                              element.domain.id ==
                                                   activeDomainIndex,
                                             )
-                                            .toList()[quizIndex]
-                                            .sectionGroups
-                                            .length,
-                                        (sectionIndex) => Container(
-                                          height: 108,
-                                          width: 143,
-                                          padding: const EdgeInsets.all(10),
-                                          margin: const EdgeInsets.only(
-                                              left: 7, right: 7),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              color: quizzes
-                                                          .where(
-                                                            (element) =>
-                                                                element.domain
-                                                                    .id ==
-                                                                activeDomainIndex,
-                                                          )
-                                                          .toList()[quizIndex]
+                                                .toList()[quizIndex]
+                                                .sectionGroups
+                                                .length,
+                                                (sectionIndex) => GestureDetector(
+                                              onTap: () {
+                                                Navigator.of(context)
+                                                    .push(MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      QuizWelcomeScreen(
+                                                        quiz: quizzesD
+                                                            .where(
+                                                              (element) =>
+                                                          element.domain.id ==
+                                                              activeDomainIndex,
+                                                        )
+                                                            .toList()[quizIndex],
+                                                        sectionGroup: quizzesD
+                                                            .where(
+                                                              (element) =>
+                                                          element
+                                                              .domain.id ==
+                                                              activeDomainIndex,
+                                                        )
+                                                            .toList()[quizIndex]
+                                                            .sectionGroups[
+                                                        sectionIndex],
+                                                      ),
+                                                ));
+                                              },
+                                              child: Container(
+                                                height: 108,
+                                                width: 143,
+                                                padding: const EdgeInsets.all(10),
+                                                margin: const EdgeInsets.only(
+                                                    left: 7, right: 7),
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                    BorderRadius.circular(20),
+                                                    color: quizzes
+                                                        .where(
+                                                          (element) =>
+                                                      element.domain
+                                                          .id ==
+                                                          activeDomainIndex,
+                                                    )
+                                                        .toList()[quizIndex]
+                                                        .domain
+                                                        .name ==
+                                                        "Odontostomatologie"
+                                                        ? Colors.greenAccent
+                                                        : quizzes
+                                                        .where(
+                                                          (element) =>
+                                                      element
                                                           .domain
-                                                          .name ==
-                                                      "Odontostomatologie"
-                                                  ? Colors.greenAccent
-                                                  : quizzes
-                                                              .where(
-                                                                (element) =>
-                                                                    element
-                                                                        .domain
-                                                                        .id ==
-                                                                    activeDomainIndex,
-                                                              )
-                                                              .toList()[
-                                                                  quizIndex]
-                                                              .domain
-                                                              .name ==
-                                                          "Médecine"
-                                                      ? Colors.lightBlueAccent
-                                                      : Colors
-                                                          .deepPurpleAccent),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Text(
-                                                  quizzesD
-                                                      .where(
-                                                        (element) =>
-                                                            element.domain.id ==
-                                                            activeDomainIndex,
-                                                      )
-                                                      .toList()[quizIndex]
-                                                      .sectionGroups[
-                                                          sectionIndex]
-                                                      .title
-                                                      .title,
-                                                  textAlign: TextAlign.left,
-                                                  style: GoogleFonts.inter(
-                                                      color: Colors.black)),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                      '${quizzesD.where(
-                                                            (element) =>
-                                                                element.domain
-                                                                    .id ==
-                                                                activeDomainIndex,
-                                                          ).toList()[quizIndex].sectionGroups[sectionIndex].numberOfQuestions.toString()} Qst',
-                                                      textAlign:
-                                                          TextAlign.right,
-                                                      style: GoogleFonts.inter(
-                                                          color: Colors.black)),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      )),
+                                                          .id ==
+                                                          activeDomainIndex,
+                                                    )
+                                                        .toList()[
+                                                    quizIndex]
+                                                        .domain
+                                                        .name ==
+                                                        "Médecine"
+                                                        ? Colors.lightBlueAccent
+                                                        : Colors
+                                                        .deepPurpleAccent),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                                  children: [
+                                                    Text(
+                                                        quizzesD
+                                                            .where(
+                                                              (element) =>
+                                                          element
+                                                              .domain.id ==
+                                                              activeDomainIndex,
+                                                        )
+                                                            .toList()[quizIndex]
+                                                            .sectionGroups[
+                                                        sectionIndex]
+                                                            .title
+                                                            .title,
+                                                        textAlign: TextAlign.left,
+                                                        style: GoogleFonts.inter(
+                                                            color: Colors.black)),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                            '${quizzesD.where(
+                                                                  (element) =>
+                                                              element.domain
+                                                                  .id ==
+                                                                  activeDomainIndex,
+                                                            ).toList()[quizIndex].sectionGroups[sectionIndex].numberOfQuestions.toString()} Qst',
+                                                            textAlign:
+                                                            TextAlign.right,
+                                                            style:
+                                                            GoogleFonts.inter(
+                                                                color: Colors
+                                                                    .black)),
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          )),
                                     ),
                                   ),
                                   const SizedBox(
                                       height:
-                                          16), // Space between each year group
+                                      16), // Space between each year group
                                 ],
                               ),
                             )),
