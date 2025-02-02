@@ -166,16 +166,19 @@ class QuizCubit extends Cubit<QuizState> {
 
   Future<void> finishQuiz(QuizDetails quiz,SectionGroup sectionGroup, int score) async {
     print('start');
-    final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
+    final List<ConnectivityResult> connectivityResult = await (Connectivity()
+        .checkConnectivity());
     if (connectivityResult.contains(ConnectivityResult.none)) {
       try {
         emit(const QuizState.notConnected());
         hiveService.addHistorical(hs.Historical(
             id: 0,
             createdAt: DateTime.now(),
-            text: 'Vous avez terminé le quiz ${quiz.name} ${sectionGroup.title.title} ${quiz.year}',
+            text: 'Vous avez terminé le quiz ${quiz.name} ${sectionGroup.title
+                .title} ${quiz.year}',
             user: 1));
-      } catch (e){
+        emit(QuizState.finished(score: score));
+      } catch (e) {
         if (kDebugMode) {
           print(e);
         }
@@ -186,19 +189,22 @@ class QuizCubit extends Cubit<QuizState> {
       emit(const QuizState.loading());
       try {
         final prefs = await SharedPreferences.getInstance();
-        final int  id = prefs.getInt('id')!;
+        final int id = prefs.getInt('id')!;
         // take user id
-        await quizRepository.saveResult(id, quiz.id,sectionGroup.title.title, 1, score);
+        await quizRepository.saveResult(
+            id, quiz.id, sectionGroup.title.title, 1, score);
         await historicalRepository.insertHistorical(Historical(
             id: 0,
             createdAt: DateTime.now(),
-            text: 'Vous avez terminé le quiz ${quiz.name} ${sectionGroup.title.title} ${quiz.year}',
+            text: 'Vous avez terminé le quiz ${quiz.name} ${sectionGroup.title
+                .title} ${quiz.year}',
             user: id));
         emit(QuizState.finished(score: score));
         hiveService.addHistorical(hs.Historical(
             id: 0,
             createdAt: DateTime.now(),
-            text: 'Vous avez terminé le quiz ${quiz.name} ${sectionGroup.title.title} ${quiz.year}',
+            text: 'Vous avez terminé le quiz ${quiz.name} ${sectionGroup.title
+                .title} ${quiz.year}',
             user: id));
       } catch (e) {
         if (kDebugMode) {
@@ -207,6 +213,19 @@ class QuizCubit extends Cubit<QuizState> {
         emit(const QuizState.error(error: 'Une erreur est survenue'));
       }
     }
+  }
+
+  Future<void> deleteQuiz(QuizDetails quiz) async {
+    //emit(const QuizState.loading());
+    try {
+      hiveService.deleteQuiz(quiz.id);
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      emit(const QuizState.error(error: 'Une erreur est survenue'));
+    }
+  }
 
     /*
     connectivitySubscription =
@@ -254,4 +273,3 @@ class QuizCubit extends Cubit<QuizState> {
      */
   }
 
-}

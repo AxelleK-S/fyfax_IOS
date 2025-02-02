@@ -45,8 +45,23 @@ class HiveService {
 
   //delete
   Future<void> deleteQuiz(int index) async {
-    var box = await _box;
-    await box.deleteAt(index);
+    try {
+      var box = await _box;
+      var map = box.toMap();
+      var key = findKeyById(map, index);
+      await box.deleteAt(key);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  dynamic findKeyById(Map<dynamic, OfflineQuiz> map, int id) {
+    for (var entry in map.entries) {
+      if (entry.value.id == id) {
+        return entry.key; // Return the key if the id matches
+      }
+    }
+    return null; // Return null if no match is found
   }
 
   //delete all
