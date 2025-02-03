@@ -30,8 +30,8 @@ class ProfileArea extends StatelessWidget {
               var snackBar = SnackBar(
                 content: Text(error,
                     style: GoogleFonts.inter(
-                        color: Theme.of(context).colorScheme.onError)),
-                backgroundColor: Theme.of(context).colorScheme.error,
+                        color: Theme.of(context).colorScheme.error)),
+                backgroundColor: Theme.of(context).colorScheme.onError,
               );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             },

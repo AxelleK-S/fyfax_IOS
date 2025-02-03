@@ -47,8 +47,8 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
                 var snackBar = SnackBar(
                   content: Text(message,
                       style: GoogleFonts.inter(
-                          color: Theme.of(context).colorScheme.onError)),
-                  backgroundColor: Theme.of(context).colorScheme.error,
+                          color: Theme.of(context).colorScheme.error)),
+                  backgroundColor: Theme.of(context).colorScheme.onError,
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
@@ -56,8 +56,8 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
                 var snackBar = SnackBar(
                   content: Text('Vous n\'êtes pas connecté à Internet',
                       style: GoogleFonts.inter(
-                          color: Theme.of(context).colorScheme.onError)),
-                  backgroundColor: Theme.of(context).colorScheme.error,
+                          color: Theme.of(context).colorScheme.error)),
+                  backgroundColor: Theme.of(context).colorScheme.onError,
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
@@ -450,6 +450,13 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
                                           onPressed: () {
                                             try {
                                               context.read<QuizCubit>().deleteQuiz(quizzesD.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex]);
+                                              var snackBar = SnackBar(
+                                                content: Text("Quiz supprimé avec succès",
+                                                    style: GoogleFonts.inter(
+                                                        color: Theme.of(context).colorScheme.primary)),
+                                                backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                                              );
+                                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                             } catch (e) {
                                               if (kDebugMode) {
                                                 print(e);
@@ -460,11 +467,11 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
                                                     style: GoogleFonts.inter(
                                                         color: Theme.of(context)
                                                             .colorScheme
-                                                            .onError)),
+                                                            .error)),
                                                 backgroundColor:
                                                 Theme.of(context)
                                                     .colorScheme
-                                                    .error,
+                                                    .onError,
                                               );
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(snackBar);

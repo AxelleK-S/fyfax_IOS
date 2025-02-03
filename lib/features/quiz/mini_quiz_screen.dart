@@ -131,8 +131,8 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                 var snackBar = SnackBar(
                   content: Text(message,
                       style: GoogleFonts.inter(
-                          color: Theme.of(context).colorScheme.onError)),
-                  backgroundColor: Theme.of(context).colorScheme.error,
+                          color: Theme.of(context).colorScheme.error)),
+                  backgroundColor: Theme.of(context).colorScheme.onError,
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
@@ -140,8 +140,8 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                 var snackBar = SnackBar(
                   content: Text('Vous n\'êtes pas connecté à Internet',
                       style: GoogleFonts.inter(
-                          color: Theme.of(context).colorScheme.onError)),
-                  backgroundColor: Theme.of(context).colorScheme.error,
+                          color: Theme.of(context).colorScheme.error)),
+                  backgroundColor: Theme.of(context).colorScheme.onError,
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
@@ -149,8 +149,8 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                 var snackBar = SnackBar(
                   content: Text('Téléchargement reussi',
                       style: GoogleFonts.inter(
-                          color: Theme.of(context).colorScheme.onPrimary)),
-                  backgroundColor: Theme.of(context).colorScheme.primary,
+                          color: Theme.of(context).colorScheme.primary)),
+                  backgroundColor: Theme.of(context).colorScheme.onPrimary,
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },

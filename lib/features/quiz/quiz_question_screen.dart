@@ -40,8 +40,8 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
               var snackBar = SnackBar(
                 content: Text(message,
                     style: GoogleFonts.inter(
-                        color: Theme.of(context).colorScheme.onError)),
-                backgroundColor: Theme.of(context).colorScheme.error,
+                        color: Theme.of(context).colorScheme.error)),
+                backgroundColor: Theme.of(context).colorScheme.onError,
               );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             },
