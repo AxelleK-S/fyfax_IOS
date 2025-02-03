@@ -289,7 +289,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                       MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                            '${quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].name} ${quizzes[quizIndex].year}',
+                                            '${quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].name} ${quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].year}',
                                             style: GoogleFonts.inter(
                                                 fontSize: 16)),
                                         Visibility(
