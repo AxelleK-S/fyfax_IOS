@@ -192,11 +192,11 @@ class _LargeQuizScreenState extends State<LargeQuizScreen> {
                                                     style: GoogleFonts.inter(
                                                         color: Theme.of(context)
                                                             .colorScheme
-                                                            .onError)),
+                                                            .error)),
                                                 backgroundColor:
                                                     Theme.of(context)
                                                         .colorScheme
-                                                        .error,
+                                                        .onError,
                                               );
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(snackBar);

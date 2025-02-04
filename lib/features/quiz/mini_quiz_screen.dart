@@ -307,8 +307,8 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                                 var snackBar = SnackBar(
                                                   content: Text('Téléchargement reussi',
                                                       style: GoogleFonts.inter(
-                                                          color: Theme.of(context).colorScheme.onPrimary)),
-                                                  backgroundColor: Theme.of(context).colorScheme.primary,
+                                                          color: Theme.of(context).colorScheme.primary)),
+                                                  backgroundColor: Theme.of(context).colorScheme.onPrimary,
                                                 );
                                                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                               } catch (e) {
