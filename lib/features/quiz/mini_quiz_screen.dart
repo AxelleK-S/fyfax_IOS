@@ -66,7 +66,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                     const SizedBox(
                       height: 14,
                     ),
-                    Text('Préparez vous efficacement pour l\' ENSCT',
+                    Text(' Préparez vous efficacement pour l\' ENSCT ',
                         style: GoogleFonts.inter(fontSize: 18, color: Colors.white)),
                     const SizedBox(
                       height: 14,
