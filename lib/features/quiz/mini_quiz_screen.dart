@@ -66,8 +66,11 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                     const SizedBox(
                       height: 14,
                     ),
-                    Text(' Préparez vous efficacement pour l\' ENSCT ',
-                        style: GoogleFonts.inter(fontSize: 18, color: Colors.white)),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4, right: 4),
+                      child: Text('Préparez vous efficacement pour l\' ENSCT',
+                          style: GoogleFonts.inter(fontSize: 16, color: Colors.white)),
+                    ),
                     const SizedBox(
                       height: 14,
                     ),
