@@ -133,6 +133,26 @@ class LoginCubit extends Cubit<LoginState> {
      */
   }
 
+  Future<void> deleteUser(String userMail)async {
+    final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult.contains(ConnectivityResult.none)) {
+      emit(const LoginState.notConnected());
+    } else {
+      emit(const LoginState.loading());
+      try {
+        await userRepository.deleteUser(userMail);
+        await localStorageService.deleteAll();
+        emit(LoginState.success(user: User(phoneNumber: '', username: '',id: 0)));
+      } catch (e) {
+        if (kDebugMode) {
+          print(e);
+        }
+        emit(const LoginState.error(error: 'Une erreur est survenue'));
+      }
+    }
+
+  }
+
   Future<void> createUser(String email, String phoneNumber, String pass, String username)async {
     final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
 

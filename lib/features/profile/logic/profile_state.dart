@@ -7,4 +7,5 @@ class ProfileState with _$ProfileState {
   const factory ProfileState.success({required String email, required String phoneNumber, required String name}) = _Success;
   const factory ProfileState.error({required String error}) = _Error;
   const factory ProfileState.notConnected() = _NotConnected;
+  const factory ProfileState.done() = _Done;
 }

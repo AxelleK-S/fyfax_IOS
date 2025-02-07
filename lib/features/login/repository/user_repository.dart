@@ -33,6 +33,21 @@ class UserRepository {
     }
   }
 
+  Future<void> deleteUser(String userMail) async{
+    try {
+      final data = await Supabase.instance.client.from('user').delete().eq('username', userMail);
+      await Supabase.instance.client.auth.admin.deleteUser(Supabase.instance.client.auth.currentUser!.id);
+      if (kDebugMode) {
+        print(data);
+      }
+    } catch (e){
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+  }
+
+
   Future<void> logout ()async{
     await Supabase.instance.client.auth.signOut().catchError((err){print('Erro : $err');});
     Supabase.instance.client.auth.refreshSession(); //mettre ici ou après le loginz

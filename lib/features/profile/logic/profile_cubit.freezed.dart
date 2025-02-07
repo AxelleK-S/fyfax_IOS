@@ -24,6 +24,7 @@ mixin _$ProfileState {
         success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
+    required TResult Function() done,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,6 +34,7 @@ mixin _$ProfileState {
     TResult? Function(String email, String phoneNumber, String name)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
+    TResult? Function()? done,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,6 +44,7 @@ mixin _$ProfileState {
     TResult Function(String email, String phoneNumber, String name)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
+    TResult Function()? done,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -52,6 +55,7 @@ mixin _$ProfileState {
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
+    required TResult Function(_Done value) done,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +65,7 @@ mixin _$ProfileState {
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
+    TResult? Function(_Done value)? done,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +75,7 @@ mixin _$ProfileState {
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
+    TResult Function(_Done value)? done,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -111,12 +117,18 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
+class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   const _$InitialImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ProfileState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'ProfileState.initial'));
   }
 
   @override
@@ -137,6 +149,7 @@ class _$InitialImpl implements _Initial {
         success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
+    required TResult Function() done,
   }) {
     return initial();
   }
@@ -149,6 +162,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(String email, String phoneNumber, String name)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
+    TResult? Function()? done,
   }) {
     return initial?.call();
   }
@@ -161,6 +175,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(String email, String phoneNumber, String name)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
+    TResult Function()? done,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -177,6 +192,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
+    required TResult Function(_Done value) done,
   }) {
     return initial(this);
   }
@@ -189,6 +205,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
+    TResult? Function(_Done value)? done,
   }) {
     return initial?.call(this);
   }
@@ -201,6 +218,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
+    TResult Function(_Done value)? done,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -232,12 +250,18 @@ class __$$LoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadingImpl implements _Loading {
+class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   const _$LoadingImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ProfileState.loading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'ProfileState.loading'));
   }
 
   @override
@@ -258,6 +282,7 @@ class _$LoadingImpl implements _Loading {
         success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
+    required TResult Function() done,
   }) {
     return loading();
   }
@@ -270,6 +295,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(String email, String phoneNumber, String name)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
+    TResult? Function()? done,
   }) {
     return loading?.call();
   }
@@ -282,6 +308,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(String email, String phoneNumber, String name)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
+    TResult Function()? done,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -298,6 +325,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
+    required TResult Function(_Done value) done,
   }) {
     return loading(this);
   }
@@ -310,6 +338,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
+    TResult? Function(_Done value)? done,
   }) {
     return loading?.call(this);
   }
@@ -322,6 +351,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
+    TResult Function(_Done value)? done,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -378,7 +408,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SuccessImpl implements _Success {
+class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
   const _$SuccessImpl(
       {required this.email, required this.phoneNumber, required this.name});
 
@@ -390,8 +420,18 @@ class _$SuccessImpl implements _Success {
   final String name;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ProfileState.success(email: $email, phoneNumber: $phoneNumber, name: $name)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.success'))
+      ..add(DiagnosticsProperty('email', email))
+      ..add(DiagnosticsProperty('phoneNumber', phoneNumber))
+      ..add(DiagnosticsProperty('name', name));
   }
 
   @override
@@ -423,6 +463,7 @@ class _$SuccessImpl implements _Success {
         success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
+    required TResult Function() done,
   }) {
     return success(email, phoneNumber, name);
   }
@@ -435,6 +476,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(String email, String phoneNumber, String name)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
+    TResult? Function()? done,
   }) {
     return success?.call(email, phoneNumber, name);
   }
@@ -447,6 +489,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(String email, String phoneNumber, String name)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
+    TResult Function()? done,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -463,6 +506,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
+    required TResult Function(_Done value) done,
   }) {
     return success(this);
   }
@@ -475,6 +519,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
+    TResult? Function(_Done value)? done,
   }) {
     return success?.call(this);
   }
@@ -487,6 +532,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
+    TResult Function(_Done value)? done,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -543,15 +589,23 @@ class __$$ErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorImpl implements _Error {
+class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   const _$ErrorImpl({required this.error});
 
   @override
   final String error;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ProfileState.error(error: $error)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.error'))
+      ..add(DiagnosticsProperty('error', error));
   }
 
   @override
@@ -580,6 +634,7 @@ class _$ErrorImpl implements _Error {
         success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
+    required TResult Function() done,
   }) {
     return error(this.error);
   }
@@ -592,6 +647,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(String email, String phoneNumber, String name)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
+    TResult? Function()? done,
   }) {
     return error?.call(this.error);
   }
@@ -604,6 +660,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(String email, String phoneNumber, String name)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
+    TResult Function()? done,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -620,6 +677,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
+    required TResult Function(_Done value) done,
   }) {
     return error(this);
   }
@@ -632,6 +690,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
+    TResult? Function(_Done value)? done,
   }) {
     return error?.call(this);
   }
@@ -644,6 +703,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
+    TResult Function(_Done value)? done,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -680,12 +740,18 @@ class __$$NotConnectedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NotConnectedImpl implements _NotConnected {
+class _$NotConnectedImpl with DiagnosticableTreeMixin implements _NotConnected {
   const _$NotConnectedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ProfileState.notConnected()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'ProfileState.notConnected'));
   }
 
   @override
@@ -706,6 +772,7 @@ class _$NotConnectedImpl implements _NotConnected {
         success,
     required TResult Function(String error) error,
     required TResult Function() notConnected,
+    required TResult Function() done,
   }) {
     return notConnected();
   }
@@ -718,6 +785,7 @@ class _$NotConnectedImpl implements _NotConnected {
     TResult? Function(String email, String phoneNumber, String name)? success,
     TResult? Function(String error)? error,
     TResult? Function()? notConnected,
+    TResult? Function()? done,
   }) {
     return notConnected?.call();
   }
@@ -730,6 +798,7 @@ class _$NotConnectedImpl implements _NotConnected {
     TResult Function(String email, String phoneNumber, String name)? success,
     TResult Function(String error)? error,
     TResult Function()? notConnected,
+    TResult Function()? done,
     required TResult orElse(),
   }) {
     if (notConnected != null) {
@@ -746,6 +815,7 @@ class _$NotConnectedImpl implements _NotConnected {
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_NotConnected value) notConnected,
+    required TResult Function(_Done value) done,
   }) {
     return notConnected(this);
   }
@@ -758,6 +828,7 @@ class _$NotConnectedImpl implements _NotConnected {
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_NotConnected value)? notConnected,
+    TResult? Function(_Done value)? done,
   }) {
     return notConnected?.call(this);
   }
@@ -770,6 +841,7 @@ class _$NotConnectedImpl implements _NotConnected {
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_NotConnected value)? notConnected,
+    TResult Function(_Done value)? done,
     required TResult orElse(),
   }) {
     if (notConnected != null) {
@@ -781,4 +853,136 @@ class _$NotConnectedImpl implements _NotConnected {
 
 abstract class _NotConnected implements ProfileState {
   const factory _NotConnected() = _$NotConnectedImpl;
+}
+
+/// @nodoc
+abstract class _$$DoneImplCopyWith<$Res> {
+  factory _$$DoneImplCopyWith(
+          _$DoneImpl value, $Res Function(_$DoneImpl) then) =
+      __$$DoneImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DoneImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$DoneImpl>
+    implements _$$DoneImplCopyWith<$Res> {
+  __$$DoneImplCopyWithImpl(_$DoneImpl _value, $Res Function(_$DoneImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$DoneImpl with DiagnosticableTreeMixin implements _Done {
+  const _$DoneImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileState.done()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'ProfileState.done'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$DoneImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String email, String phoneNumber, String name)
+        success,
+    required TResult Function(String error) error,
+    required TResult Function() notConnected,
+    required TResult Function() done,
+  }) {
+    return done();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String email, String phoneNumber, String name)? success,
+    TResult? Function(String error)? error,
+    TResult? Function()? notConnected,
+    TResult? Function()? done,
+  }) {
+    return done?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String email, String phoneNumber, String name)? success,
+    TResult Function(String error)? error,
+    TResult Function()? notConnected,
+    TResult Function()? done,
+    required TResult orElse(),
+  }) {
+    if (done != null) {
+      return done();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_NotConnected value) notConnected,
+    required TResult Function(_Done value) done,
+  }) {
+    return done(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_NotConnected value)? notConnected,
+    TResult? Function(_Done value)? done,
+  }) {
+    return done?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_NotConnected value)? notConnected,
+    TResult Function(_Done value)? done,
+    required TResult orElse(),
+  }) {
+    if (done != null) {
+      return done(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Done implements ProfileState {
+  const factory _Done() = _$DoneImpl;
 }

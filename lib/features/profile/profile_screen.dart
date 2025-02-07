@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fyfax/features/profile/logic/profile_cubit.dart';
-import 'package:fyfax/shared/services/local_storage_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -27,6 +26,7 @@ class ProfileArea extends StatelessWidget {
         listener: (context, state) {
           state.maybeWhen(
             error: (error) {
+              Navigator.of(context).pop();
               var snackBar = SnackBar(
                 content: Text(error,
                     style: GoogleFonts.inter(
@@ -35,6 +35,32 @@ class ProfileArea extends StatelessWidget {
               );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             },
+            loading: () {
+              Future<void> showMyDialog() async {
+                return showDialog<void>(
+                  context: context,
+                  barrierDismissible: false, // user must tap button!
+                  builder: (BuildContext context) {
+                    return const AlertDialog(
+                      title: Text('Loading'),
+                      content: SingleChildScrollView(
+                        child: Center(
+                            child: SizedBox(
+                              height: 50,
+                              width: 50,
+                              child: (CircularProgressIndicator()),
+                            )),
+                      ),
+                    );
+                  },
+                );
+              }
+
+              showMyDialog();
+            },
+             done: () {
+               Navigator.of(context).pushNamed('/splash');
+             },
             orElse: () {
 
             },);
@@ -195,7 +221,7 @@ class ProfileArea extends StatelessWidget {
                                   style: GoogleFonts.inter(color: Theme.of(context).colorScheme.error),
                                 ),
                                 onTap: () {
-                                  final LocalStorageService localStorageService = LocalStorageService();
+                                  //final LocalStorageService localStorageService = LocalStorageService();
                                   Future<void> showMyDialog() async {
                                     return showDialog<void>(
                                       context: context,
@@ -215,8 +241,62 @@ class ProfileArea extends StatelessWidget {
                                             TextButton(
                                               child: Text('Oui',style: GoogleFonts.inter(color: Theme.of(context).colorScheme.error),),
                                               onPressed: () async {
-                                                await localStorageService.deleteAll();
-                                                Navigator.of(context).pushNamed('/splash');
+                                                context.read<ProfileCubit>().logout();
+                                              },
+                                            ),
+                                            // final UserRepository userRepository = UserRepository();
+                                            // await userRepository.logout() ;
+                                            TextButton(
+                                              child: Text('Non', style: GoogleFonts.inter(),),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
+
+                                  showMyDialog();
+                                },
+                              )
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16, right: 16, top: 7, bottom: 7),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              GestureDetector(
+                                child: Text(
+                                  'Supprimer le compte',
+                                  style: GoogleFonts.inter(color: Theme.of(context).colorScheme.error),
+                                ),
+                                onTap: () {
+                                  //final LocalStorageService localStorageService = LocalStorageService();
+                                  Future<void> showMyDialog() async {
+                                    return showDialog<void>(
+                                      context: context,
+                                      barrierDismissible: false, // user must tap button!
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: const Text('Supprimer le compte'),
+                                          content: const SingleChildScrollView(
+                                            child: Center(
+                                                child: SizedBox(
+                                                  height: 50,
+                                                  child: Text(
+                                                      'Etes-vous sur de vouloir supprimer votre compte ?'),
+                                                )),
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              child: Text('Oui',style: GoogleFonts.inter(color: Theme.of(context).colorScheme.error),),
+                                              onPressed: () async {
+                                                context.read<ProfileCubit>().deleteUser(email);
+                                                //Perform suppression of account
                                               },
                                             ),
                                             // final UserRepository userRepository = UserRepository();
