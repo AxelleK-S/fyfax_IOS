@@ -7,6 +7,7 @@ class FlyerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> images = ['assets/images/flyer.jpg', 'assets/images/flyer1.jpeg', 'assets/images/flyer2.jpeg'];
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(80),
@@ -37,7 +38,7 @@ class FlyerScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(
-            1,
+            images.length,
             (index) {
               return Container(
                 height: 300,
@@ -47,10 +48,10 @@ class FlyerScreen extends StatelessWidget {
                   top: 7,
                   bottom: 7,
                 ),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   //color: Colors.green,
                     image: DecorationImage(
-                        image: AssetImage('assets/images/flyer.jpg',),)),
+                        image: AssetImage(images[index],),)),
                 //child: Image.asset('assets/images/flyer.jpg', fit: BoxFit.fill, ),
               );
             },

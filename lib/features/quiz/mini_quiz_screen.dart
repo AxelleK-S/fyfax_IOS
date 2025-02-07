@@ -23,6 +23,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
   int activeDomainIndex = 1;
   final List<String> titles = ['Médecine Générale', 'Odontologie', 'Pharmacie'];
   String searchQuery = '';
+  List<String> images = ['assets/images/flyer.jpg', 'assets/images/flyer1.jpeg', 'assets/images/flyer2.jpeg'];
 
   @override
   Widget build(BuildContext context) {
@@ -220,7 +221,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                             },));
                           },
                           child: CarouselSlider(
-                              items: List.generate(1, (index) => Image.asset('assets/images/flyer.jpg', fit: BoxFit.fitHeight,),),
+                              items: List.generate(images.length, (index) => Image.asset(images[index], fit: BoxFit.fitHeight,),),
                               options: CarouselOptions(
                                 height: 150,
                                 viewportFraction: 0.98,
