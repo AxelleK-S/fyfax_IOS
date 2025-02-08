@@ -241,7 +241,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   setState(() {
                                                     disconnect = true;
                                                   });
-                                                  Navigator.of(context).pop();
+                                                  //Navigator.of(context).pop();
                                                 },
                                               ),
                                               // final UserRepository userRepository = UserRepository();
@@ -302,7 +302,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   setState(() {
                                                     delete = true;
                                                   });
-                                                  Navigator.of(context).pop();
+                                                  //Navigator.of(context).pop();
                                                   //Perform suppression of account
                                                 },
                                               ),
