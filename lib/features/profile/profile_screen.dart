@@ -238,10 +238,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               TextButton(
                                                 child: Text('Oui',style: GoogleFonts.inter(color: Theme.of(context).colorScheme.error),),
                                                 onPressed: () async {
+                                                  /*
                                                   setState(() {
                                                     disconnect = true;
                                                   });
-                                                  //Navigator.of(context).pop();
+
+                                                   */
+                                                  Navigator.of(context).pop(true);
                                                 },
                                               ),
                                               // final UserRepository userRepository = UserRepository();
@@ -249,7 +252,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               TextButton(
                                                 child: Text('Non', style: GoogleFonts.inter(),),
                                                 onPressed: () {
-                                                  Navigator.of(context).pop();
+                                                  Navigator.of(context).pop(false);
                                                 },
                                               ),
                                             ],
@@ -258,11 +261,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       );
                                     }
 
-                                    showMyDialog();
+                                    showMyDialog().then((value) {
+                                      context.read<ProfileCubit>().logout();
+                                    },);
 
+                                    /*
                                     if (disconnect == true) {
                                       context.read<ProfileCubit>().logout();
                                     }
+
+                                     */
                                   },
                                 )
                               ],
@@ -298,11 +306,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             actions: [
                                               TextButton(
                                                 child: Text('Oui',style: GoogleFonts.inter(color: Theme.of(context).colorScheme.error),),
-                                                onPressed: () async {
+                                                onPressed: () {
+                                                  /*
                                                   setState(() {
                                                     delete = true;
                                                   });
-                                                  //Navigator.of(context).pop();
+
+                                                   */
+                                                  Navigator.of(context).pop(true);
                                                   //Perform suppression of account
                                                 },
                                               ),
@@ -311,7 +322,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               TextButton(
                                                 child: Text('Non', style: GoogleFonts.inter(),),
                                                 onPressed: () {
-                                                  Navigator.of(context).pop();
+                                                  Navigator.of(context).pop(false);
                                                 },
                                               ),
                                             ],
@@ -320,11 +331,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       );
                                     }
 
-                                    showMyDialog();
+                                    showMyDialog().then((value) {
+                                      context.read<ProfileCubit>().deleteUser(email);
+                                    },);
 
+                                    /*
                                     if (delete == true){
                                       context.read<ProfileCubit>().deleteUser(email);
                                     }
+
+                                     */
                                   },
                                 )
                               ],
