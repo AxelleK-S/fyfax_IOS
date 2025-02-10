@@ -103,7 +103,7 @@ class LoginArea extends StatelessWidget {
                     isObscure: false,
                     inputType: TextInputType.name),
                 LoginField(
-                    title: 'Entrez le code  reçu',
+                    title: 'Entrez le mot de passe',
                     controller: passwordController,
                     onChanged: (p0) {},
                     validator: (p0) {
