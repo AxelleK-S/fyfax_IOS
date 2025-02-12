@@ -164,7 +164,7 @@ class QuizCubit extends Cubit<QuizState> {
     }
   }
 
-  Future<void> finishQuiz(QuizDetails quiz,SectionGroup sectionGroup, int score) async {
+  Future<void> finishQuiz1(QuizDetails quiz,SectionGroup sectionGroup, int score) async {
     print('start');
     final List<ConnectivityResult> connectivityResult = await (Connectivity()
         .checkConnectivity());
@@ -212,6 +212,24 @@ class QuizCubit extends Cubit<QuizState> {
         }
         emit(const QuizState.error(error: 'Une erreur est survenue'));
       }
+    }
+  }
+
+  Future<void> finishQuiz(QuizDetails quiz,SectionGroup sectionGroup, int score)async {
+    try {
+      emit(const QuizState.notConnected());
+      hiveService.addHistorical(hs.Historical(
+          id: 0,
+          createdAt: DateTime.now(),
+          text: 'Vous avez terminé le quiz ${quiz.name} ${sectionGroup.title
+              .title} ${quiz.year}',
+          user: 1));
+      emit(QuizState.finished(score: score));
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      emit(const QuizState.error(error: 'Une erreur est survenue'));
     }
   }
 
