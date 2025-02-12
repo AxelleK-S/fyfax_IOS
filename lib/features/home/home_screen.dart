@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fyfax/features/flyer/flyer_screen.dart';
 import 'package:fyfax/features/historical/historical_screen.dart';
-import 'package:fyfax/features/profile/profile_screen.dart';
 import 'package:fyfax/features/quiz/large_quiz_screen.dart';
 import 'package:fyfax/features/quiz/mini_quiz_screen.dart';
 import 'package:fyfax/shared/widgets/menu_icon_item.dart';
@@ -18,19 +18,22 @@ class _HomeScreenState extends State<HomeScreen> {
     const MiniQuizScreen(),
     const LargeQuizScreen(),
     const HistoricalScreen(),
-    const ProfileScreen(),
+    const FlyerScreen(),
+    //const ProfileScreen(),
   ];
   List<IconData> icons = [
     Iconsax.home,
     Iconsax.book_square,
     Iconsax.clock,
-    Iconsax.user
+    //Iconsax.user
+    Iconsax.paperclip
   ];
   List<String> texts = [
     'Accueil',
     'Mes Epreuves',
     'Historique',
-    'Mon Compte'
+    //'Mon Compte'
+    'Flyers'
   ];
   int activeIndex = 0;
   @override

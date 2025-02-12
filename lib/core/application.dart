@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:fyfax/core/i18n/l10n.dart';
 import 'package:fyfax/core/theme/app_theme.dart';
 import 'package:fyfax/features/home/home_screen.dart';
-import 'package:fyfax/features/first/first_screen.dart';
 import 'package:fyfax/features/splash/splash_screen.dart';
 
 
@@ -20,7 +19,8 @@ class Application extends StatelessWidget {
       initialRoute: '/splash',
       routes: {
         '/splash': (ctx) => const SplashScreen(),
-        '/': (ctx) => const FirstScreen(),
+        //'/': (ctx) => const FirstScreen(),
+        '/': (ctx) => const HomeScreen(),
         '/home': (ctx) => const HomeScreen(),
       },
       theme: AppTheme.lightTheme,

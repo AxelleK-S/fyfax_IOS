@@ -19,7 +19,7 @@ class HistoricalCubit extends Cubit<HistoricalState> {
   late StreamSubscription<List<ConnectivityResult>> connectivitySubscription;
   HistoricalCubit() : super(const HistoricalState.initial());
 
-  Future<void> getHistorical()async {
+  Future<void> getHistorical2()async {
     print('debut');
     final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult.contains(ConnectivityResult.none)) {
@@ -135,5 +135,29 @@ class HistoricalCubit extends Cubit<HistoricalState> {
     );
 
      */
+  }
+
+  Future<void> getHistorical() async {
+    try{
+      emit(const HistoricalState.notConnected());
+      emit(const HistoricalState.loading());
+      List<hs.Historical> historical = await hiveService.getAllHistorical();
+
+      if (historical == []){
+        emit(const HistoricalState.empty());
+      } else {
+        List<Historical> historicalList = [];
+
+        for (var hist in historical){
+          historicalList.add(Historical.fromJson(hist.toJson()));
+          if (kDebugMode) {
+            print(hist.toJson());
+          }
+        }
+        emit(HistoricalState.success(historical: historicalList));
+      }
+    } catch (e){
+      emit(const HistoricalState.error(error: 'Une erreur est survenue'));
+    }
   }
 }
