@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax/iconsax.dart';
 
 class FlyerScreen extends StatelessWidget {
   const FlyerScreen({super.key});
@@ -19,11 +18,13 @@ class FlyerScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  IconButton(
+                  /*IconButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
                       icon: const Icon(Iconsax.arrow_left)),
+
+                   */
                   Center(
                     child: Text(
                       'Flyers',
