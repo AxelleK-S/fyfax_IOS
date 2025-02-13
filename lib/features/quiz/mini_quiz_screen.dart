@@ -5,6 +5,7 @@ import 'package:fyfax/features/flyer/flyer_screen.dart';
 import 'package:fyfax/features/quiz/logic/quiz_cubit.dart';
 import 'package:fyfax/features/quiz/model/quiz_details.dart';
 import 'package:fyfax/features/quiz/model/section_group.dart';
+import 'package:fyfax/features/quiz/quiz_welcome_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -354,60 +355,87 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                             )
                                                 .toList()
                                                 .length,
-                                                (sectionIndex) => Container(
-                                              height: 108,
-                                              width: 143,
-                                              padding: const EdgeInsets.all(10),
-                                              margin: const EdgeInsets.only(
-                                                  left: 7, right: 7),
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                  BorderRadius.circular(20),
-                                                  color: quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].domain.name == "Odontostomatologie"
-                                                      ? Colors.greenAccent
-                                                      : quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].domain.name == "Médecine"
-                                                      ? Colors.lightBlueAccent
-                                                      : Colors.deepPurpleAccent
-                                              ),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                                children: [
-                                                  Text(
-                                                      quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex]
-                                                          .sectionGroups.where(
-                                                            (element) => element.title.title.toLowerCase()
-                                                            .contains(
-                                                            searchQuery.toLowerCase()),
-                                                      )
-                                                          .toList()[sectionIndex]
-                                                          .title
-                                                          .title,
-                                                      textAlign: TextAlign.left,
-                                                      style: GoogleFonts.inter(
-                                                          color: Colors.black)),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                          '${quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].sectionGroups.where(
-                                                                (element) => element.title.title.toLowerCase()
-                                                                .contains(
-                                                                searchQuery.toLowerCase()),
-                                                          )
-                                                              .toList()[sectionIndex].numberOfQuestions.toString()} Qst',
-                                                          textAlign: TextAlign.right,
-                                                          style: GoogleFonts.inter(
-                                                              color: Colors.black)),
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                            ),
+                                                (sectionIndex) => GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.of(context)
+                                                        .push(MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          QuizWelcomeScreen(
+                                                            quiz: quizzes
+                                                                .where(
+                                                                  (element) =>
+                                                              element.domain.id ==
+                                                                  activeDomainIndex,
+                                                            )
+                                                                .toList()[quizIndex],
+                                                            sectionGroup: quizzes
+                                                                .where(
+                                                                  (element) =>
+                                                              element
+                                                                  .domain.id ==
+                                                                  activeDomainIndex,
+                                                            )
+                                                                .toList()[quizIndex]
+                                                                .sectionGroups[
+                                                            sectionIndex],
+                                                          ),
+                                                    ));
+                                                  },
+                                                  child: Container(
+                                                                                                height: 108,
+                                                                                                width: 143,
+                                                                                                padding: const EdgeInsets.all(10),
+                                                                                                margin: const EdgeInsets.only(
+                                                    left: 7, right: 7),
+                                                                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                    BorderRadius.circular(20),
+                                                    color: quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].domain.name == "Odontostomatologie"
+                                                        ? Colors.greenAccent
+                                                        : quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].domain.name == "Médecine"
+                                                        ? Colors.lightBlueAccent
+                                                        : Colors.deepPurpleAccent
+                                                                                                ),
+                                                                                                child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                                  children: [
+                                                    Text(
+                                                        quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex]
+                                                            .sectionGroups.where(
+                                                              (element) => element.title.title.toLowerCase()
+                                                              .contains(
+                                                              searchQuery.toLowerCase()),
+                                                        )
+                                                            .toList()[sectionIndex]
+                                                            .title
+                                                            .title,
+                                                        textAlign: TextAlign.left,
+                                                        style: GoogleFonts.inter(
+                                                            color: Colors.black)),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                            '${quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].sectionGroups.where(
+                                                                  (element) => element.title.title.toLowerCase()
+                                                                  .contains(
+                                                                  searchQuery.toLowerCase()),
+                                                            )
+                                                                .toList()[sectionIndex].numberOfQuestions.toString()} Qst',
+                                                            textAlign: TextAlign.right,
+                                                            style: GoogleFonts.inter(
+                                                                color: Colors.black)),
+                                                      ],
+                                                    )
+                                                  ],
+                                                                                                ),
+                                                                                              ),
+                                                ),
                                           )),
                                     ),
                                   ),
