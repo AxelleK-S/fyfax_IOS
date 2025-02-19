@@ -24,7 +24,11 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
   int activeDomainIndex = 1;
   final List<String> titles = ['Médecine Générale', 'Odontologie', 'Pharmacie'];
   String searchQuery = '';
-  List<String> images = ['assets/images/flyer.jpg', 'assets/images/flyer1.jpeg', 'assets/images/flyer2.jpeg'];
+  List<String> images = [
+    'assets/images/flyer.jpg',
+    'assets/images/flyer1.jpeg',
+    'assets/images/flyer2.jpeg'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -64,14 +68,16 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                       height: 14,
                     ),
                     Text('Bienvenu sur FyFax',
-                        style: GoogleFonts.inter(fontSize: 18, color: Colors.white)),
+                        style: GoogleFonts.inter(
+                            fontSize: 18, color: Colors.white)),
                     const SizedBox(
                       height: 14,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 4, right: 4),
                       child: Text('Préparez vous efficacement pour l\' ENSCT',
-                          style: GoogleFonts.inter(fontSize: 16, color: Colors.white)),
+                          style: GoogleFonts.inter(
+                              fontSize: 16, color: Colors.white)),
                     ),
                     const SizedBox(
                       height: 14,
@@ -116,8 +122,7 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                               border: InputBorder.none,
                               hintText: 'Search Quiz',
                               hintStyle: GoogleFonts.inter(
-                                  fontSize: 14,
-                                  color: Colors.black54),
+                                  fontSize: 14, color: Colors.black54),
                               icon: const Icon(
                                 Iconsax.search_normal,
                                 color: Colors.black54,
@@ -167,62 +172,72 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
               return state.maybeWhen(
                 loading: () => Skeletonizer(
                     child: SingleChildScrollView(
-                      child: Column(
-                        children: List.generate(
-                          3,
-                              (index) => Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 16, top: 24),
-                                child: Text('Session 2024',
-                                    style: GoogleFonts.inter(fontSize: 16)),
-                              ),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              Container(
-                                  margin: const EdgeInsets.only(
-                                    left: 16,
-                                    right: 16,
-                                  ),
-                                  child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                        children: List.generate(
-                                          4,
-                                              (index) => Container(
-                                            height: 108,
-                                            width: 143,
-                                            padding: const EdgeInsets.all(10),
-                                            margin: const EdgeInsets.only(
-                                                left: 7, right: 7),
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                BorderRadius.circular(20)),
-                                          ),
-                                        ),
-                                      )))
-                            ],
+                  child: Column(
+                    children: List.generate(
+                      3,
+                      (index) => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16, top: 24),
+                            child: Text('Session 2024',
+                                style: GoogleFonts.inter(fontSize: 16)),
                           ),
-                        ),
+                          const SizedBox(
+                            height: 24,
+                          ),
+                          Container(
+                              margin: const EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                              ),
+                              child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: List.generate(
+                                      4,
+                                      (index) => Container(
+                                        height: 108,
+                                        width: 143,
+                                        padding: const EdgeInsets.all(10),
+                                        margin: const EdgeInsets.only(
+                                            left: 7, right: 7),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                      ),
+                                    ),
+                                  )))
+                        ],
                       ),
-                    )),
+                    ),
+                  ),
+                )),
                 success: (quizzes) {
                   // Populate section groups for each quiz
                   populateSectionGroups(quizzes);
                   return SingleChildScrollView(
                     child: Column(
                       children: [
-                        const SizedBox(height: 8,),
+                        const SizedBox(
+                          height: 8,
+                        ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                              return const FlyerScreen();
-                            },));
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) {
+                                return const FlyerScreen();
+                              },
+                            ));
                           },
                           child: CarouselSlider(
-                              items: List.generate(images.length, (index) => Image.asset(images[index], fit: BoxFit.fitHeight,),),
+                              items: List.generate(
+                                images.length,
+                                (index) => Image.asset(
+                                  images[index],
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              ),
                               options: CarouselOptions(
                                 height: 150,
                                 viewportFraction: 0.98,
@@ -230,75 +245,106 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                 enableInfiniteScroll: true,
                                 reverse: false,
                                 scrollDirection: Axis.horizontal,
-                              )
-                          ),
+                              )),
                         ),
-                        const SizedBox(height: 8,),
+                        const SizedBox(
+                          height: 8,
+                        ),
                         Container(
                           height: 40,
                           padding: const EdgeInsets.only(
-                              left: 6,
-                              right: 6,
-                              top: 4,
-                              bottom: 4
-                          ),
+                              left: 6, right: 6, top: 4, bottom: 4),
                           margin: const EdgeInsets.only(
-                              left: 16,
-                              right: 16,
-                              top: 14,
-                              bottom: 14
-                          ),
+                              left: 16, right: 16, top: 14, bottom: 14),
                           decoration: BoxDecoration(
                               color: Colors.transparent,
-                              borderRadius: BorderRadius.circular(10)
-                          ),
+                              borderRadius: BorderRadius.circular(10)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            children: List.generate(3, (index) => GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  activeDomainIndex = index+1;
-                                });
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.only(
-                                  left: 4,
-                                  right: 4,
+                            children: List.generate(
+                              3,
+                              (index) => GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    activeDomainIndex = index + 1;
+                                  });
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.only(
+                                    left: 4,
+                                    right: 4,
+                                  ),
+                                  padding: const EdgeInsets.only(
+                                    left: 4,
+                                    right: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: activeDomainIndex == index + 1
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .primary
+                                          : Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Center(
+                                      child: Text(
+                                    titles[index],
+                                    style: GoogleFonts.inter(
+                                        color: activeDomainIndex == index + 1
+                                            ? Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary
+                                            : Colors.black),
+                                  )),
                                 ),
-                                padding: const EdgeInsets.only(
-                                  left: 4,
-                                  right: 4,
-                                ),
-                                decoration: BoxDecoration(
-                                    color: activeDomainIndex==index+1? Theme.of(context).colorScheme.primary : Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(10)
-                                ),
-                                child: Center(child: Text(titles[index], style: GoogleFonts.inter(color: activeDomainIndex==index+1? Theme.of(context).colorScheme.onPrimary : Colors.black),)),
                               ),
-                            ),),
+                            ),
                           ),
                         ),
                         Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: List.generate(
-                              quizzes.where((element) => element.domain.id==activeDomainIndex,).toList().length,
-                                  (quizIndex) => Column(
+                              quizzes
+                                  .where(
+                                    (element) =>
+                                        element.domain.id == activeDomainIndex,
+                                  )
+                                  .toList()
+                                  .length,
+                              (quizIndex) => Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding:
-                                    const EdgeInsets.only(left: 16, top: 24),
+                                    padding: const EdgeInsets.only(
+                                        left: 16, top: 24),
                                     child: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                            '${quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].name} ${quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].year}',
+                                            '${quizzes.where(
+                                                  (element) =>
+                                                      element.domain.id ==
+                                                      activeDomainIndex,
+                                                ).toList()[quizIndex].name} ${quizzes.where(
+                                                  (element) =>
+                                                      element.domain.id ==
+                                                      activeDomainIndex,
+                                                ).toList()[quizIndex].year}',
                                             style: GoogleFonts.inter(
                                                 fontSize: 16)),
                                         Visibility(
-                                          visible: quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].sectionGroups.isEmpty ? false : true,
+                                          visible: quizzes
+                                                  .where(
+                                                    (element) =>
+                                                        element.domain.id ==
+                                                        activeDomainIndex,
+                                                  )
+                                                  .toList()[quizIndex]
+                                                  .sectionGroups
+                                                  .isEmpty
+                                              ? false
+                                              : true,
                                           child: IconButton(
                                             icon: const Icon(
                                               Iconsax.document_download,
@@ -308,25 +354,48 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                               try {
                                                 context
                                                     .read<QuizCubit>()
-                                                    .storeQuiz(quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex]);
+                                                    .storeQuiz(quizzes
+                                                        .where(
+                                                          (element) =>
+                                                              element
+                                                                  .domain.id ==
+                                                              activeDomainIndex,
+                                                        )
+                                                        .toList()[quizIndex]);
                                                 var snackBar = SnackBar(
-                                                  content: Text('Téléchargement reussi',
+                                                  content: Text(
+                                                      'Téléchargement reussi',
                                                       style: GoogleFonts.inter(
-                                                          color: Theme.of(context).colorScheme.primary)),
-                                                  backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .primary)),
+                                                  backgroundColor:
+                                                      Theme.of(context)
+                                                          .colorScheme
+                                                          .onPrimary,
                                                 );
-                                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(snackBar);
                                               } catch (e) {
                                                 if (kDebugMode) {
                                                   print(e);
                                                 }
                                                 var snackBar = SnackBar(
-                                                  content: Text('Une erreur est survenue',
+                                                  content: Text(
+                                                      'Une erreur est survenue',
                                                       style: GoogleFonts.inter(
-                                                          color: Theme.of(context).colorScheme.onError)),
-                                                  backgroundColor: Theme.of(context).colorScheme.error,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .onError)),
+                                                  backgroundColor:
+                                                      Theme.of(context)
+                                                          .colorScheme
+                                                          .error,
                                                 );
-                                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(snackBar);
                                               }
                                             },
                                           ),
@@ -346,102 +415,151 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
                                       scrollDirection: Axis.horizontal,
                                       child: Row(
                                           children: List.generate(
-                                            quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex]
-                                                .sectionGroups
-                                                .where(
-                                                  (element) => element.title.title.toLowerCase()
-                                                  .contains(
-                                                  searchQuery.toLowerCase()),
+                                        quizzes
+                                            .where(
+                                              (element) =>
+                                                  element.domain.id ==
+                                                  activeDomainIndex,
                                             )
-                                                .toList()
-                                                .length,
-                                                (sectionIndex) => GestureDetector(
-                                                  onTap: () {
-                                                    Navigator.of(context)
-                                                        .push(MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          QuizWelcomeScreen(
-                                                            quiz: quizzes
-                                                                .where(
-                                                                  (element) =>
-                                                              element.domain.id ==
-                                                                  activeDomainIndex,
-                                                            )
-                                                                .toList()[quizIndex],
-                                                            sectionGroup: quizzes
-                                                                .where(
-                                                                  (element) =>
+                                            .toList()[quizIndex]
+                                            .sectionGroups
+                                            .where(
+                                              (element) => element.title.title
+                                                  .toLowerCase()
+                                                  .contains(searchQuery
+                                                      .toLowerCase()),
+                                            )
+                                            .toList()
+                                            .length,
+                                        (sectionIndex) => GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context)
+                                                .push(MaterialPageRoute(
+                                              builder: (context) =>
+                                                  QuizWelcomeScreen(
+                                                quiz: quizzes
+                                                    .where(
+                                                      (element) =>
+                                                          element.domain.id ==
+                                                          activeDomainIndex,
+                                                    )
+                                                    .toList()[quizIndex],
+                                                sectionGroup: quizzes
+                                                        .where(
+                                                          (element) =>
                                                               element
                                                                   .domain.id ==
+                                                              activeDomainIndex,
+                                                        )
+                                                        .toList()[quizIndex]
+                                                        .sectionGroups[
+                                                    sectionIndex],
+                                              ),
+                                            ));
+                                          },
+                                          child: Container(
+                                            height: 108,
+                                            width: 143,
+                                            padding: const EdgeInsets.all(10),
+                                            margin: const EdgeInsets.only(
+                                                left: 7, right: 7),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                color: quizzes
+                                                            .where(
+                                                              (element) =>
+                                                                  element.domain
+                                                                      .id ==
                                                                   activeDomainIndex,
                                                             )
-                                                                .toList()[quizIndex]
-                                                                .sectionGroups[
-                                                            sectionIndex],
-                                                          ),
-                                                    ));
-                                                  },
-                                                  child: Container(
-                                                                                                height: 108,
-                                                                                                width: 143,
-                                                                                                padding: const EdgeInsets.all(10),
-                                                                                                margin: const EdgeInsets.only(
-                                                    left: 7, right: 7),
-                                                                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                    BorderRadius.circular(20),
-                                                    color: quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].domain.name == "Odontostomatologie"
-                                                        ? Colors.greenAccent
-                                                        : quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].domain.name == "Médecine"
+                                                            .toList()[quizIndex]
+                                                            .domain
+                                                            .name ==
+                                                        "Odontostomatologie"
+                                                    ? Colors.greenAccent
+                                                    : quizzes
+                                                                .where(
+                                                                  (element) =>
+                                                                      element
+                                                                          .domain
+                                                                          .id ==
+                                                                      activeDomainIndex,
+                                                                )
+                                                                .toList()[
+                                                                    quizIndex]
+                                                                .domain
+                                                                .name ==
+                                                            "Médecine"
                                                         ? Colors.lightBlueAccent
-                                                        : Colors.deepPurpleAccent
-                                                                                                ),
-                                                                                                child: Column(
-                                                  crossAxisAlignment:
+                                                        : Colors
+                                                            .deepPurpleAccent),
+                                            child: Column(
+                                              crossAxisAlignment:
                                                   CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
+                                              mainAxisAlignment:
                                                   MainAxisAlignment.spaceAround,
-                                                  children: [
-                                                    Text(
-                                                        quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex]
-                                                            .sectionGroups.where(
-                                                              (element) => element.title.title.toLowerCase()
-                                                              .contains(
-                                                              searchQuery.toLowerCase()),
+                                              children: [
+                                                Text(
+                                                    quizzes
+                                                        .where(
+                                                          (element) =>
+                                                              element
+                                                                  .domain.id ==
+                                                              activeDomainIndex,
                                                         )
-                                                            .toList()[sectionIndex]
-                                                            .title
-                                                            .title,
-                                                        textAlign: TextAlign.left,
-                                                        style: GoogleFonts.inter(
-                                                            color: Colors.black)),
-                                                    Row(
-                                                      mainAxisAlignment:
+                                                        .toList()[quizIndex]
+                                                        .sectionGroups
+                                                        .where(
+                                                          (element) => element
+                                                              .title.title
+                                                              .toLowerCase()
+                                                              .contains(searchQuery
+                                                                  .toLowerCase()),
+                                                        )
+                                                        .toList()[sectionIndex]
+                                                        .title
+                                                        .title,
+                                                    textAlign: TextAlign.left,
+                                                    style: GoogleFonts.inter(
+                                                        color: Colors.black)),
+                                                Row(
+                                                  mainAxisAlignment:
                                                       MainAxisAlignment
                                                           .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                            '${quizzes.where((element) => element.domain.id==activeDomainIndex,).toList()[quizIndex].sectionGroups.where(
-                                                                  (element) => element.title.title.toLowerCase()
+                                                  children: [
+                                                    Text(
+                                                        '${quizzes.where(
+                                                              (element) =>
+                                                                  element.domain
+                                                                      .id ==
+                                                                  activeDomainIndex,
+                                                            ).toList()[quizIndex].sectionGroups.where(
+                                                              (element) => element
+                                                                  .title.title
+                                                                  .toLowerCase()
                                                                   .contains(
-                                                                  searchQuery.toLowerCase()),
-                                                            )
-                                                                .toList()[sectionIndex].numberOfQuestions.toString()} Qst',
-                                                            textAlign: TextAlign.right,
-                                                            style: GoogleFonts.inter(
-                                                                color: Colors.black)),
-                                                      ],
-                                                    )
+                                                                      searchQuery
+                                                                          .toLowerCase()),
+                                                            ).toList()[sectionIndex].numberOfQuestions.toString()} Qst',
+                                                        textAlign:
+                                                            TextAlign.right,
+                                                        style:
+                                                            GoogleFonts.inter(
+                                                                color: Colors
+                                                                    .black)),
                                                   ],
-                                                                                                ),
-                                                                                              ),
-                                                ),
-                                          )),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      )),
                                     ),
                                   ),
                                   const SizedBox(
                                       height:
-                                      16), // Space between each year group
+                                          16), // Space between each year group
                                 ],
                               ),
                             )),
@@ -570,47 +688,47 @@ class _MiniQuizScreenState extends State<MiniQuizScreen> {
               },*/
                 orElse: () => Skeletonizer(
                     child: SingleChildScrollView(
-                      child: Column(
-                        children: List.generate(
-                          3,
-                              (index) => Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 16, top: 24),
-                                child: Text('Session 2024',
-                                    style: GoogleFonts.inter(fontSize: 16)),
-                              ),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              Container(
-                                  margin: const EdgeInsets.only(
-                                    left: 16,
-                                    right: 16,
-                                  ),
-                                  child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                        children: List.generate(
-                                          4,
-                                              (index) => Container(
-                                            height: 108,
-                                            width: 143,
-                                            padding: const EdgeInsets.all(10),
-                                            margin: const EdgeInsets.only(
-                                                left: 7, right: 7),
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                BorderRadius.circular(20)),
-                                          ),
-                                        ),
-                                      )))
-                            ],
+                  child: Column(
+                    children: List.generate(
+                      3,
+                      (index) => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16, top: 24),
+                            child: Text('Session 2024',
+                                style: GoogleFonts.inter(fontSize: 16)),
                           ),
-                        ),
+                          const SizedBox(
+                            height: 24,
+                          ),
+                          Container(
+                              margin: const EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                              ),
+                              child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: List.generate(
+                                      4,
+                                      (index) => Container(
+                                        height: 108,
+                                        width: 143,
+                                        padding: const EdgeInsets.all(10),
+                                        margin: const EdgeInsets.only(
+                                            left: 7, right: 7),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                      ),
+                                    ),
+                                  )))
+                        ],
                       ),
-                    )),
+                    ),
+                  ),
+                )),
               );
             },
           ),
