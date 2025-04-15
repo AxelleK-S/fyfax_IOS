@@ -109,14 +109,24 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                           const SizedBox(
                             height: 10,
                           ),
-                          Text(
-                            widget
-                                .sectionGroup
-                                .sections[activeSectionIndex]
-                                .question[activeQuestionIndex]
-                                .statement,
-                            style: GoogleFonts.inter(),
-                            maxLines: 5,
+                          SizedBox(
+                            height : 100,
+                            child: SingleChildScrollView(
+                              scrollDirection : Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    widget
+                                        .sectionGroup
+                                        .sections[activeSectionIndex]
+                                        .question[activeQuestionIndex]
+                                        .statement,
+                                    style: GoogleFonts.inter(),
+                                    maxLines: 3,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                           Visibility(
                               visible: widget
