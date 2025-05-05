@@ -28,10 +28,20 @@ class QuizButton extends StatelessWidget {
                     ? Colors.transparent
                     : Theme.of(context).colorScheme.onSurface)),
         child: Center(
-          child: Text(
-            statement,
-            style: GoogleFonts.inter(),
-            maxLines: 2,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 4, right: 4),
+                  child: Text(
+                    statement,
+                    style: GoogleFonts.inter(),
+                    maxLines: 2,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
