@@ -8,9 +8,9 @@ class MenuIconItem extends StatelessWidget {
   final bool active;
   const MenuIconItem(
       {super.key,
-      required this.icon,
-      required this.onTap,
-      required this.active, required this.text});
+        required this.icon,
+        required this.onTap,
+        required this.active, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class MenuIconItem extends StatelessWidget {
             width: 75,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
-                color: active ? Colors.white.withOpacity(0.4): Colors.transparent),
+                color: active ? Colors.white.withAlpha(100): Colors.transparent),
             child: Center(
               child: Icon(
                 icon,
@@ -33,7 +33,7 @@ class MenuIconItem extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 4,),
+          const SizedBox(height: 3,),
           Text(text, style: GoogleFonts.inter(color: active ? Colors.black : Colors.white, fontSize: 8),),
         ],
       ),

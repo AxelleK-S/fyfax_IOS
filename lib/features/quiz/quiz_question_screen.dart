@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,10 +68,10 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                       content: SingleChildScrollView(
                         child: Center(
                             child: SizedBox(
-                          height: 50,
-                          width: 50,
-                          child: (CircularProgressIndicator()),
-                        )),
+                              height: 50,
+                              width: 50,
+                              child: (CircularProgressIndicator()),
+                            )),
                       ),
                     );
                   },
@@ -86,11 +88,11 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
             return Scaffold(
               appBar: PreferredSize(
                   preferredSize: Size.fromHeight(widget
-                              .sectionGroup
-                              .sections[activeSectionIndex]
-                              .question[activeQuestionIndex]
-                              .image ==
-                          ' '
+                      .sectionGroup
+                      .sections[activeSectionIndex]
+                      .question[activeQuestionIndex]
+                      .image ==
+                      ' '
                       ? 250
                       : 420),
                   child: Container(
@@ -111,43 +113,66 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                           ),
                           SizedBox(
                             height : 100,
-                            child: SingleChildScrollView(
-                              scrollDirection : Axis.horizontal,
-                              child: Row(
-                                children: [
-                                  Text(
-                                    widget
-                                        .sectionGroup
-                                        .sections[activeSectionIndex]
-                                        .question[activeQuestionIndex]
-                                        .statement,
-                                    style: GoogleFonts.inter(),
-                                    maxLines: 3,
-                                  ),
-                                ],
+                            child: GestureDetector(
+                              onTap: () {
+                                Future<void> showMyDialog() async {
+                                  return showDialog<void>(
+                                    context: context,
+                                    barrierDismissible: false, // user must tap button!
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text('Question'),
+                                        actions: [GestureDetector(onTap: () => Navigator.of(context).pop(), child : const Text('okay'))],
+                                        content: SingleChildScrollView(
+                                          child: Center(
+                                              child: SizedBox(
+                                                height: 160,
+                                                child: (Text(widget
+                                                    .sectionGroup
+                                                    .sections[activeSectionIndex]
+                                                    .question[activeQuestionIndex]
+                                                    .statement,
+                                                  style: GoogleFonts.inter(),
+                                                  maxLines: 10,)),
+                                              )),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                }
+                                showMyDialog();
+                              },
+                              child: Text(
+                                widget
+                                    .sectionGroup
+                                    .sections[activeSectionIndex]
+                                    .question[activeQuestionIndex]
+                                    .statement,
+                                style: GoogleFonts.inter(),
+                                maxLines: 3,
                               ),
                             ),
                           ),
                           Visibility(
                               visible: widget
-                                          .sectionGroup
-                                          .sections[activeSectionIndex]
-                                          .question[activeQuestionIndex]
-                                          .image ==
-                                      ' '
+                                  .sectionGroup
+                                  .sections[activeSectionIndex]
+                                  .question[activeQuestionIndex]
+                                  .image ==
+                                  ' '
                                   ? false
                                   : widget
-                                              .sectionGroup
-                                              .sections[activeSectionIndex]
-                                              .question[activeQuestionIndex]
-                                              .image ==
-                                          null
-                                      ? false
-                                      : true,
+                                  .sectionGroup
+                                  .sections[activeSectionIndex]
+                                  .question[activeQuestionIndex]
+                                  .image ==
+                                  null
+                                  ? false
+                                  : true,
                               child: Container(
                                 height: 200,
                                 margin: const EdgeInsets.only(
-                                    //left: 16, right: 16,
+                                  //left: 16, right: 16,
                                     top: 14,
                                     bottom: 14),
                                 /*decoration: BoxDecoration(
@@ -167,25 +192,25 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
 
                                  */
                                 child: widget
-                                            .sectionGroup
-                                            .sections[activeSectionIndex]
-                                            .question[activeQuestionIndex]
-                                            .image!
-                                            .split(',')
-                                            .length >
-                                        1
+                                    .sectionGroup
+                                    .sections[activeSectionIndex]
+                                    .question[activeQuestionIndex]
+                                    .image!
+                                    .split(',')
+                                    .length >
+                                    1
                                     ? Row(
-                                        children: List.generate(
-                                        widget
-                                            .sectionGroup
-                                            .sections[activeSectionIndex]
-                                            .question[activeQuestionIndex]
-                                            .image!
-                                            .split(',')
-                                            .length,
-                                        (index) => SizedBox(
-                                          height: 200,
-                                          /*
+                                    children: List.generate(
+                                      widget
+                                          .sectionGroup
+                                          .sections[activeSectionIndex]
+                                          .question[activeQuestionIndex]
+                                          .image!
+                                          .split(',')
+                                          .length,
+                                          (index) => SizedBox(
+                                        height: 200,
+                                        /*
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
                                             image: NetworkImage(
@@ -193,15 +218,15 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                                             fit: BoxFit.fill)),
 
                                      */
-                                          child: Image.network(
-                                            '$baseUrl/${widget.sectionGroup.sections[activeSectionIndex].question[activeQuestionIndex].image?.split(',')[index].trimLeft()}',
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
-                                      ))
-                                    : Center(
                                         child: Image.network(
-                                            '$baseUrl/${widget.sectionGroup.sections[activeSectionIndex].question[activeQuestionIndex].image?.trimLeft()}')),
+                                          '$baseUrl/${widget.sectionGroup.sections[activeSectionIndex].question[activeQuestionIndex].image?.split(',')[index].trimLeft()}',
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    ))
+                                    : Center(
+                                    child: Image.network(
+                                        '$baseUrl/${widget.sectionGroup.sections[activeSectionIndex].question[activeQuestionIndex].image?.trimLeft()}')),
                               )),
                           const SizedBox(
                             height: 6,
@@ -236,15 +261,15 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                       },
                       color: isClickedOption.contains(true)
                           ? widget
-                                      .sectionGroup
-                                      .sections[activeSectionIndex]
-                                      .question[activeQuestionIndex]
-                                      .greatAnswer ==
-                                  'A'
-                              ? Colors.green
-                              : questionClicked == 0
-                                  ? Colors.red
-                                  : Colors.transparent
+                          .sectionGroup
+                          .sections[activeSectionIndex]
+                          .question[activeQuestionIndex]
+                          .greatAnswer ==
+                          'A'
+                          ? Colors.green
+                          : questionClicked == 0
+                          ? Colors.red
+                          : Colors.transparent
                           : Colors.transparent),
                   QuizButton(
                       clicked: isClickedOption[1],
@@ -266,15 +291,15 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                       },
                       color: isClickedOption.contains(true)
                           ? widget
-                                      .sectionGroup
-                                      .sections[activeSectionIndex]
-                                      .question[activeQuestionIndex]
-                                      .greatAnswer ==
-                                  'B'
-                              ? Colors.green
-                              : questionClicked == 1
-                                  ? Colors.red
-                                  : Colors.transparent
+                          .sectionGroup
+                          .sections[activeSectionIndex]
+                          .question[activeQuestionIndex]
+                          .greatAnswer ==
+                          'B'
+                          ? Colors.green
+                          : questionClicked == 1
+                          ? Colors.red
+                          : Colors.transparent
                           : Colors.transparent),
                   QuizButton(
                       clicked: isClickedOption[2],
@@ -296,15 +321,15 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                       },
                       color: isClickedOption.contains(true)
                           ? widget
-                                      .sectionGroup
-                                      .sections[activeSectionIndex]
-                                      .question[activeQuestionIndex]
-                                      .greatAnswer ==
-                                  'C'
-                              ? Colors.green
-                              : questionClicked == 2
-                                  ? Colors.red
-                                  : Colors.transparent
+                          .sectionGroup
+                          .sections[activeSectionIndex]
+                          .question[activeQuestionIndex]
+                          .greatAnswer ==
+                          'C'
+                          ? Colors.green
+                          : questionClicked == 2
+                          ? Colors.red
+                          : Colors.transparent
                           : Colors.transparent),
                   QuizButton(
                       clicked: isClickedOption[3],
@@ -326,15 +351,15 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                       },
                       color: isClickedOption.contains(true)
                           ? widget
-                                      .sectionGroup
-                                      .sections[activeSectionIndex]
-                                      .question[activeQuestionIndex]
-                                      .greatAnswer ==
-                                  'D'
-                              ? Colors.green
-                              : questionClicked == 3
-                                  ? Colors.red
-                                  : Colors.transparent
+                          .sectionGroup
+                          .sections[activeSectionIndex]
+                          .question[activeQuestionIndex]
+                          .greatAnswer ==
+                          'D'
+                          ? Colors.green
+                          : questionClicked == 3
+                          ? Colors.red
+                          : Colors.transparent
                           : Colors.transparent),
                   QuizButton(
                       clicked: isClickedOption[4],
@@ -356,15 +381,15 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                       },
                       color: isClickedOption.contains(true)
                           ? widget
-                                      .sectionGroup
-                                      .sections[activeSectionIndex]
-                                      .question[activeQuestionIndex]
-                                      .greatAnswer ==
-                                  'E'
-                              ? Colors.green
-                              : questionClicked == 4
-                                  ? Colors.red
-                                  : Colors.transparent
+                          .sectionGroup
+                          .sections[activeSectionIndex]
+                          .question[activeQuestionIndex]
+                          .greatAnswer ==
+                          'E'
+                          ? Colors.green
+                          : questionClicked == 4
+                          ? Colors.red
+                          : Colors.transparent
                           : Colors.transparent),
 
                   /*
@@ -411,10 +436,10 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                                 content: const SingleChildScrollView(
                                   child: Center(
                                       child: SizedBox(
-                                    height: 50,
-                                    child: Text(
-                                        'Etes-vous sur de vouloir annuler le quiz ?'),
-                                  )),
+                                        height: 50,
+                                        child: Text(
+                                            'Etes-vous sur de vouloir annuler le quiz ?'),
+                                      )),
                                 ),
                                 actions: [
                                   TextButton(
@@ -451,11 +476,11 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                         ),
                         child: Center(
                             child: Text(
-                          'Annuler',
-                          style: GoogleFonts.inter(
-                              color: Theme.of(context).colorScheme.onError,
-                              fontSize: 24),
-                        )),
+                              'Annuler',
+                              style: GoogleFonts.inter(
+                                  color: Theme.of(context).colorScheme.onError,
+                                  fontSize: 24),
+                            )),
                       ),
                     ),
                     QuizValidatedButton(
@@ -472,7 +497,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                           List<String> answers = ['A', 'B', 'C', 'D', 'E'];
 
                           if (widget.sectionGroup.sections[activeSectionIndex]
-                                  .question[activeQuestionIndex].greatAnswer ==
+                              .question[activeQuestionIndex].greatAnswer ==
                               answers[isClickedOption.indexOf(true)]) {
                             score++;
                           }
@@ -530,16 +555,16 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                           });
                         },
                         text: (activeSectionIndex + 1) <
-                                widget.sectionGroup.sections.length
+                            widget.sectionGroup.sections.length
                             ? 'Suivant'
                             : (activeQuestionIndex + 1) <
-                                    widget
-                                        .sectionGroup
-                                        .sections[activeSectionIndex]
-                                        .question
-                                        .length
-                                ? 'Suivant'
-                                : 'Terminer'),
+                            widget
+                                .sectionGroup
+                                .sections[activeSectionIndex]
+                                .question
+                                .length
+                            ? 'Suivant'
+                            : 'Terminer'),
                   ],
                 ),
               ),
@@ -562,6 +587,24 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
         backgroundColor: Theme.of(context).colorScheme.surface,
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+
+  String _decodeIfNeeded(String text) {
+    // Vérifiez si le texte est en UTF-8
+    try {
+      print('Befoore text $text');
+      // Tentative de décodage
+      //var decodedText = utf8.decode(text.codeUnits, allowMalformed: false);
+      var decode = latin1.encode(text);
+      print('Coded $decode');
+      var decodeText = utf8.decode(text.codeUnits, allowMalformed: true);
+      print('Decoded $decodeText');
+      return decodeText;
+    } catch (e) {
+      print(e);
+      // Si une exception se produit, retourner le texte original
+      return text;
     }
   }
 
